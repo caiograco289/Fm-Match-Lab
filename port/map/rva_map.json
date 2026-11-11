@@ -1,0 +1,1916 @@
+{
+ "slice": "x86_64",
+ "win_meta": {
+  "program": "game_plugin.dll",
+  "image_base": "180000000",
+  "language": "x86:LE:64:default",
+  "compiler": "windows"
+ },
+ "mac_meta": {
+  "program": "game_plugin_x86_64",
+  "image_base": "00000000",
+  "language": "x86:LE:64:default",
+  "compiler": "gcc"
+ },
+ "global_match_count": 35009,
+ "summary": {
+  "verified": 18,
+  "blocked": 8,
+  "unverified": 34,
+  "unmapped": 23,
+  "data_pending": 28
+ },
+ "targets": [
+  {
+   "win_rva": "0x41a50",
+   "region": "code",
+   "kinds": [
+    "redirect"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": "0x4a88260",
+   "evidence": [
+    "const",
+    "consts_sim"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "const:2791728742"
+   ],
+   "mac_size_insns": 260,
+   "win_size_insns": 5637
+  },
+  {
+   "win_rva": "0x51a90",
+   "region": "code",
+   "kinds": [
+    "rip_compare"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "blocked",
+   "blocked_reason": "not a function start in the Windows analysis (dropped section or mid-function)"
+  },
+  {
+   "win_rva": "0x8375c",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "blocked",
+   "blocked_reason": "not a function start in the Windows analysis (dropped section or mid-function)"
+  },
+  {
+   "win_rva": "0x8d540",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(unsigned,const uint32_t*,uint64_t,const uint32_t*,uint32_t*)",
+    "unsigned char(*)(unsigned,uint32_t*,uint64_t,uint32_t*,uint32_t*)"
+   ],
+   "mac_x86_64_rva": "0x4f32600",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0xbc690<->0x4de5340 callees"
+   ],
+   "mac_size_insns": 70,
+   "win_size_insns": 68
+  },
+  {
+   "win_rva": "0xb6430",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,size_t)"
+   ],
+   "mac_x86_64_rva": "0x48511b0",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0xcf1f0<->0x4a05360 callees"
+   ],
+   "mac_size_insns": 69,
+   "win_size_insns": 64
+  },
+  {
+   "win_rva": "0xbb5b0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uint64_t(*)(const uint32_t*,unsigned)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0xd0340",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*)"
+   ],
+   "mac_x86_64_rva": "0x20cb440",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0xa3ed80<->0x270a2a0 callees"
+   ],
+   "mac_size_insns": 61,
+   "win_size_insns": 47
+  },
+  {
+   "win_rva": "0xd1180",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped",
+   "win_protected_body_rva": "0x6252350",
+   "note": "Windows stub jumps into the excluded section; body mapped via callers"
+  },
+  {
+   "win_rva": "0xd85a0",
+   "region": "code",
+   "kinds": [
+    "redirect"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": "0x4dd5f80",
+   "evidence": [
+    "callgraph",
+    "callseq",
+    "const",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "const:436732944",
+    "callseq 10/13"
+   ],
+   "mac_size_insns": 409,
+   "win_size_insns": 334
+  },
+  {
+   "win_rva": "0xe43e0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,unsigned,char,char,char)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0xe80f0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,const void*)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0xea590",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*(*)(void*,unsigned char,size_t)"
+   ],
+   "mac_x86_64_rva": "0x4d75590",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0xe0b00<->0x4a23470 callees"
+   ],
+   "mac_size_insns": 48,
+   "win_size_insns": 44
+  },
+  {
+   "win_rva": "0xf1650",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,unsigned,unsigned char,unsigned char,unsigned char)"
+   ],
+   "mac_x86_64_rva": "0x4ddc670",
+   "evidence": [
+    "callgraph",
+    "callseq",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "via 0xe0560<->0x4a38cb0 callees",
+    "callseq 17/18"
+   ],
+   "mac_size_insns": 121,
+   "win_size_insns": 106
+  },
+  {
+   "win_rva": "0x135530",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uint64_t*(*)(void*,void*,const void*)"
+   ],
+   "mac_x86_64_rva": "0x4f34a80",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x4575160<->0x4d25660 callees"
+   ],
+   "mac_size_insns": 244,
+   "win_size_insns": 125
+  },
+  {
+   "win_rva": "0x14b390",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0x15a380",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*)"
+   ],
+   "mac_x86_64_rva": "0x485fbd0",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x158080<->0x4f15b90 callees"
+   ],
+   "mac_size_insns": 15,
+   "win_size_insns": 15
+  },
+  {
+   "win_rva": "0x15a3b0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void*,void*)"
+   ],
+   "mac_x86_64_rva": "0x48654b0",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "win_protected_body_rva": "0x6436720",
+   "note": "Windows stub jumps into the excluded section; body mapped via callers",
+   "notes": [
+    "via 0x7f0310<->0x6bfb20 callees"
+   ],
+   "mac_size_insns": 64,
+   "win_size_insns": 0
+  },
+  {
+   "win_rva": "0x15a640",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,const char*,int)"
+   ],
+   "mac_x86_64_rva": "0x482df10",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x755460<->0x71afc0 callees"
+   ],
+   "mac_size_insns": 35,
+   "win_size_insns": 58
+  },
+  {
+   "win_rva": "0x160930",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,unsigned char)"
+   ],
+   "mac_x86_64_rva": "0xd2900",
+   "evidence": [
+    "callgraph",
+    "callseq",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "via 0x4991d70<->0x4dcd340 callees",
+    "callseq 8/12"
+   ],
+   "mac_size_insns": 80,
+   "win_size_insns": 90
+  },
+  {
+   "win_rva": "0x16fca0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**,unsigned char)"
+   ],
+   "mac_x86_64_rva": "0x4de9870",
+   "evidence": [
+    "callgraph",
+    "callseq",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "via 0x2e2a4b0<->0x2e0df30 callees",
+    "callseq 13/16"
+   ],
+   "mac_size_insns": 353,
+   "win_size_insns": 325
+  },
+  {
+   "win_rva": "0x184400",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*)"
+   ],
+   "mac_x86_64_rva": "0x49868a0",
+   "evidence": [
+    "callgraph",
+    "callseq",
+    "const",
+    "consts_sim",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "const(plural):77264",
+    "callseq 7/10"
+   ],
+   "mac_size_insns": 425,
+   "win_size_insns": 245
+  },
+  {
+   "win_rva": "0x1866c1",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "blocked",
+   "blocked_reason": "not a function start in the Windows analysis (dropped section or mid-function)"
+  },
+  {
+   "win_rva": "0x1d4bd0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*(*)()"
+   ],
+   "mac_x86_64_rva": "0x2c9a0",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0xa74200<->0x2737610 callees"
+   ],
+   "mac_size_insns": 35,
+   "win_size_insns": 40
+  },
+  {
+   "win_rva": "0x64fe90",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned(*)(unsigned)"
+   ],
+   "mac_x86_64_rva": "0x55afb0",
+   "evidence": [
+    "callgraph",
+    "const",
+    "consts_sim",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "const:542589235"
+   ],
+   "mac_size_insns": 532,
+   "win_size_insns": 367
+  },
+  {
+   "win_rva": "0x7a4310",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,void*)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0x9bc480",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,const char*,unsigned,unsigned)"
+   ],
+   "mac_x86_64_rva": "0x4889b80",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x210700<->0x6cf60 callees"
+   ],
+   "mac_size_insns": 69,
+   "win_size_insns": 66
+  },
+  {
+   "win_rva": "0x9e1d80",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(unsigned int)"
+   ],
+   "mac_x86_64_rva": "0x48a3d70",
+   "evidence": [
+    "callgraph",
+    "string",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "string anchor (ICU library message)",
+    "string anchor (ICU library message)"
+   ],
+   "mac_size_insns": 215,
+   "win_size_insns": 263
+  },
+  {
+   "win_rva": "0xa85270",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(size_t)"
+   ],
+   "mac_x86_64_rva": "0x49bfff0",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "win_protected_body_rva": "0x8584660",
+   "note": "Windows stub jumps into the excluded section; body mapped via callers",
+   "notes": [
+    "via 0x27badf0<->0x3268140 callees"
+   ],
+   "mac_size_insns": 182,
+   "win_size_insns": 0
+  },
+  {
+   "win_rva": "0xabe290",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*)"
+   ],
+   "mac_x86_64_rva": "0x49875d0",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "win_protected_body_rva": "0x85d8a30",
+   "note": "Windows stub jumps into the excluded section; body mapped via callers",
+   "notes": [
+    "via 0x21f0940<->0x27c8ad0 callees"
+   ],
+   "mac_size_insns": 465,
+   "win_size_insns": 0
+  },
+  {
+   "win_rva": "0xc4b7e0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,void*)"
+   ],
+   "mac_x86_64_rva": "0x482b360",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "win_protected_body_rva": "0x8c849e0",
+   "note": "Windows stub jumps into the excluded section; body mapped via callers",
+   "notes": [
+    "via 0x768a10<->0x698460 callees"
+   ],
+   "mac_size_insns": 33,
+   "win_size_insns": 0
+  },
+  {
+   "win_rva": "0xc51e60",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*)"
+   ],
+   "mac_x86_64_rva": "0x4861420",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0xa18500<->0x4872f60 callees"
+   ],
+   "mac_size_insns": 159,
+   "win_size_insns": 221
+  },
+  {
+   "win_rva": "0xc53400",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,void*)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped",
+   "win_protected_body_rva": "0x8cbcd00",
+   "note": "Windows stub jumps into the excluded section; body mapped via callers"
+  },
+  {
+   "win_rva": "0xc53910",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,void*)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0xc539b0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*)"
+   ],
+   "mac_x86_64_rva": "0x4862890",
+   "evidence": [
+    "callgraph",
+    "callseq",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "via 0xa18500<->0x4872f60 callees",
+    "callseq 28/32"
+   ],
+   "mac_size_insns": 486,
+   "win_size_insns": 554
+  },
+  {
+   "win_rva": "0xc54920",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,void*,void*)"
+   ],
+   "mac_x86_64_rva": "0x4863340",
+   "evidence": [
+    "callgraph",
+    "callseq",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "via 0xc539b0<->0x4862890 callees",
+    "callseq 3/5"
+   ],
+   "mac_size_insns": 160,
+   "win_size_insns": 143
+  },
+  {
+   "win_rva": "0xc55000",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped",
+   "win_protected_body_rva": "0x8cd03e0",
+   "note": "Windows stub jumps into the excluded section; body mapped via callers"
+  },
+  {
+   "win_rva": "0xdf78e0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped",
+   "win_protected_body_rva": "0x9787910",
+   "note": "Windows stub jumps into the excluded section; body mapped via callers"
+  },
+  {
+   "win_rva": "0xdf7a20",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0xe06b60",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*)"
+   ],
+   "mac_x86_64_rva": "0x48d7fa0",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0xa29440<->0x48c3b90 callees"
+   ],
+   "mac_size_insns": 199,
+   "win_size_insns": 238
+  },
+  {
+   "win_rva": "0xfb2580",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**)"
+   ],
+   "mac_x86_64_rva": "0x4df62c0",
+   "evidence": [
+    "callgraph",
+    "consts_sim",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "via 0x34947e0<->0x255bd20 callees"
+   ],
+   "mac_size_insns": 143,
+   "win_size_insns": 269
+  },
+  {
+   "win_rva": "0x14264d0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,void*,uintptr_t,void*)"
+   ],
+   "mac_x86_64_rva": "0x4817a80",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x29cf5f0<->0x2569dd0 callees"
+   ],
+   "mac_size_insns": 48,
+   "win_size_insns": 52
+  },
+  {
+   "win_rva": "0x14590b0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,uintptr_t)"
+   ],
+   "mac_x86_64_rva": "0x4805c50",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x752fe0<->0x719b20 callees"
+   ],
+   "mac_size_insns": 63,
+   "win_size_insns": 66
+  },
+  {
+   "win_rva": "0x16d7b80",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uint64_t(*)(const uint32_t*,unsigned)"
+   ],
+   "mac_x86_64_rva": "0x4ed5f00",
+   "evidence": [
+    "callgraph",
+    "consts_sim",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "via 0x3d1cb0<->0x2733b0 callees"
+   ],
+   "mac_size_insns": 62,
+   "win_size_insns": 60
+  },
+  {
+   "win_rva": "0x17d1010",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**,unsigned char,void*,unsigned,unsigned,unsigned char,void*)"
+   ],
+   "mac_x86_64_rva": "0xd2f690",
+   "evidence": [
+    "callgraph",
+    "consts_sim",
+    "strings_sim",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "via 0x17d2d30<->0xd31220 callers"
+   ],
+   "mac_size_insns": 1497,
+   "win_size_insns": 1493
+  },
+  {
+   "win_rva": "0x1b32710",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**)"
+   ],
+   "mac_x86_64_rva": "0x4dd8650",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x1a19bd0<->0x3176750 callees"
+   ],
+   "mac_size_insns": 88,
+   "win_size_insns": 165
+  },
+  {
+   "win_rva": "0x260aec0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned(*)(void*,unsigned char)"
+   ],
+   "mac_x86_64_rva": "0x4d757e0",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x4a1bb60<->0x4e996f0 callees"
+   ],
+   "mac_size_insns": 48,
+   "win_size_insns": 39
+  },
+  {
+   "win_rva": "0x2f4c890",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0x3182420",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void**,void*,void*)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0x33dfcc0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)()"
+   ],
+   "mac_x86_64_rva": "0x48b3f10",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0xa29440<->0x48c3b90 callees"
+   ],
+   "mac_size_insns": 370,
+   "win_size_insns": 374
+  },
+  {
+   "win_rva": "0x34931c0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0x3770660",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**)"
+   ],
+   "mac_x86_64_rva": "0x3d17980",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x160930<->0xd2900 callers"
+   ],
+   "mac_size_insns": 458,
+   "win_size_insns": 266
+  },
+  {
+   "win_rva": "0x38477b0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,void*)"
+   ],
+   "mac_x86_64_rva": "0x4803b50",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0xedb510<->0x482d640 callers"
+   ],
+   "mac_size_insns": 340,
+   "win_size_insns": 321
+  },
+  {
+   "win_rva": "0x3fb4b00",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**,uint16_t)"
+   ],
+   "mac_x86_64_rva": "0x4dc1e70",
+   "evidence": [
+    "callgraph",
+    "callseq",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "via 0x170250<->0x4f32740 callers",
+    "callseq 17/26"
+   ],
+   "mac_size_insns": 532,
+   "win_size_insns": 776
+  },
+  {
+   "win_rva": "0x4520bd0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,unsigned int,int)"
+   ],
+   "mac_x86_64_rva": "0x498afc0",
+   "evidence": [
+    "callgraph",
+    "callseq",
+    "string",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "string anchor (ICU library message)",
+    "string anchor (ICU library message)",
+    "callseq 11/16"
+   ],
+   "mac_size_insns": 289,
+   "win_size_insns": 293
+  },
+  {
+   "win_rva": "0x4520d2e",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "blocked",
+   "blocked_reason": "not a function start in the Windows analysis (dropped section or mid-function)"
+  },
+  {
+   "win_rva": "0x4520f05",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "blocked",
+   "blocked_reason": "not a function start in the Windows analysis (dropped section or mid-function)"
+  },
+  {
+   "win_rva": "0x4520f4c",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "blocked",
+   "blocked_reason": "not a function start in the Windows analysis (dropped section or mid-function)"
+  },
+  {
+   "win_rva": "0x46c0fe0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(unsigned,const uint32_t*,uint64_t,const uint32_t*,uint32_t*)",
+    "unsigned char(*)(unsigned,uint32_t*,uint64_t,uint32_t*,uint32_t*)"
+   ],
+   "mac_x86_64_rva": "0x4f2f620",
+   "evidence": [
+    "callgraph",
+    "callseq",
+    "const",
+    "consts_sim",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "const:536903170",
+    "callseq 4/4"
+   ],
+   "mac_size_insns": 2630,
+   "win_size_insns": 1216
+  },
+  {
+   "win_rva": "0x46fdbd0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,void*,uint64_t,uint32_t*)"
+   ],
+   "mac_x86_64_rva": "0x4d60a30",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0xd2820<->0x4a0fa90 callees"
+   ],
+   "mac_size_insns": 38,
+   "win_size_insns": 40
+  },
+  {
+   "win_rva": "0x4706d20",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(size_t)"
+   ],
+   "mac_x86_64_rva": "0x2bd150",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x88e3d0<->0x79a750 callees"
+   ],
+   "mac_size_insns": 40,
+   "win_size_insns": 21
+  },
+  {
+   "win_rva": "0x4706f40",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)()"
+   ],
+   "mac_x86_64_rva": "0x506b2d0",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x29d7140<->0x326a3a0 callees"
+   ],
+   "mac_size_insns": 38,
+   "win_size_insns": 26
+  },
+  {
+   "win_rva": "0x4961dc0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,const void*)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0x4962660",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*)"
+   ],
+   "mac_x86_64_rva": "0x5040990",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "win_protected_body_rva": "0x16b8dbd0",
+   "note": "Windows stub jumps into the excluded section; body mapped via callers",
+   "notes": [
+    "via 0xe063b0<->0x4ea2310 callees"
+   ],
+   "mac_size_insns": 17,
+   "win_size_insns": 0
+  },
+  {
+   "win_rva": "0x4968820",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*)"
+   ],
+   "mac_x86_64_rva": "0x4dd8bf0",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x27b3290<->0x325f700 callees"
+   ],
+   "mac_size_insns": 81,
+   "win_size_insns": 121
+  },
+  {
+   "win_rva": "0x4969df0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void*)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0x496aa30",
+   "region": "code",
+   "kinds": [
+    "module_offset"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped",
+   "win_protected_body_rva": "0x16bebe60",
+   "note": "Windows stub jumps into the excluded section; body mapped via callers"
+  },
+  {
+   "win_rva": "0x4973930",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void*,void*,unsigned int)"
+   ],
+   "mac_x86_64_rva": "0x5044810",
+   "evidence": [
+    "callgraph",
+    "callseq",
+    "consts_sim",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "via 0x7bcc30<->0x76bc40 callees",
+    "callseq 7/8"
+   ],
+   "mac_size_insns": 208,
+   "win_size_insns": 222
+  },
+  {
+   "win_rva": "0x497c010",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,const void*)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0x497f3e0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*(*)()"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0x49870d0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "blocked",
+   "blocked_reason": "not a function start in the Windows analysis (dropped section or mid-function)"
+  },
+  {
+   "win_rva": "0x49929c0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,unsigned)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0x49a9ab0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**,unsigned char)"
+   ],
+   "mac_x86_64_rva": "0x507c550",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x2e2a4b0<->0x2e0df30 callees"
+   ],
+   "mac_size_insns": 300,
+   "win_size_insns": 313
+  },
+  {
+   "win_rva": "0x49b8660",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uint32_t(*)(void*,unsigned char,unsigned char,size_t)"
+   ],
+   "mac_x86_64_rva": "0x4da07d0",
+   "evidence": [
+    "callgraph",
+    "consts_sim",
+    "size"
+   ],
+   "confidence": "verified",
+   "notes": [
+    "via 0x6149b0<->0x513bf0 callees"
+   ],
+   "mac_size_insns": 60,
+   "win_size_insns": 57
+  },
+  {
+   "win_rva": "0x49bcc70",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped",
+   "win_protected_body_rva": "0x16d79e10",
+   "note": "Windows stub jumps into the excluded section; body mapped via callers"
+  },
+  {
+   "win_rva": "0x49ca790",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**,void*,void*)"
+   ],
+   "mac_x86_64_rva": "0x4efa580",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x6c5380<->0x5e4630 callees"
+   ],
+   "mac_size_insns": 945,
+   "win_size_insns": 601
+  },
+  {
+   "win_rva": "0x4a1e230",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,uint32_t,const uint32_t*,size_t)"
+   ],
+   "mac_x86_64_rva": "0x4dc1290",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x5b7ff0<->0x4ab480 callees"
+   ],
+   "mac_size_insns": 167,
+   "win_size_insns": 108
+  },
+  {
+   "win_rva": "0x4a1f1a0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(unsigned)"
+   ],
+   "mac_x86_64_rva": "0x50c8c20",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x21ca3f0<->0x1af1c10 callees"
+   ],
+   "mac_size_insns": 28,
+   "win_size_insns": 15
+  },
+  {
+   "win_rva": "0x4a204f0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*(*)(void*,unsigned char,signed char)"
+   ],
+   "mac_x86_64_rva": "0x507acc0",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x5b2a70<->0x4a5720 callees"
+   ],
+   "mac_size_insns": 15,
+   "win_size_insns": 12
+  },
+  {
+   "win_rva": "0x4a22db0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(unsigned char,unsigned char)"
+   ],
+   "mac_x86_64_rva": "0x4da4250",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x613df0<->0x512e70 callees"
+   ],
+   "mac_size_insns": 73,
+   "win_size_insns": 72
+  },
+  {
+   "win_rva": "0x4a39350",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*(*)(void*,uint32_t)"
+   ],
+   "mac_x86_64_rva": "0x506bad0",
+   "evidence": [
+    "callgraph",
+    "size"
+   ],
+   "confidence": "unverified",
+   "notes": [
+    "via 0x63c0f0<->0x544080 callees"
+   ],
+   "mac_size_insns": 42,
+   "win_size_insns": 47
+  },
+  {
+   "win_rva": "0x4a7c550",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**,uint16_t)"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0x4aff5b9",
+   "region": "data_ro",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x4c8c878",
+   "region": "data_ro",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x4d8de08",
+   "region": "data_ro",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x4d8de28",
+   "region": "data_ro",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x4d8de78",
+   "region": "data_ro",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x4e38a90",
+   "region": "data_ro",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x56f3ab0",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void**"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x56f3af8",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char**"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x56f3b00",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void**",
+    "unsigned char**"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x56f3bb8",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char**"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x56f3c28",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void**"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x5700ef0",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x5701a00",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void**"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x5701a08",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void**"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x5701a70",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void**"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x5703660",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x570549c",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x5705e22",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x5705e23",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x57064f0",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x5706578",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t**"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x5709c50",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t*"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x570abb0",
+   "region": "data_rw",
+   "kinds": [
+    "metadata_data"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x5712d38",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t*"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x5716528",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x5716928",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x57169e0",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x5719098",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "data_pending"
+  },
+  {
+   "win_rva": "0x16c921e0",
+   "region": "code_rwx",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)()"
+   ],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "unmapped"
+  },
+  {
+   "win_rva": "0x17605818",
+   "region": "code_rwx",
+   "kinds": [
+    "module_offset"
+   ],
+   "signatures": [],
+   "mac_x86_64_rva": null,
+   "evidence": [],
+   "confidence": "blocked",
+   "blocked_reason": "not a function start in the Windows analysis (dropped section or mid-function)"
+  }
+ ]
+}

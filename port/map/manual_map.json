@@ -1,0 +1,59 @@
+{
+ "about": "Hand alignments of Windows game_plugin.dll RVAs to the Mac x86_64 slice (FM27 27.0.0+2493426, Mac UUID 0981AB31-AC3B-3D93-944F-47FE4B59CD9E). Evidence kinds: decomp_align = same statement position in a decompiled Windows/Mac function pair (named in 'via'); callsite = call-site votes (port/map/callsite_vote.py); string/const/... = port/map/match.py. Decompilations are local only ($FM27_WORK_DIR/decomp/).",
+ "code": [
+  {"win": "0x4520bd0", "mac": "0x498afc0", "name": "MATCH::play detailed step", "evidence": ["string", "decomp_align", "callsite"], "via": "test match 0xa84cd0/0x2a0d4d0"},
+  {"win": "0xa84cd0", "mac": "0x2a0d4d0", "name": "original 'test match' runner", "evidence": ["string", "callgraph"], "note": "Windows builds 'test match' from immediates; Mac references the literal"},
+  {"win": "0x14264d0", "mac": "0x4817a80", "name": "PKM reader factory", "evidence": ["decomp_align", "callsite"], "via": "test match", "abi": "Windows passes a hidden 16-byte return buffer first (host's reader_options); Mac returns it in RAX:RDX: mac(out**, file**, 0, extra**)"},
+  {"win": "0x184400", "mac": "0x49868a0", "name": "MATCH constructor", "evidence": ["decomp_align", "callsite", "callgraph"], "via": "test match"},
+  {"win": "0xa85270", "mac": "pool:GAME_MATCH", "name": "MATCH allocation", "evidence": ["decomp_align", "callsite"], "via": "test match", "note": "Windows: class operator new(0x155b0). Mac: inlined pool 'GAME_MATCH' (object size 0x15590), pool allocate 0x4852b80; host may allocate the 0x15590 bytes itself"},
+  {"win": "0xabe290", "mac": "0x4852ed0", "name": "MATCH pool free", "evidence": ["callsite"], "note": "worker-mode release only"},
+  {"win": "0x4706f40", "mac": null, "name": "Windows TLS block init", "evidence": ["decomp_align"], "note": "Mac uses the thread-local descriptor below; no init call"},
+  {"win": "0x4973930", "mac": "0x5044810", "name": "MATCH deserialize", "evidence": ["decomp_align", "callsite", "callseq"], "via": "test match"},
+  {"win": "0x4962660", "mac": "0x5040990", "name": "MATCH prepare (Windows body protected 0x16b8dbd0)", "evidence": ["decomp_align", "callsite"], "via": "test match"},
+  {"win": "0x4706d20", "mac": "import:operator new", "name": "allocator", "evidence": ["decomp_align"], "via": "0xa18500/0x4872f60, 0xa29440/0x48c3b90, 0x4969df0/0x50ab010", "note": "matcher's 0x2bd150 (callgraph-only) rejected; call-site votes scatter, consistent with an import"},
+  {"win": "0xc51e60", "mac": "0x4861420", "name": "resource manager ctor", "evidence": ["decomp_align", "callgraph"], "via": "0xa18500/0x4872f60", "note": "object size 0x110 (Windows) vs 0x1c0 (Mac)"},
+  {"win": "0xc53400", "mac": "0x48622c0", "name": "resource type registration (Windows body protected 0x8cbcd00)", "evidence": ["decomp_align", "callsite"], "via": "0xa18500/0x4872f60"},
+  {"win": "0xc53910", "mac": "0x4862810", "name": "JSON resource type registration", "evidence": ["structure", "callee_consistency"], "note": "lock/one call/unlock, 34 vs 29 insns; only callee 0xc5b270 matched to 0x48683a0; sits between the twins of 0xc53400 and 0xc539b0"},
+  {"win": "0xc539b0", "mac": "0x4862890", "name": "resource manager finalise", "evidence": ["decomp_align", "callgraph"], "via": "0xa18500/0x4872f60"},
+  {"win": "0xe06b60", "mac": "0x48d7fa0", "name": "structured data manager ctor (size 0x10 both)", "evidence": ["decomp_align", "callgraph"], "via": "0xa29440/0x48c3b90"},
+  {"win": "0x33dfcc0", "mac": "0x48b3f10", "name": "structured data post-init", "evidence": ["decomp_align", "callgraph"], "via": "0xa29440/0x48c3b90"},
+  {"win": "0x4969df0", "mac": "0x50ab010", "name": "engine bootstrap", "evidence": ["decomp_align", "structure"], "via": "main init 0x1d22d0/0x296c0 ('Match Unable to Initialise Properly'); identical bodies (memcpy 0x88, alloc 0x50, 0x1b000000)"},
+  {"win": "0x496a8f0", "mac": "0x50ba440", "name": "interface install", "evidence": ["decomp_align", "structure"], "via": "bootstrap pair"},
+  {"win": "0x496aa30", "mac": "0x50b0fe0", "name": "interface ctor (Windows body protected 0x16bebe60)", "evidence": ["decomp_align"], "via": "0x496a8f0/0x50ba440", "note": "object size 0x48 (Windows) vs 0x60 (Mac)"},
+  {"win": "0x15a640", "mac": "0x4884ba0", "name": "engine string from C string (s, cstr, -1)", "evidence": ["callsite", "usage"], "note": "1061 call-site votes; Mac test match calls it as (&s,\"test match\",-1). Matcher's 0x49218e0 rejected"},
+  {"win": "0x15a380", "mac": "0x485fbd0", "name": "folder query ctor", "evidence": ["decomp_align", "callsite", "callgraph"], "via": "xG loader 0x158080/0x4f15b90"},
+  {"win": "0x15a3b0", "mac": "0x48654b0", "name": "folder lookup (Windows body protected 0x6436720)", "evidence": ["decomp_align", "callsite"], "via": "xG loader 0x158080/0x4f15b90"},
+  {"win": "0x159bb0", "mac": "0x6adf70", "name": "resource read with type key", "evidence": ["decomp_align", "callgraph"], "via": "xG loader"}
+ ],
+ "data": [
+  {"win": "0x5701a70", "mac": "0x5cd7e58", "name": "interface object global", "evidence": ["decomp_align"], "via": "test match, 0x496a8f0/0x50ba440"},
+  {"win": "0x5701a00", "mac": "0x5cd7de8", "name": "callback table copy [0]", "evidence": ["decomp_align"], "via": "0x496a8f0/0x50ba440"},
+  {"win": "0x5701a08", "mac": "0x5cd7df0", "name": "callback table copy [1]", "evidence": ["decomp_align"], "via": "0x496a8f0/0x50ba440"},
+  {"win": "0x56f3b00", "mac": "0x5c5ca00", "name": "resource manager global", "evidence": ["decomp_align"], "via": "0xa18500/0x4872f60"},
+  {"win": "0x56f3c28", "mac": "0x5c5cd70", "name": "structured data manager global", "evidence": ["decomp_align"], "via": "0xa29440/0x48c3b90, 0x496a8f0/0x50ba440"},
+  {"win": "0x5703660", "mac": "0x5c8c210", "name": "default resource type list", "evidence": ["decomp_align"], "via": "0xa18500/0x4872f60"},
+  {"win": "0x57064f0", "mac": "0x5cd7c80", "name": "bootstrap callback table (0x88)", "evidence": ["decomp_align"], "via": "bootstrap pair"},
+  {"win": "0x57064e8", "mac": "0x5cf2800", "name": "bootstrap success flag", "evidence": ["decomp_align"], "via": "bootstrap pair"},
+  {"win": "0x5706578", "mac": "0x5c79e88", "name": "xG model store (0x50 object)", "evidence": ["decomp_align"], "via": "bootstrap pair"},
+  {"win": "0x5706580", "mac": "0x5cf2808", "name": "bootstrap secondary object", "evidence": ["decomp_align"], "via": "bootstrap pair"},
+  {"win": "0x4cb9c58", "mac": "0x5c58700", "name": "xG model store vtable", "evidence": ["decomp_align"], "via": "bootstrap pair"},
+  {"win": "0x4c8c878", "mac": "0x5b93210", "name": "benchmark MATCH-derived vtable", "evidence": ["decomp_align"], "via": "test match"},
+  {"win": "0x5719098", "mac": "0x5cf2db0", "name": "xG folder query key", "evidence": ["decomp_align"], "via": "xG loader"},
+  {"win": "0x5716528", "mac": "0x5c8c168", "name": "JSON resource type key", "evidence": ["decomp_align"], "via": "xG loader"},
+  {"win": "0x5709c50", "mac": "0x5c8bd58", "name": "folder open key", "evidence": ["decomp_align"], "via": "0x751560/0x718370 (vtable +0xc0 vs +0xc8)"},
+  {"win": "0x5716928", "mac": "0x5c8c838", "name": "symbol 'updates_folder'", "evidence": ["decomp_align", "string"], "via": "0x33d5170/0x4906e10"}
+ ],
+ "thread_local": [
+  {"win": "TLS block +0x838", "mac": "tlv descriptor 0x5c7a748", "name": "current match thread context {match*, flags}", "evidence": ["decomp_align"], "via": "test match", "note": "Mac: slot = ((void**(*)(void*))*(void**)desc)(desc)"}
+ ],
+ "struct_offsets": [
+  {"object": "MATCH", "win": "0x155a0", "mac": "0x15588", "what": "benchmark flag byte", "via": "test match"},
+  {"object": "MATCH", "win": "0x15464", "mac": "0x15454", "what": "clock", "via": "test match"},
+  {"object": "MATCH", "win": "size 0x155b0", "mac": "size 0x15590", "via": "test match / GAME_MATCH pool"}
+ ],
+ "abi_rules": [
+  "Itanium vtables have two destructor slots (complete, deleting) where MSVC has one scalar-deleting destructor: Windows slot n>=1 is Mac slot n+1 for classes with a virtual destructor at slot 0 (seen: interface +0x8 -> +0x10, folder +0xc0 -> +0xc8).",
+  "Intrusive refcount release: Windows vtable[0](p,1); Mac vtable[1](p).",
+  "Struct returns up to 16 bytes come back in registers on Mac (no hidden pointer); MSVC uses a hidden pointer as the first argument."
+ ]
+}

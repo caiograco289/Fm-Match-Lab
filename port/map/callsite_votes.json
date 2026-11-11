@@ -1,0 +1,551 @@
+{
+ "0x41a50": {
+  "key": "0x41a50",
+  "votes": {
+   "0x4ad49c0": 1
+  },
+  "callers_voting": 1
+ },
+ "0x51a90": {
+  "key": "0x51a90",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x8375c": {
+  "key": "0x8375c",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x8d540": {
+  "key": "0x8d540",
+  "votes": {
+   "0x4f32600": 4
+  },
+  "callers_voting": 4
+ },
+ "0xb6430": {
+  "key": "0xb6430",
+  "votes": {
+   "0x48511b0": 4370,
+   "0x4884ba0": 610,
+   "0x48506e0": 20,
+   "0x4852e40": 15,
+   "0x2d2f0": 14
+  },
+  "callers_voting": 5348
+ },
+ "0xbb5b0": {
+  "key": "0xbb5b0",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0xd0340": {
+  "key": "0xd0340",
+  "votes": {
+   "0x255e550": 2,
+   "0x49ee960": 1,
+   "0x2a0640": 1,
+   "0x2562b0": 1
+  },
+  "callers_voting": 5
+ },
+ "0xd1180": {
+  "key": "0x6252350",
+  "votes": {
+   "0x4a0f950": 1
+  },
+  "callers_voting": 1
+ },
+ "0xd85a0": {
+  "key": "0xd85a0",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0xe43e0": {
+  "key": "0xe43e0",
+  "votes": {
+   "0x4da4390": 10
+  },
+  "callers_voting": 10
+ },
+ "0xe80f0": {
+  "key": "0xe80f0",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0xea590": {
+  "key": "0xea590",
+  "votes": {
+   "0x4d75590": 9
+  },
+  "callers_voting": 9
+ },
+ "0xf1650": {
+  "key": "0xf1650",
+  "votes": {
+   "0x4ddc670": 10,
+   "0x290740": 1
+  },
+  "callers_voting": 11
+ },
+ "0x135530": {
+  "key": "0x135530",
+  "votes": {
+   "0x4f34a80": 1
+  },
+  "callers_voting": 1
+ },
+ "0x14b390": {
+  "key": "0x14b390",
+  "votes": {
+   "0x290740": 13
+  },
+  "callers_voting": 13
+ },
+ "0x15a380": {
+  "key": "0x15a380",
+  "votes": {
+   "0x485fbd0": 4
+  },
+  "callers_voting": 4
+ },
+ "0x15a3b0": {
+  "key": "0x6436720",
+  "votes": {
+   "0x48654b0": 2
+  },
+  "callers_voting": 2
+ },
+ "0x15a640": {
+  "key": "0x15a640",
+  "votes": {
+   "0x4884ba0": 1061,
+   "0x4884ee0": 5,
+   "0x48cf190": 2,
+   "0x487f1e0": 2,
+   "0x4884ed0": 1
+  },
+  "callers_voting": 1078
+ },
+ "0x160930": {
+  "key": "0x160930",
+  "votes": {
+   "0xd2900": 18,
+   "0x4f1b450": 2
+  },
+  "callers_voting": 20
+ },
+ "0x16fca0": {
+  "key": "0x16fca0",
+  "votes": {
+   "0x4de9870": 6
+  },
+  "callers_voting": 6
+ },
+ "0x184400": {
+  "key": "0x184400",
+  "votes": {
+   "0x49868a0": 8
+  },
+  "callers_voting": 8
+ },
+ "0x1866c1": {
+  "key": "0x1866c1",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x1d4bd0": {
+  "key": "0x1d4bd0",
+  "votes": {
+   "0x2c9a0": 10
+  },
+  "callers_voting": 10
+ },
+ "0x64fe90": {
+  "key": "0x64fe90",
+  "votes": {
+   "0x55afb0": 1
+  },
+  "callers_voting": 1
+ },
+ "0x7a4310": {
+  "key": "0x7a4310",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x9bc480": {
+  "key": "0x9bc480",
+  "votes": {
+   "0x4889b80": 77
+  },
+  "callers_voting": 77
+ },
+ "0x9e1d80": {
+  "key": "0x9e1d80",
+  "votes": {
+   "0x48a3d70": 1
+  },
+  "callers_voting": 1
+ },
+ "0xa85270": {
+  "key": "0x8584660",
+  "votes": {
+   "0x4852b80": 9
+  },
+  "callers_voting": 9
+ },
+ "0xabe290": {
+  "key": "0x85d8a30",
+  "votes": {
+   "0x4852ed0": 10
+  },
+  "callers_voting": 10
+ },
+ "0xc4b7e0": {
+  "key": "0x8c849e0",
+  "votes": {
+   "0x482b360": 29
+  },
+  "callers_voting": 29
+ },
+ "0xc51e60": {
+  "key": "0xc51e60",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0xc53400": {
+  "key": "0x8cbcd00",
+  "votes": {
+   "0x48622c0": 1
+  },
+  "callers_voting": 1
+ },
+ "0xc53910": {
+  "key": "0xc53910",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0xc539b0": {
+  "key": "0xc539b0",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0xc54920": {
+  "key": "0xc54920",
+  "votes": {
+   "0x4863340": 5
+  },
+  "callers_voting": 5
+ },
+ "0xc55000": {
+  "key": "0x8cd03e0",
+  "votes": {
+   "0x48639f0": 1
+  },
+  "callers_voting": 1
+ },
+ "0xdf78e0": {
+  "key": "0x9787910",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0xdf7a20": {
+  "key": "0xdf7a20",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0xe06b60": {
+  "key": "0xe06b60",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0xfb2580": {
+  "key": "0xfb2580",
+  "votes": {
+   "0x4df62c0": 1
+  },
+  "callers_voting": 1
+ },
+ "0x14264d0": {
+  "key": "0x14264d0",
+  "votes": {
+   "0x4817a80": 6,
+   "0x48178a0": 2
+  },
+  "callers_voting": 8
+ },
+ "0x14590b0": {
+  "key": "0x14590b0",
+  "votes": {
+   "0x4805c50": 5
+  },
+  "callers_voting": 5
+ },
+ "0x16d7b80": {
+  "key": "0x16d7b80",
+  "votes": {
+   "0x4ed5f00": 1
+  },
+  "callers_voting": 1
+ },
+ "0x17d1010": {
+  "key": "0x17d1010",
+  "votes": {
+   "0xd2f690": 2
+  },
+  "callers_voting": 2
+ },
+ "0x1b32710": {
+  "key": "0x1b32710",
+  "votes": {
+   "0x4dd8650": 3
+  },
+  "callers_voting": 3
+ },
+ "0x260aec0": {
+  "key": "0x260aec0",
+  "votes": {
+   "0x4d757e0": 1,
+   "0x4a2df60": 1
+  },
+  "callers_voting": 2
+ },
+ "0x2f4c890": {
+  "key": "0x2f4c890",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x3182420": {
+  "key": "0x3182420",
+  "votes": {
+   "0x4e7c3a0": 3
+  },
+  "callers_voting": 3
+ },
+ "0x33dfcc0": {
+  "key": "0x33dfcc0",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x34931c0": {
+  "key": "0x34931c0",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x3770660": {
+  "key": "0x3770660",
+  "votes": {
+   "0x3d17980": 1
+  },
+  "callers_voting": 1
+ },
+ "0x38477b0": {
+  "key": "0x38477b0",
+  "votes": {
+   "0x4803b50": 1
+  },
+  "callers_voting": 1
+ },
+ "0x3fb4b00": {
+  "key": "0x3fb4b00",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x4520bd0": {
+  "key": "0x4520bd0",
+  "votes": {
+   "0x498afc0": 4
+  },
+  "callers_voting": 4
+ },
+ "0x4520d2e": {
+  "key": "0x4520d2e",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x4520f05": {
+  "key": "0x4520f05",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x4520f4c": {
+  "key": "0x4520f4c",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x46c0fe0": {
+  "key": "0x46c0fe0",
+  "votes": {
+   "0x4f2f620": 4,
+   "0x4f2edd0": 1
+  },
+  "callers_voting": 5
+ },
+ "0x46fdbd0": {
+  "key": "0x46fdbd0",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x4706d20": {
+  "key": "0x4706d20",
+  "votes": {
+   "0x50a0870": 19,
+   "0x1600bc0": 13,
+   "0x4852ed0": 13,
+   "0x27f0560": 10,
+   "0x2d25e30": 10
+  },
+  "callers_voting": 275
+ },
+ "0x4706f40": {
+  "key": "0x4706f40",
+  "votes": {
+   "0x47e5e90": 4,
+   "0x6108f0": 2,
+   "0x3ec4190": 1,
+   "0x4852150": 1
+  },
+  "callers_voting": 8
+ },
+ "0x4961dc0": {
+  "key": "0x4961dc0",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x4962660": {
+  "key": "0x16b8dbd0",
+  "votes": {
+   "0x5040990": 3
+  },
+  "callers_voting": 3
+ },
+ "0x4968820": {
+  "key": "0x4968820",
+  "votes": {
+   "0x4852ed0": 3,
+   "0x49875d0": 2,
+   "0x1b55ac0": 1,
+   "0x1dee520": 1,
+   "0x4ef3d80": 1
+  },
+  "callers_voting": 10
+ },
+ "0x4969df0": {
+  "key": "0x4969df0",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x496aa30": {
+  "key": "0x16bebe60",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x4973930": {
+  "key": "0x4973930",
+  "votes": {
+   "0x5044810": 3
+  },
+  "callers_voting": 3
+ },
+ "0x497c010": {
+  "key": "0x497c010",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x497f3e0": {
+  "key": "0x497f3e0",
+  "votes": {
+   "0x4ef2f70": 5
+  },
+  "callers_voting": 5
+ },
+ "0x49870d0": {
+  "key": "0x49870d0",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x49929c0": {
+  "key": "0x49929c0",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x49a9ab0": {
+  "key": "0x49a9ab0",
+  "votes": {
+   "0x507c550": 15
+  },
+  "callers_voting": 15
+ },
+ "0x49b8660": {
+  "key": "0x49b8660",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x49bcc70": {
+  "key": "0x16d79e10",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x49ca790": {
+  "key": "0x49ca790",
+  "votes": {
+   "0x4efa580": 13,
+   "0x4ef2f70": 1
+  },
+  "callers_voting": 14
+ },
+ "0x4a1e230": {
+  "key": "0x4a1e230",
+  "votes": {
+   "0x4dc1290": 6
+  },
+  "callers_voting": 6
+ },
+ "0x4a1f1a0": {
+  "key": "0x4a1f1a0",
+  "votes": {
+   "0x50c8c20": 27,
+   "0x50c9110": 1,
+   "0x4850a00": 1,
+   "0x4f1b450": 1,
+   "0x27d5930": 1
+  },
+  "callers_voting": 31
+ },
+ "0x4a204f0": {
+  "key": "0x4a204f0",
+  "votes": {
+   "0x507acc0": 5
+  },
+  "callers_voting": 5
+ },
+ "0x4a22db0": {
+  "key": "0x4a22db0",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x4a39350": {
+  "key": "0x4a39350",
+  "votes": {
+   "0x506bad0": 3
+  },
+  "callers_voting": 3
+ },
+ "0x4a7c550": {
+  "key": "0x4a7c550",
+  "votes": {
+   "0x4dc3a80": 1
+  },
+  "callers_voting": 1
+ },
+ "0x16c921e0": {
+  "key": "0x16c921e0",
+  "votes": {},
+  "callers_voting": 0
+ },
+ "0x17605818": {
+  "key": "0x17605818",
+  "votes": {},
+  "callers_voting": 0
+ }
+}

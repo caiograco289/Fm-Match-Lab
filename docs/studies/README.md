@@ -1,0 +1,114 @@
+# Engine studies: plan and index
+
+Six questions about how FM27's match engine responds to what you control. Each study gets its own page here when it
+finishes. Pages for studies still running say so.
+
+| # | Question | Status | Page |
+|---|---|---|---|
+| 1 | What is each attribute worth? | **done** (27.0 and 27.0.1) | [01-attribute-values.md](01-attribute-values.md) |
+| 2 | Are attribute values in real matches the same as in "everyone 12" tests? | **done**: levelling squads changes little; the test match shrinks most effects | [02-real-vs-levelled.md](02-real-vs-levelled.md) |
+| 3 | What does tactical familiarity do? | **done**: familiarity = trained and played area values; training counts double | [03-tactical-familiarity.md](03-tactical-familiarity.md) |
+| 4 | Do attributes matter more at high familiarity than at low? | **done**: no; attributes and familiarity add up | [04-attributes-x-familiarity.md](04-attributes-x-familiarity.md) |
+| 5 | Of everything else we can change, what matters and by how much? | **screen done**: sharpness, condition, positions, cohesion lead; confirmations to run | [05-everything-else.md](05-everything-else.md) |
+| 6 | Do tactics differ, and does the best tactic depend on familiarity? | **done**: the team's own tactic (STORMBRINGER) is best; defensive presets far worse | [06-tactics-x-familiarity.md](06-tactics-x-familiarity.md) |
+
+## Common design
+
+Unless a page says otherwise, every study uses the same set-up.
+
+- **Bases: real saved matches.** Ten matches of a Premier League team ("the team") the game saved on holiday under 27.0 (Fleetwood, Brentford,
+  Burnley, Chelsea, Man City, Stoke, Man Utd, Norwich, West Ham, Young Boys), replayed on the 27.0.1 engine. Each
+  match keeps everything stored in it: both squads, both tactics, fitness, morale and the opponent's selection.
+- **In-match decisions are live.** In these matches the assistant and the AI substitute and adjust during the match,
+  as with an instant result (checked: different seeds give different substitutions).
+- **Paired comparison.** Each condition changes one thing for the team only and replays every match on the same 30
+  seeds as the unchanged version. The effect is the average paired difference over 10 × 30 = 300 matches. The t value
+  says how clearly it differs from zero: |t| ≥ 2 is about 95% confidence, and |t| ≥ 3 is solid.
+- **Outcomes:** points per game (ppg), expected-goal difference (xGD), goals for and against, shots and xG per shot.
+  xGD is the most sensitive; ppg is what you ultimately care about but is noisier.
+- **Resolution:** with 300 pairs, effects of about 0.1 ppg or 0.1 xGD can be detected. Smaller ones read as "no
+  clear effect", not as "no effect".
+- **Many comparisons:** a study with 100 conditions will show a few |t| ≈ 2 results by chance. The pages call out
+  only effects that are large, consistent in direction (both +5 and −5) or confirmed with more seeds.
+- **Limits:** all bases are one club, mostly Premier League matches, so results describe a lower-table side
+  against stronger teams. FM27 must be closed while studies run.
+
+Throughput is about 5,400 matches per hour on this machine (6 workers). Running costs are noted per study.
+
+## Study 1: attribute values
+
+Each of the 54 non-position attributes is moved by ±5 in-game points (±25 stored) for the team's whole squad and
+clamped to 1–20. That gives 109 conditions × 300 = 32,700 matches, about 6 hours.
+
+**Done.** Pace and Acceleration lead by far (about +0.07 ppg and +0.10 xGD per point), followed by Jumping Reach,
+Stamina, Anticipation, Dribbling and Concentration. Finishing converts chances rather than creating them, and most
+technical attributes show no clear effect. 27.0.1 matches 27.0 (r = 0.98). See
+[01-attribute-values.md](01-attribute-values.md).
+
+## Study 2: real matches against "everyone 12" tests
+
+**Done.** Earlier tests on the original tool's sample match, with every attribute levelled to 12, suggested that
+physical attributes dominate and mental ones barely register. Study 2 shows that this came from the test match,
+not the engine: in real matches Anticipation and Concentration are clearly rewarded, even with every player levelled
+to 12, while on the sample match most effects shrink and several vanish. Not every mental attribute matters
+(Decisions, Teamwork, Determination and Flair show no clear effect anywhere). See
+[02-real-vs-levelled.md](02-real-vs-levelled.md).
+
+## Study 3: tactical familiarity
+
+**Step 0: find the input (done).** Screenshots of the game's panel before two matches identified it. FM27's familiarity is
+the Tactical Understanding part of Tactical Effectiveness: per-area values in the effectiveness record, plus
+tactical ability and tactic complexity. See [03-tactical-familiarity.md](03-tactical-familiarity.md).
+
+**Step 1: dose-response (done).** Untrained areas cost about 0.4 points per game; well-trained areas (around 75)
+gain about 0.2, and more gains nothing. Match exposure counts about half as much as training. Complexity held alone
+showed no clear effect. See [03-tactical-familiarity.md](03-tactical-familiarity.md).
+
+## Study 4: attributes × familiarity
+
+Take the six attributes with the largest xGD effects in Study 1 (Pace, Acceleration, Jumping Reach, Stamina,
+Anticipation, Dribbling). Familiarity low = all eight tactical areas held at 20, high = 80. Move each by +5 and −5 at low and at high familiarity,
+giving 6 × 2 × 2 conditions plus the two familiarity baselines, × 300 ≈ 7,800 matches (about 1.5 hours).
+
+The interaction is (attribute effect at high familiarity) − (attribute effect at low familiarity), paired on the same
+matches and seeds. A positive interaction means good players need a familiar tactic to show it. A negative one means
+quality compensates for unfamiliarity.
+
+## Study 5: everything else
+
+A screen over every other input the app can change, each moved one step for the team only, 300 pairs each. Then
+the 10–15 largest effects are rerun with 3× the seeds to confirm them and give tighter estimates.
+
+| group | conditions |
+|---|---|
+| Start state | condition 80/90/100%, match sharpness 50/75/100%, morale low/high, team cohesion low/high, club cohesion low/high |
+| Body | height ±10 cm, weight ±10 kg |
+| Person | age, the 7 personality fields (professionalism, temperament, pressure, …) low/high, current ability ±20, reputation |
+| Position | starters' familiarity with their position: natural → accomplished → unconvincing |
+| Mentality | one and two steps more defensive and more attacking |
+| Team instructions | every option of every in- and out-of-possession instruction, one at a time |
+| Player instructions | the main ones by position group (e.g. full-backs "get further forward", forwards "shoot more often") |
+| Opposition instructions | press all / none, tight-mark all |
+| Set pieces | taker order, routine frequency, throw-in strategy |
+| In-match management | assistant vs fixed tactic vs AI manager |
+
+Cost: about 150 conditions × 300 ≈ 45,000 matches (8 hours) for the screen, plus about 2 hours to confirm.
+
+The page ranks everything by effect on ppg and xGD, with the mechanism (shots, xG per shot, chances conceded), and
+gives a short "worth changing / not worth it" summary.
+
+## Study 6: tactics × familiarity
+
+Run the installed FM27 presets (one per style, about 20) plus the user's own .fmf tactics on the team in the 10 real
+matches, 300 pairs each. That gives a ranking on real matches, which the earlier tactic league (levelled squads, no
+substitutions) could not. Once Study 3 has the familiarity input, each tactic also runs at low and high familiarity,
+to see whether the ranking changes: some tactics may only pay off once learned.
+
+Cost: about 6,000 matches per familiarity level (about 1 hour each).
+
+## Order and timing
+
+Studies 1, 3, 4, 6, 5 and 2 ran in that order on 10 and 11 November 2026, at about 6,500 matches per hour on six
+workers; the Study 5 confirmation followed.
+
+Each page states its design, results, interpretation, caveats and how to reproduce it.

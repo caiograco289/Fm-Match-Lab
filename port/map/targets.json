@@ -1,0 +1,3186 @@
+{
+ "source": "upstream lqf0624/fm-tactics-lab v1108.5 native/",
+ "reference_build": "27.0.0+2493426",
+ "counts": {
+  "targets": 111,
+  "functions": 83,
+  "data": 28,
+  "compat_ranges": 95,
+  "compat_ranges_without_target": 30
+ },
+ "targets": [
+  {
+   "win_rva": "0x41a50",
+   "region": "code",
+   "kinds": [
+    "redirect"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/native_execution_experiment.h",
+     "line": 81,
+     "snippet": null
+    }
+   ]
+  },
+  {
+   "win_rva": "0x51a90",
+   "region": "code",
+   "kinds": [
+    "rip_compare"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/native_statistics.h",
+     "line": 35,
+     "snippet": null
+    }
+   ],
+   "compat_ranges": [
+    0
+   ]
+  },
+  {
+   "win_rva": "0x8375c",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t"
+   ],
+   "sites": [
+    {
+     "file": "native/native_match_events.h",
+     "line": 92,
+     "snippet": "=c;c.Dr0=(uintptr_t)at(desktop_event_audit?0x4520d2e:0x1866c1);c.Dr1=(uintptr_t)at(desktop_event_audit?0x4520f05:0x8375c)"
+    }
+   ],
+   "compat_ranges": [
+    1
+   ]
+  },
+  {
+   "win_rva": "0x8d540",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(unsigned,const uint32_t*,uint64_t,const uint32_t*,uint32_t*)",
+    "unsigned char(*)(unsigned,uint32_t*,uint64_t,uint32_t*,uint32_t*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 54,
+     "snippet": "((unsigned char(*)(unsigned,const uint32_t*,uint64_t,const uint32_t*,uint32_t*))at(row.phase?0x8d540:0x46c0fe0)"
+    },
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 209,
+     "snippet": "auto policy=(unsigned char(*)(unsigned,uint32_t*,uint64_t,uint32_t*,uint32_t*))at(edit.a/16?0x8d540:0x46c0fe0)"
+    }
+   ],
+   "compat_ranges": [
+    2
+   ]
+  },
+  {
+   "win_rva": "0xb6430",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,size_t)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 255,
+     "snippet": "auto obj=(unsigned char*)((void*(*)(void*,size_t))at(0xb6430)"
+    },
+    {
+     "file": "native/native_source_generation.h",
+     "line": 36,
+     "snippet": "auto trait_memory=(unsigned char*)((void*(*)(void*,size_t))at(0xb6430)"
+    }
+   ],
+   "compat_ranges": [
+    3
+   ]
+  },
+  {
+   "win_rva": "0xbb5b0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uint64_t(*)(const uint32_t*,unsigned)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 46,
+     "snippet": "auto mask=((uint64_t(*)(const uint32_t*,unsigned))at(phase?0xbb5b0:0x16d7b80)"
+    },
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 324,
+     "snippet": "auto allowed=((uint64_t(*)(const uint32_t*,unsigned))at(phase?0xbb5b0:0x16d7b80)"
+    }
+   ],
+   "compat_ranges": [
+    4
+   ]
+  },
+  {
+   "win_rva": "0xd0340",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 89,
+     "snippet": "((void(*)(void*))at(0xd0340)"
+    },
+    {
+     "file": "native/native_source_generation.h",
+     "line": 29,
+     "snippet": "((void(*)(void*))at(0xd0340)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0xd1180",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_source_generation.h",
+     "line": 95,
+     "snippet": "de++)if(!*(uint32_t*)(generation_source.data()+8+288*side+272))((void(*)(void*))at(0xd1180)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0xd85a0",
+   "region": "code",
+   "kinds": [
+    "redirect"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/native_execution_experiment.h",
+     "line": 80,
+     "snippet": null
+    }
+   ]
+  },
+  {
+   "win_rva": "0xe43e0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,unsigned,char,char,char)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 277,
+     "snippet": "((void(*)(void*,unsigned,char,char,char))at(0xe43e0)"
+    }
+   ],
+   "compat_ranges": [
+    5
+   ]
+  },
+  {
+   "win_rva": "0xe80f0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,const void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 281,
+     "snippet": "((void*(*)(void*,void*,const void*))at(0xe80f0)"
+    }
+   ],
+   "compat_ranges": [
+    6
+   ]
+  },
+  {
+   "win_rva": "0xea590",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*(*)(void*,unsigned char,size_t)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 89,
+     "snippet": "return ((unsigned char*(*)(void*,unsigned char,size_t))at(0xea590)"
+    }
+   ],
+   "compat_ranges": [
+    7
+   ]
+  },
+  {
+   "win_rva": "0xf1650",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,unsigned,unsigned char,unsigned char,unsigned char)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 85,
+     "snippet": "((void(*)(void*,unsigned,unsigned char,unsigned char,unsigned char))at(0xf1650)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x135530",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uint64_t*(*)(void*,void*,const void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 102,
+     "snippet": "return ((uint64_t*(*)(void*,void*,const void*))at(0x135530)"
+    }
+   ],
+   "compat_ranges": [
+    9
+   ]
+  },
+  {
+   "win_rva": "0x14b390",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_source_generation.h",
+     "line": 28,
+     "snippet": "((void*(*)(void*,void*))at(0x14b390)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x15a380",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 699,
+     "snippet": "((void*(*)(void*,void*))at(0x15a380)"
+    }
+   ],
+   "compat_ranges": [
+    10
+   ]
+  },
+  {
+   "win_rva": "0x15a3b0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void*,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 700,
+     "snippet": "auto folder_found=((unsigned char(*)(void*,void*,void*))at(0x15a3b0)"
+    }
+   ],
+   "compat_ranges": [
+    11
+   ]
+  },
+  {
+   "win_rva": "0x15a640",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,const char*,int)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 675,
+     "snippet": "uintptr_t name[4]={};((void*(*)(void*,const char*,int))at(0x15a640)"
+    },
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 723,
+     "snippet": "if(entry.second)((void*(*)(void*,const char*,int))at(0x15a640)"
+    },
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 32,
+     "snippet": "((void*(*)(void*,const char*,int))at(0x15a640)"
+    },
+    {
+     "file": "native/native_fmf_probe.h",
+     "line": 9,
+     "snippet": "path).generic_u8string();uintptr_t name[4]={};((void*(*)(void*,const char*,int))at(0x15a640)"
+    },
+    {
+     "file": "native/native_tactic_export.h",
+     "line": 9,
+     "snippet": "le,256)){auto name=fs::path(title).u8string();((void*(*)(void*,const char*,int))at(0x15a640)"
+    }
+   ],
+   "compat_ranges": [
+    12
+   ]
+  },
+  {
+   "win_rva": "0x160930",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,unsigned char)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 84,
+     "snippet": "((void*(*)(void*,void*,unsigned char))at(0x160930)"
+    },
+    {
+     "file": "native/native_source_generation.h",
+     "line": 27,
+     "snippet": "((void*(*)(void*,void*,unsigned char))at(0x160930)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x16fca0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**,unsigned char)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_ai_tactics.h",
+     "line": 57,
+     "snippet": "if(!((unsigned char(*)(void*,void**,unsigned char))at(0x16fca0)"
+    },
+    {
+     "file": "native/native_tactic_import.h",
+     "line": 11,
+     "snippet": "har**)(team+0x630);auto accepted=((unsigned char(*)(void*,void**,unsigned char))at(0x16fca0)"
+    }
+   ],
+   "compat_ranges": [
+    75
+   ]
+  },
+  {
+   "win_rva": "0x184400",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 735,
+     "snippet": "((void*(*)(void*))at(0x184400)"
+    }
+   ],
+   "compat_ranges": [
+    14
+   ]
+  },
+  {
+   "win_rva": "0x1866c1",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t"
+   ],
+   "sites": [
+    {
+     "file": "native/native_match_events.h",
+     "line": 92,
+     "snippet": "sktop_event_thread,&c)&&!(c.Dr7&255)){desktop_event_previous=c;c.Dr0=(uintptr_t)at(desktop_event_audit?0x4520d2e:0x1866c1)"
+    }
+   ],
+   "compat_ranges": [
+    15
+   ]
+  },
+  {
+   "win_rva": "0x1d4bd0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*(*)()"
+   ],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 53,
+     "snippet": "auto loader=((unsigned char*(*)())at(0x1d4bd0)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x64fe90",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned(*)(unsigned)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 174,
+     "snippet": "unsigned bit=((unsigned(*)(unsigned))at(0x64fe90)"
+    },
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 434,
+     "snippet": "unsigned bit=((unsigned(*)(unsigned))at(0x64fe90)"
+    }
+   ],
+   "compat_ranges": [
+    16
+   ]
+  },
+  {
+   "win_rva": "0x7a4310",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 41,
+     "snippet": "((void*(*)(void*,void*,void*))at(0x7a4310)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x9bc480",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,const char*,unsigned,unsigned)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 11,
+     "snippet": "((void*(*)(void*,const char*,unsigned,unsigned))at(0x9bc480)"
+    },
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 12,
+     "snippet": "((void*(*)(void*,const char*,unsigned,unsigned))at(0x9bc480)"
+    },
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 13,
+     "snippet": "((void*(*)(void*,const char*,unsigned,unsigned))at(0x9bc480)"
+    },
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 14,
+     "snippet": "((void*(*)(void*,const char*,unsigned,unsigned))at(0x9bc480)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x9e1d80",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(unsigned int)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 628,
+     "snippet": "auto platform=((unsigned char(*)(unsigned int))at(0x9e1d80)"
+    }
+   ],
+   "compat_ranges": [
+    17
+   ]
+  },
+  {
+   "win_rva": "0xa85270",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(size_t)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 734,
+     "snippet": "auto match=(unsigned char*)((void*(*)(size_t))at(0xa85270)"
+    }
+   ],
+   "compat_ranges": [
+    18
+   ]
+  },
+  {
+   "win_rva": "0xabe290",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 852,
+     "snippet": "((void(*)(void*))at(0xabe290)"
+    }
+   ],
+   "compat_ranges": [
+    19
+   ]
+  },
+  {
+   "win_rva": "0xc4b7e0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 26,
+     "snippet": "((void*(*)(void*,void*,void*))at(0xc4b7e0)"
+    },
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 47,
+     "snippet": "((void*(*)(void*,void*,void*))at(0xc4b7e0)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0xc51e60",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 654,
+     "snippet": "auto manager=native_alloc(0x110);((void*(*)(void*))at(0xc51e60)"
+    }
+   ],
+   "compat_ranges": [
+    20
+   ]
+  },
+  {
+   "win_rva": "0xc53400",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 663,
+     "snippet": "((void(*)(void*,void*))at(0xc53400)"
+    }
+   ],
+   "compat_ranges": [
+    21
+   ]
+  },
+  {
+   "win_rva": "0xc53910",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 666,
+     "snippet": "((void(*)(void*,void*))at(0xc53910)"
+    },
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 8,
+     "snippet": "((void(*)(void*,void*))at(0xc53910)"
+    }
+   ],
+   "compat_ranges": [
+    22
+   ]
+  },
+  {
+   "win_rva": "0xc539b0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 668,
+     "snippet": "((void(*)(void*))at(0xc539b0)"
+    }
+   ],
+   "compat_ranges": [
+    23
+   ]
+  },
+  {
+   "win_rva": "0xc54920",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,void*,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 683,
+     "snippet": "((void(*)(void*,void*,void*))at(0xc54920)"
+    }
+   ],
+   "compat_ranges": [
+    24
+   ]
+  },
+  {
+   "win_rva": "0xc55000",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 696,
+     "snippet": "int scan_status[8]={};((void*(*)(void*,void*))at(0xc55000)"
+    }
+   ],
+   "compat_ranges": [
+    25
+   ]
+  },
+  {
+   "win_rva": "0xdf78e0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/native_saved_fixture.h",
+     "line": 17,
+     "snippet": "*(void**)at(0x5701a00)=at(0xdf78e0)"
+    }
+   ],
+   "compat_ranges": [
+    80
+   ]
+  },
+  {
+   "win_rva": "0xdf7a20",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/native_saved_fixture.h",
+     "line": 17,
+     "snippet": "*(void**)at(0x5701a00)=at(0xdf78e0);*(void**)at(0x5701a08)=at(0xdf7a20)"
+    }
+   ],
+   "compat_ranges": [
+    82
+   ]
+  },
+  {
+   "win_rva": "0xe06b60",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 658,
+     "snippet": "auto manager=native_alloc(0x10);((void*(*)(void*))at(0xe06b60)"
+    }
+   ],
+   "compat_ranges": [
+    26
+   ]
+  },
+  {
+   "win_rva": "0xfb2580",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_ai_tactics.h",
+     "line": 16,
+     "snippet": "auto okay=((unsigned char(*)(void*,void**))at(0xfb2580)"
+    }
+   ],
+   "compat_ranges": [
+    86
+   ]
+  },
+  {
+   "win_rva": "0x14264d0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,void*,uintptr_t,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 727,
+     "snippet": "((void*(*)(void*,void*,void*,uintptr_t,void*))at(0x14264d0)"
+    },
+    {
+     "file": "native/native_fmf_probe.h",
+     "line": 20,
+     "snippet": "options[2]={0x80100004e554c4c,0};((void*(*)(void*,void*,void*,uintptr_t,void*))at(0x14264d0)"
+    }
+   ],
+   "compat_ranges": [
+    27
+   ]
+  },
+  {
+   "win_rva": "0x14590b0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,uintptr_t)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 678,
+     "snippet": "((void*(*)(void*,void*,uintptr_t))at(0x14590b0)"
+    },
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 36,
+     "snippet": "((void*(*)(void*,void*,uintptr_t))at(0x14590b0)"
+    },
+    {
+     "file": "native/native_fmf_probe.h",
+     "line": 10,
+     "snippet": "))(&file,name,(unsigned char*)resources+0xc0);((void*(*)(void*,void*,uintptr_t))at(0x14590b0)"
+    }
+   ],
+   "compat_ranges": [
+    28
+   ]
+  },
+  {
+   "win_rva": "0x16d7b80",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uint64_t(*)(const uint32_t*,unsigned)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 46,
+     "snippet": "auto mask=((uint64_t(*)(const uint32_t*,unsigned))at(phase?0xbb5b0:0x16d7b80)"
+    },
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 324,
+     "snippet": "auto allowed=((uint64_t(*)(const uint32_t*,unsigned))at(phase?0xbb5b0:0x16d7b80)"
+    }
+   ],
+   "compat_ranges": [
+    29
+   ]
+  },
+  {
+   "win_rva": "0x17d1010",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**,unsigned char,void*,unsigned,unsigned,unsigned char,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_source_staff.h",
+     "line": 12,
+     "snippet": "char(*)(void*,void**,unsigned char,void*,unsigned,unsigned,unsigned char,void*))at(0x17d1010)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x1b32710",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_ai_tactics.h",
+     "line": 29,
+     "snippet": "member(\"plan_vector\",((unsigned char(*)(void*,void**))at(0x1b32710)"
+    }
+   ],
+   "compat_ranges": [
+    89
+   ]
+  },
+  {
+   "win_rva": "0x260aec0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned(*)(void*,unsigned char)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 816,
+     "snippet": "unsigned variant=((unsigned(*)(void*,unsigned char))at(0x260aec0)"
+    }
+   ],
+   "compat_ranges": [
+    30
+   ]
+  },
+  {
+   "win_rva": "0x2f4c890",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_source_staff.h",
+     "line": 17,
+     "snippet": "if(traits)for(auto p=traits[0];p!=traits[1];p+=2)if(((unsigned char(*)(void*))at(0x2f4c890)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x3182420",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void**,void*,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_ai_tactics.h",
+     "line": 35,
+     "snippet": "((void*(*)(void*,void**,void*,void*))at(0x3182420)"
+    }
+   ],
+   "compat_ranges": [
+    94
+   ]
+  },
+  {
+   "win_rva": "0x33dfcc0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)()"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 660,
+     "snippet": "((void(*)())at(0x33dfcc0)"
+    }
+   ],
+   "compat_ranges": [
+    31
+   ]
+  },
+  {
+   "win_rva": "0x34931c0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_ai_tactics.h",
+     "line": 15,
+     "snippet": "unsigned char object[0xb0]={};((void*(*)(void*))at(0x34931c0)"
+    }
+   ],
+   "compat_ranges": [
+    85
+   ]
+  },
+  {
+   "win_rva": "0x3770660",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_saved_fixture.h",
+     "line": 53,
+     "snippet": "if(!((unsigned char(*)(void*,void**))at(0x3770660)"
+    }
+   ],
+   "compat_ranges": [
+    79
+   ]
+  },
+  {
+   "win_rva": "0x38477b0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 677,
+     "snippet": "((void*(*)(void*,void*,void*))at(0x38477b0)"
+    },
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 725,
+     "snippet": "((void*(*)(void*,void*,void*))at(0x38477b0)"
+    },
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 35,
+     "snippet": "((void*(*)(void*,void*,void*))at(0x38477b0)"
+    },
+    {
+     "file": "native/native_fmf_probe.h",
+     "line": 10,
+     "snippet": "((void*(*)(void*,void*,void*))at(0x38477b0)"
+    }
+   ],
+   "compat_ranges": [
+    32
+   ]
+  },
+  {
+   "win_rva": "0x3fb4b00",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**,uint16_t)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_ai_tactics.h",
+     "line": 31,
+     "snippet": "member(\"record_vector\",((unsigned char(*)(void*,void**,uint16_t))at(0x3fb4b00)"
+    }
+   ],
+   "compat_ranges": [
+    91
+   ]
+  },
+  {
+   "win_rva": "0x4520bd0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,unsigned int,int)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 865,
+     "snippet": "((void(*)(void*,unsigned int,int))at(0x4520bd0)"
+    }
+   ],
+   "compat_ranges": [
+    33
+   ]
+  },
+  {
+   "win_rva": "0x4520d2e",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t"
+   ],
+   "sites": [
+    {
+     "file": "native/native_match_events.h",
+     "line": 92,
+     "snippet": "sktop_event_thread,&c)&&!(c.Dr7&255)){desktop_event_previous=c;c.Dr0=(uintptr_t)at(desktop_event_audit?0x4520d2e:0x1866c1)"
+    }
+   ],
+   "compat_ranges": [
+    33
+   ]
+  },
+  {
+   "win_rva": "0x4520f05",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t"
+   ],
+   "sites": [
+    {
+     "file": "native/native_match_events.h",
+     "line": 92,
+     "snippet": "=c;c.Dr0=(uintptr_t)at(desktop_event_audit?0x4520d2e:0x1866c1);c.Dr1=(uintptr_t)at(desktop_event_audit?0x4520f05:0x8375c)"
+    }
+   ],
+   "compat_ranges": [
+    33
+   ]
+  },
+  {
+   "win_rva": "0x4520f4c",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t"
+   ],
+   "sites": [
+    {
+     "file": "native/native_match_events.h",
+     "line": 92,
+     "snippet": "c1);c.Dr1=(uintptr_t)at(desktop_event_audit?0x4520f05:0x8375c);c.Dr2=(uintptr_t)at(desktop_event_audit?0x4520f4c:0x49870d0)"
+    }
+   ],
+   "compat_ranges": [
+    33
+   ]
+  },
+  {
+   "win_rva": "0x46c0fe0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(unsigned,const uint32_t*,uint64_t,const uint32_t*,uint32_t*)",
+    "unsigned char(*)(unsigned,uint32_t*,uint64_t,uint32_t*,uint32_t*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 54,
+     "snippet": "((unsigned char(*)(unsigned,const uint32_t*,uint64_t,const uint32_t*,uint32_t*))at(row.phase?0x8d540:0x46c0fe0)"
+    },
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 209,
+     "snippet": "auto policy=(unsigned char(*)(unsigned,uint32_t*,uint64_t,uint32_t*,uint32_t*))at(edit.a/16?0x8d540:0x46c0fe0)"
+    }
+   ],
+   "compat_ranges": [
+    34
+   ]
+  },
+  {
+   "win_rva": "0x46fdbd0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,void*,uint64_t,uint32_t*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 448,
+     "snippet": "((void(*)(void*,void*,uint64_t,uint32_t*))at(0x46fdbd0)"
+    }
+   ],
+   "compat_ranges": [
+    35
+   ]
+  },
+  {
+   "win_rva": "0x4706d20",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(size_t)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 652,
+     "snippet": "auto native_alloc=(void*(*)(size_t))at(0x4706d20)"
+    }
+   ],
+   "compat_ranges": [
+    36
+   ]
+  },
+  {
+   "win_rva": "0x4706f40",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)()"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 746,
+     "snippet": "if(!tls[0x4b8])((void(*)())at(0x4706f40)"
+    }
+   ],
+   "compat_ranges": [
+    38
+   ]
+  },
+  {
+   "win_rva": "0x4961dc0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,const void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 287,
+     "snippet": "igned char)index,(unsigned char)edit.value};((void*(*)(void*,void*,const void*))at(0x4961dc0)"
+    }
+   ],
+   "compat_ranges": [
+    40
+   ]
+  },
+  {
+   "win_rva": "0x4962660",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 768,
+     "snippet": "((void(*)(void*))at(0x4962660)"
+    }
+   ],
+   "compat_ranges": [
+    41
+   ]
+  },
+  {
+   "win_rva": "0x4968820",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 851,
+     "snippet": "((void(*)(void*))at(0x4968820)"
+    }
+   ],
+   "compat_ranges": [
+    42
+   ]
+  },
+  {
+   "win_rva": "0x4969df0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 706,
+     "snippet": "auto initialized=((unsigned char(*)(void*,void*))at(0x4969df0)"
+    }
+   ],
+   "compat_ranges": [
+    43
+   ]
+  },
+  {
+   "win_rva": "0x496aa30",
+   "region": "code",
+   "kinds": [
+    "module_offset"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 982,
+     "snippet": null
+    }
+   ],
+   "compat_ranges": [
+    44
+   ]
+  },
+  {
+   "win_rva": "0x4973930",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void*,void*,unsigned int)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 749,
+     "snippet": "auto accepted=((unsigned char(*)(void*,void*,void*,unsigned int))at(0x4973930)"
+    }
+   ],
+   "compat_ranges": [
+    45
+   ]
+  },
+  {
+   "win_rva": "0x497c010",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void*(*)(void*,void*,const void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 258,
+     "snippet": "((void*(*)(void*,void*,const void*))at(0x497c010)"
+    }
+   ],
+   "compat_ranges": [
+    46
+   ]
+  },
+  {
+   "win_rva": "0x497f3e0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*(*)()"
+   ],
+   "sites": [
+    {
+     "file": "native/native_saved_fixture.h",
+     "line": 44,
+     "snippet": "core=((unsigned char*(*)())at(0x497f3e0)"
+    }
+   ],
+   "compat_ranges": [
+    77
+   ]
+  },
+  {
+   "win_rva": "0x49870d0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t"
+   ],
+   "sites": [
+    {
+     "file": "native/native_match_events.h",
+     "line": 92,
+     "snippet": "c1);c.Dr1=(uintptr_t)at(desktop_event_audit?0x4520f05:0x8375c);c.Dr2=(uintptr_t)at(desktop_event_audit?0x4520f4c:0x49870d0)"
+    }
+   ],
+   "compat_ranges": [
+    47
+   ]
+  },
+  {
+   "win_rva": "0x49929c0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,unsigned)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 54,
+     "snippet": "((void(*)(void*,unsigned))at(0x49929c0)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x49a9ab0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**,unsigned char)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_source_generation.h",
+     "line": 131,
+     "snippet": "auto accepted=((unsigned char(*)(void*,void**,unsigned char))at(0x49a9ab0)"
+    },
+    {
+     "file": "native/native_tactic_export.h",
+     "line": 11,
+     "snippet": "unsigned char accepted=((unsigned char(*)(void*,void**,unsigned char))at(0x49a9ab0)"
+    }
+   ],
+   "compat_ranges": [
+    76
+   ]
+  },
+  {
+   "win_rva": "0x49b8660",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uint32_t(*)(void*,unsigned char,unsigned char,size_t)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 377,
+     "snippet": "auto actual=((uint32_t(*)(void*,unsigned char,unsigned char,size_t))at(0x49b8660)"
+    }
+   ],
+   "compat_ranges": [
+    52
+   ]
+  },
+  {
+   "win_rva": "0x49bcc70",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_ai_tactics.h",
+     "line": 32,
+     "snippet": "member(\"team_links\",((unsigned char(*)(void*,void**))at(0x49bcc70)"
+    }
+   ],
+   "compat_ranges": [
+    92
+   ]
+  },
+  {
+   "win_rva": "0x49ca790",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**,void*,void*)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_saved_fixture.h",
+     "line": 45,
+     "snippet": "auto okay=((unsigned char(*)(void*,void**,void*,void*))at(0x49ca790)"
+    }
+   ],
+   "compat_ranges": [
+    78
+   ]
+  },
+  {
+   "win_rva": "0x4a1e230",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)(void*,uint32_t,const uint32_t*,size_t)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 244,
+     "snippet": "((void(*)(void*,uint32_t,const uint32_t*,size_t))at(0x4a1e230)"
+    },
+    {
+     "file": "native/native_source_generation.h",
+     "line": 66,
+     "snippet": "((void(*)(void*,uint32_t,const uint32_t*,size_t))at(0x4a1e230)"
+    }
+   ],
+   "compat_ranges": [
+    53
+   ]
+  },
+  {
+   "win_rva": "0x4a1f1a0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(unsigned)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 82,
+     "snippet": "if(!((unsigned char(*)(unsigned))at(0x4a1f1a0)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x4a204f0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*(*)(void*,unsigned char,signed char)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 80,
+     "snippet": "return ((unsigned char*(*)(void*,unsigned char,signed char))at(0x4a204f0)"
+    }
+   ],
+   "compat_ranges": [
+    54
+   ]
+  },
+  {
+   "win_rva": "0x4a22db0",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(unsigned char,unsigned char)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 276,
+     "snippet": "if(edit.b>=8||edit.value>=16||!(((unsigned char(*)(unsigned char,unsigned char))at(0x4a22db0)"
+    }
+   ],
+   "compat_ranges": [
+    55
+   ]
+  },
+  {
+   "win_rva": "0x4a39350",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*(*)(void*,uint32_t)"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 235,
+     "snippet": "auto row=((unsigned char*(*)(void*,uint32_t))at(0x4a39350)"
+    }
+   ],
+   "compat_ranges": [
+    56
+   ]
+  },
+  {
+   "win_rva": "0x4a7c550",
+   "region": "code",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char(*)(void*,void**,uint16_t)"
+   ],
+   "sites": [
+    {
+     "file": "native/native_ai_tactics.h",
+     "line": 30,
+     "snippet": "member(\"reference_vector\",((unsigned char(*)(void*,void**,uint16_t))at(0x4a7c550)"
+    }
+   ],
+   "compat_ranges": [
+    90
+   ]
+  },
+  {
+   "win_rva": "0x4aff5b9",
+   "region": "data_ro",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 84,
+     "snippet": "((void*(*)(void*,void*,unsigned char))at(0x160930))(plan,at(0x4aff5b9)"
+    },
+    {
+     "file": "native/native_source_generation.h",
+     "line": 27,
+     "snippet": "((void*(*)(void*,void*,unsigned char))at(0x160930))(fresh,at(0x4aff5b9)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x4c8c878",
+   "region": "data_ro",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 739,
+     "snippet": "*(void**)match=at(0x4c8c878)"
+    }
+   ],
+   "metadata_data_size": 8,
+   "compat_ranges": [
+    73
+   ]
+  },
+  {
+   "win_rva": "0x4d8de08",
+   "region": "data_ro",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/native_source_staff.h",
+     "line": 9,
+     "snippet": "auto object=(unsigned char*)calloc(1,0x240);*(void**)object=at(0x4d8de08)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x4d8de28",
+   "region": "data_ro",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/native_source_staff.h",
+     "line": 9,
+     "snippet": "ect=at(0x4d8de08);*(void**)(object+0x100)=at(0x4d8de78);*(void**)(object+0x128)=at(0x4d8de28)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x4d8de78",
+   "region": "data_ro",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/native_source_staff.h",
+     "line": 9,
+     "snippet": "ned char*)calloc(1,0x240);*(void**)object=at(0x4d8de08);*(void**)(object+0x100)=at(0x4d8de78)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x4e38a90",
+   "region": "data_ro",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 811,
+     "snippet": "unsigned attacking_type=((unsigned char*)at(0x4e38a90)"
+    },
+    {
+     "file": "native/native_setpiece_episode.h",
+     "line": 12,
+     "snippet": "eadball=match[0x12d70];unsigned type=deadball>=1&&deadball<=13?((unsigned char*)at(0x4e38a90)"
+    }
+   ],
+   "metadata_data_size": 8
+  },
+  {
+   "win_rva": "0x56f3ab0",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void**"
+   ],
+   "sites": [
+    {
+     "file": "native/native_source_generation.h",
+     "line": 36,
+     "snippet": "uto trait_memory=(unsigned char*)((void*(*)(void*,size_t))at(0xb6430))(*(void**)at(0x56f3ab0)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x56f3af8",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char**"
+   ],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 23,
+     "snippet": "auto fm=*(unsigned char**)at(0x56f3af8)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x56f3b00",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void**",
+    "unsigned char**"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 653,
+     "snippet": "if(!*(void**)at(0x56f3b00)"
+    },
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 655,
+     "snippet": "*(void**)at(0x56f3b00)"
+    },
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 662,
+     "snippet": "auto resources=*(void**)at(0x56f3b00)"
+    },
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 711,
+     "snippet": "auto resources=*(void**)at(0x56f3b00)"
+    },
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 34,
+     "snippet": "auto resources=*(unsigned char**)at(0x56f3b00)"
+    }
+   ],
+   "metadata_data_size": 8
+  },
+  {
+   "win_rva": "0x56f3bb8",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char**"
+   ],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 60,
+     "snippet": "auto loader=*(unsigned char**)at(0x56f3bb8)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x56f3c28",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void**"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 657,
+     "snippet": "if(!*(void**)at(0x56f3c28)"
+    },
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 659,
+     "snippet": "*(void**)at(0x56f3c28)"
+    }
+   ],
+   "metadata_data_size": 8
+  },
+  {
+   "win_rva": "0x5700ef0",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 255,
+     "snippet": "auto obj=(unsigned char*)((void*(*)(void*,size_t))at(0xb6430))(at(0x5700ef0)"
+    }
+   ],
+   "metadata_data_size": 8
+  },
+  {
+   "win_rva": "0x5701a00",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void**"
+   ],
+   "sites": [
+    {
+     "file": "native/native_saved_fixture.h",
+     "line": 17,
+     "snippet": "*(void**)at(0x5701a00)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x5701a08",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void**"
+   ],
+   "sites": [
+    {
+     "file": "native/native_saved_fixture.h",
+     "line": 17,
+     "snippet": "*(void**)at(0x5701a00)=at(0xdf78e0);*(void**)at(0x5701a08)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x5701a70",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void**"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 69,
+     "snippet": "void* interface_object=*(void**)at(0x5701a70)"
+    },
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 625,
+     "snippet": "*(void**)at(0x5701a70)"
+    },
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 717,
+     "snippet": "interface_object=*(void**)at(0x5701a70)"
+    }
+   ],
+   "metadata_data_size": 8
+  },
+  {
+   "win_rva": "0x5703660",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 663,
+     "snippet": "((void(*)(void*,void*))at(0xc53400))(resources,at(0x5703660)"
+    }
+   ],
+   "metadata_data_size": 8
+  },
+  {
+   "win_rva": "0x570549c",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*"
+   ],
+   "sites": [
+    {
+     "file": "native/native_ai_tactics.h",
+     "line": 8,
+     "snippet": "*(unsigned char*)at(0x570549c)"
+    },
+    {
+     "file": "native/native_saved_fixture.h",
+     "line": 16,
+     "snippet": "*(unsigned char*)at(0x570549c)"
+    },
+    {
+     "file": "native/native_source_staff.h",
+     "line": 3,
+     "snippet": "*(unsigned char*)at(0x570549c)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x5705e22",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*"
+   ],
+   "sites": [
+    {
+     "file": "native/native_source_staff.h",
+     "line": 3,
+     "snippet": "*(unsigned char*)at(0x570549c)=0;*(unsigned char*)at(0x5705e22)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x5705e23",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "unsigned char*"
+   ],
+   "sites": [
+    {
+     "file": "native/native_source_staff.h",
+     "line": 3,
+     "snippet": "nsigned char*)at(0x570549c)=0;*(unsigned char*)at(0x5705e22)=0;*(unsigned char*)at(0x5705e23)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x57064f0",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 705,
+     "snippet": "static unsigned char init_input[0x88];memcpy(init_input,at(0x57064f0)"
+    }
+   ],
+   "metadata_data_size": 8
+  },
+  {
+   "win_rva": "0x5706578",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t**"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 712,
+     "snippet": "auto stats=*(uintptr_t**)at(0x5706578)"
+    }
+   ],
+   "metadata_data_size": 8
+  },
+  {
+   "win_rva": "0x5709c50",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t*"
+   ],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 678,
+     "snippet": "((void*(*)(void*,void*,uintptr_t))at(0x14590b0))(&folder,&file,*(uintptr_t*)at(0x5709c50)"
+    },
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 36,
+     "snippet": "((void*(*)(void*,void*,uintptr_t))at(0x14590b0))(&folder,&file,*(uintptr_t*)at(0x5709c50)"
+    },
+    {
+     "file": "native/native_fmf_probe.h",
+     "line": 10,
+     "snippet": "c0);((void*(*)(void*,void*,uintptr_t))at(0x14590b0))(&folder,&file,*(uintptr_t*)at(0x5709c50)"
+    }
+   ],
+   "metadata_data_size": 8
+  },
+  {
+   "win_rva": "0x570abb0",
+   "region": "data_rw",
+   "kinds": [
+    "metadata_data"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/profile_metadata.json",
+     "line": null,
+     "snippet": null
+    }
+   ],
+   "metadata_data_size": 8
+  },
+  {
+   "win_rva": "0x5712d38",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "uintptr_t*"
+   ],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 26,
+     "snippet": "((void*(*)(void*,void*,void*))at(0xc4b7e0))(fm,&existing,at(0x5712d38)"
+    },
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 41,
+     "snippet": "((void*(*)(void*,void*,void*))at(0x7a4310))(tree,iter,at(0x5712d38)"
+    },
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 43,
+     "snippet": "if(!node||*(uintptr_t*)(node+0x20)!=*(uintptr_t*)at(0x5712d38)"
+    },
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 47,
+     "snippet": "((void*(*)(void*,void*,void*))at(0xc4b7e0))(fm,&found,at(0x5712d38)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x5716528",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 666,
+     "snippet": "((void(*)(void*,void*))at(0xc53910))(resources,at(0x5716528)"
+    }
+   ],
+   "metadata_data_size": 8
+  },
+  {
+   "win_rva": "0x5716928",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 683,
+     "snippet": "((void(*)(void*,void*,void*))at(0xc54920))(resources,folder_path,at(0x5716928)"
+    }
+   ],
+   "metadata_data_size": 8
+  },
+  {
+   "win_rva": "0x57169e0",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 8,
+     "snippet": "((void(*)(void*,void*))at(0xc53910))(resources,at(0x57169e0)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x5719098",
+   "region": "data_rw",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 699,
+     "snippet": "((void*(*)(void*,void*))at(0x15a380))(query,at(0x5719098)"
+    }
+   ],
+   "metadata_data_size": 8
+  },
+  {
+   "win_rva": "0x16c921e0",
+   "region": "code_rwx",
+   "kinds": [
+    "at"
+   ],
+   "signatures": [
+    "void(*)()"
+   ],
+   "sites": [
+    {
+     "file": "native/native_coach_presets.h",
+     "line": 9,
+     "snippet": "((void(*)())at(0x16c921e0)"
+    }
+   ]
+  },
+  {
+   "win_rva": "0x17605818",
+   "region": "code_rwx",
+   "kinds": [
+    "module_offset"
+   ],
+   "signatures": [],
+   "sites": [
+    {
+     "file": "native/desktop_host.cpp",
+     "line": 975,
+     "snippet": null
+    }
+   ],
+   "compat_ranges": [
+    72
+   ]
+  }
+ ],
+ "compat_ranges": [
+  {
+   "index": 0,
+   "win_rva": "0x50860",
+   "size": 15146,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x51a90"
+   ]
+  },
+  {
+   "index": 1,
+   "win_rva": "0x83630",
+   "size": 1744,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x8375c"
+   ]
+  },
+  {
+   "index": 2,
+   "win_rva": "0x8d540",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x8d540"
+   ]
+  },
+  {
+   "index": 3,
+   "win_rva": "0xb6430",
+   "size": 186,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xb6430"
+   ]
+  },
+  {
+   "index": 4,
+   "win_rva": "0xbb5b0",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xbb5b0"
+   ]
+  },
+  {
+   "index": 5,
+   "win_rva": "0xe43e0",
+   "size": 736,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xe43e0"
+   ]
+  },
+  {
+   "index": 6,
+   "win_rva": "0xe80f0",
+   "size": 387,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xe80f0"
+   ]
+  },
+  {
+   "index": 7,
+   "win_rva": "0xea590",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xea590"
+   ]
+  },
+  {
+   "index": 8,
+   "win_rva": "0x123bd0",
+   "size": 377,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 9,
+   "win_rva": "0x135530",
+   "size": 430,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x135530"
+   ]
+  },
+  {
+   "index": 10,
+   "win_rva": "0x15a380",
+   "size": 41,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x15a380"
+   ]
+  },
+  {
+   "index": 11,
+   "win_rva": "0x15a3b0",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x15a3b0"
+   ]
+  },
+  {
+   "index": 12,
+   "win_rva": "0x15a640",
+   "size": 178,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x15a640"
+   ]
+  },
+  {
+   "index": 13,
+   "win_rva": "0x15fd50",
+   "size": 759,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 14,
+   "win_rva": "0x184400",
+   "size": 1470,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x184400"
+   ]
+  },
+  {
+   "index": 15,
+   "win_rva": "0x185a60",
+   "size": 20732,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x1866c1"
+   ]
+  },
+  {
+   "index": 16,
+   "win_rva": "0x64fe90",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x64fe90"
+   ]
+  },
+  {
+   "index": 17,
+   "win_rva": "0x9e1d80",
+   "size": 1234,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x9e1d80"
+   ]
+  },
+  {
+   "index": 18,
+   "win_rva": "0xa85270",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xa85270"
+   ]
+  },
+  {
+   "index": 19,
+   "win_rva": "0xabe290",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xabe290"
+   ]
+  },
+  {
+   "index": 20,
+   "win_rva": "0xc51e60",
+   "size": 1009,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xc51e60"
+   ]
+  },
+  {
+   "index": 21,
+   "win_rva": "0xc53400",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xc53400"
+   ]
+  },
+  {
+   "index": 22,
+   "win_rva": "0xc53910",
+   "size": 109,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xc53910"
+   ]
+  },
+  {
+   "index": 23,
+   "win_rva": "0xc539b0",
+   "size": 2207,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xc539b0"
+   ]
+  },
+  {
+   "index": 24,
+   "win_rva": "0xc54920",
+   "size": 519,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xc54920"
+   ]
+  },
+  {
+   "index": 25,
+   "win_rva": "0xc55000",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xc55000"
+   ]
+  },
+  {
+   "index": 26,
+   "win_rva": "0xe06b60",
+   "size": 1095,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0xe06b60"
+   ]
+  },
+  {
+   "index": 27,
+   "win_rva": "0x14264d0",
+   "size": 162,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x14264d0"
+   ]
+  },
+  {
+   "index": 28,
+   "win_rva": "0x14590b0",
+   "size": 220,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x14590b0"
+   ]
+  },
+  {
+   "index": 29,
+   "win_rva": "0x16d7b80",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x16d7b80"
+   ]
+  },
+  {
+   "index": 30,
+   "win_rva": "0x260aec0",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x260aec0"
+   ]
+  },
+  {
+   "index": 31,
+   "win_rva": "0x33dfcc0",
+   "size": 1483,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x33dfcc0"
+   ]
+  },
+  {
+   "index": 32,
+   "win_rva": "0x38477b0",
+   "size": 1182,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x38477b0"
+   ]
+  },
+  {
+   "index": 33,
+   "win_rva": "0x4520bd0",
+   "size": 1310,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x4520bd0",
+    "0x4520d2e",
+    "0x4520f05",
+    "0x4520f4c"
+   ]
+  },
+  {
+   "index": 34,
+   "win_rva": "0x46c0fe0",
+   "size": 5630,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x46c0fe0"
+   ]
+  },
+  {
+   "index": 35,
+   "win_rva": "0x46fdbd0",
+   "size": 120,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x46fdbd0"
+   ]
+  },
+  {
+   "index": 36,
+   "win_rva": "0x4706d20",
+   "size": 68,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x4706d20"
+   ]
+  },
+  {
+   "index": 37,
+   "win_rva": "0x4706ed0",
+   "size": 102,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 38,
+   "win_rva": "0x4706f40",
+   "size": 98,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x4706f40"
+   ]
+  },
+  {
+   "index": 39,
+   "win_rva": "0x4706fe0",
+   "size": 32,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 40,
+   "win_rva": "0x4961dc0",
+   "size": 276,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x4961dc0"
+   ]
+  },
+  {
+   "index": 41,
+   "win_rva": "0x4962660",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x4962660"
+   ]
+  },
+  {
+   "index": 42,
+   "win_rva": "0x4968820",
+   "size": 554,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x4968820"
+   ]
+  },
+  {
+   "index": 43,
+   "win_rva": "0x4969df0",
+   "size": 205,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x4969df0"
+   ]
+  },
+  {
+   "index": 44,
+   "win_rva": "0x496aa30",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x496aa30"
+   ]
+  },
+  {
+   "index": 45,
+   "win_rva": "0x4973930",
+   "size": 889,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x4973930"
+   ]
+  },
+  {
+   "index": 46,
+   "win_rva": "0x497c010",
+   "size": 376,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x497c010"
+   ]
+  },
+  {
+   "index": 47,
+   "win_rva": "0x49870d0",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x49870d0"
+   ]
+  },
+  {
+   "index": 48,
+   "win_rva": "0x499c690",
+   "size": 760,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 49,
+   "win_rva": "0x499d3c0",
+   "size": 934,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 50,
+   "win_rva": "0x499ecd0",
+   "size": 94,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 51,
+   "win_rva": "0x499ed30",
+   "size": 1013,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 52,
+   "win_rva": "0x49b8660",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x49b8660"
+   ]
+  },
+  {
+   "index": 53,
+   "win_rva": "0x4a1e230",
+   "size": 347,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x4a1e230"
+   ]
+  },
+  {
+   "index": 54,
+   "win_rva": "0x4a204f0",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x4a204f0"
+   ]
+  },
+  {
+   "index": 55,
+   "win_rva": "0x4a22db0",
+   "size": 325,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x4a22db0"
+   ]
+  },
+  {
+   "index": 56,
+   "win_rva": "0x4a39350",
+   "size": 151,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": [
+    "0x4a39350"
+   ]
+  },
+  {
+   "index": 57,
+   "win_rva": "0x4a3f7c0",
+   "size": 82,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 58,
+   "win_rva": "0x4a75a60",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 59,
+   "win_rva": "0x4a75b40",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 60,
+   "win_rva": "0x4a75c50",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 61,
+   "win_rva": "0x7390600",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 62,
+   "win_rva": "0x7c1e730",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 63,
+   "win_rva": "0x80ef930",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 64,
+   "win_rva": "0x91bbd00",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 65,
+   "win_rva": "0xa6a1fd0",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 66,
+   "win_rva": "0xb3b94e0",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 67,
+   "win_rva": "0xbd436d0",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 68,
+   "win_rva": "0xf504890",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 69,
+   "win_rva": "0x11bdf720",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 70,
+   "win_rva": "0x133d74a0",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 71,
+   "win_rva": "0x14698b90",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 72,
+   "win_rva": "0x17605818",
+   "size": 64,
+   "purpose": "adapter-referenced native code",
+   "region": "code_rwx",
+   "covers_targets": [
+    "0x17605818"
+   ]
+  },
+  {
+   "index": 73,
+   "win_rva": "0x4c8c878",
+   "size": 64,
+   "purpose": "match/interface vtable layout",
+   "region": "data_ro",
+   "covers_targets": [
+    "0x4c8c878"
+   ]
+  },
+  {
+   "index": 74,
+   "win_rva": "0x4f0f618",
+   "size": 64,
+   "purpose": "match/interface vtable layout",
+   "region": "data_ro",
+   "covers_targets": []
+  },
+  {
+   "index": 75,
+   "win_rva": "0x16fca0",
+   "size": 1442,
+   "purpose": "desktop tactical plan serializer",
+   "region": "code",
+   "covers_targets": [
+    "0x16fca0"
+   ]
+  },
+  {
+   "index": 76,
+   "win_rva": "0x49a9ab0",
+   "size": 1349,
+   "purpose": "desktop tactical plan serializer",
+   "region": "code",
+   "covers_targets": [
+    "0x49a9ab0"
+   ]
+  },
+  {
+   "index": 77,
+   "win_rva": "0x497f3e0",
+   "size": 130,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code",
+   "covers_targets": [
+    "0x497f3e0"
+   ]
+  },
+  {
+   "index": 78,
+   "win_rva": "0x49ca790",
+   "size": 2400,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code",
+   "covers_targets": [
+    "0x49ca790"
+   ]
+  },
+  {
+   "index": 79,
+   "win_rva": "0x3770660",
+   "size": 1166,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code",
+   "covers_targets": [
+    "0x3770660"
+   ]
+  },
+  {
+   "index": 80,
+   "win_rva": "0xdf78e0",
+   "size": 5,
+   "purpose": "saved fixture factory jump",
+   "region": "code",
+   "covers_targets": [
+    "0xdf78e0"
+   ]
+  },
+  {
+   "index": 81,
+   "win_rva": "0x9787910",
+   "size": 45,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 82,
+   "win_rva": "0xdf7a20",
+   "size": 293,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code",
+   "covers_targets": [
+    "0xdf7a20"
+   ]
+  },
+  {
+   "index": 83,
+   "win_rva": "0xdf7ea0",
+   "size": 731,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 84,
+   "win_rva": "0x49d0770",
+   "size": 3019,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 85,
+   "win_rva": "0x34931c0",
+   "size": 901,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code",
+   "covers_targets": [
+    "0x34931c0"
+   ]
+  },
+  {
+   "index": 86,
+   "win_rva": "0xfb2580",
+   "size": 1478,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code",
+   "covers_targets": [
+    "0xfb2580"
+   ]
+  },
+  {
+   "index": 87,
+   "win_rva": "0xfb2010",
+   "size": 5,
+   "purpose": "saved fixture factory jump",
+   "region": "code",
+   "covers_targets": []
+  },
+  {
+   "index": 88,
+   "win_rva": "0xa07dc00",
+   "size": 410,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 89,
+   "win_rva": "0x1b32710",
+   "size": 616,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code",
+   "covers_targets": [
+    "0x1b32710"
+   ]
+  },
+  {
+   "index": 90,
+   "win_rva": "0x4a7c550",
+   "size": 290,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code",
+   "covers_targets": [
+    "0x4a7c550"
+   ]
+  },
+  {
+   "index": 91,
+   "win_rva": "0x3fb4b00",
+   "size": 3092,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code",
+   "covers_targets": [
+    "0x3fb4b00"
+   ]
+  },
+  {
+   "index": 92,
+   "win_rva": "0x49bcc70",
+   "size": 5,
+   "purpose": "saved fixture factory jump",
+   "region": "code",
+   "covers_targets": [
+    "0x49bcc70"
+   ]
+  },
+  {
+   "index": 93,
+   "win_rva": "0x16d79e10",
+   "size": 56,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code_rwx",
+   "covers_targets": []
+  },
+  {
+   "index": 94,
+   "win_rva": "0x3182420",
+   "size": 2387,
+   "purpose": "saved fixture original reader/factory",
+   "region": "code",
+   "covers_targets": [
+    "0x3182420"
+   ]
+  }
+ ]
+}

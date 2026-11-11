@@ -1,0 +1,81 @@
+# Guide for AI agents working with FM27 Match Lab
+
+This repository runs Football Manager 27's own match engine from the user's Steam install, outside the game, to
+replay and test matches. Read this before running anything. `CLAUDE.md` points here.
+
+## Rules (not negotiable)
+
+- **The game must be the user's own Steam install, with Steam running and logged in.** Never bypass, stub or emulate
+  Steam, ownership checks, DRM or online services.
+- **Never modify the FM27 install.** No patched binaries, no replaced or added files. The tools read the game's files
+  and call its engine functions in their own process; that's all.
+- **Never disable SIP**, and never ask the user to.
+- **FM27 must be closed while anything runs the engine** (set-up, the app's batches, studies). Check with
+  `pgrep -f "fm.app/Contents/MacOS/Football Manager 27"`. If the user opens the game mid-run, stop the run; the study
+  runner resumes where it stopped.
+- **Nothing derived from game files is committed**: no match files (`.pkm`), tactic files (`.fmf`), engine bytes,
+  game data, screenshots of the user's save or study results. They belong in the git-ignored `private/`, `build/`,
+  `data/` or `runs/` folders. `tests/test_boundary.py` enforces this; run the tests before every commit.
+- **Privacy.** Saved matches contain the user's manager name. Never copy names from a save into tracked files. List
+  personal terms (name, user name, machine name) in the git-ignored `private/personal_terms.txt`; the boundary test
+  then rejects them anywhere in the repository.
+- Ask the user before installing anything large, writing outside the repository and its private folders, or
+  publishing anything.
+
+## Set-up and the app
+
+```sh
+python3.12 -m venv .venv && .venv/bin/pip install UnityPy
+.venv/bin/python scripts/setup.py          # host, tactic catalogue, sample match; again after a game update
+.venv/bin/python scripts/run.py            # the app at http://127.0.0.1:18765
+.venv/bin/python -m unittest discover tests
+```
+
+The app covers single comparisons: open a saved match, change something, run a few hundred seeds, compare with the
+saved tactic. For anything with many conditions, use a study.
+
+## Running a study
+
+`scripts/study.py` is the general tool. A study is a folder holding `study.json` (team, matches, seeds,
+conditions), the runner's `jobs.json`/`results.jsonl`, and `report.md`.
+
+```sh
+.venv/bin/python scripts/study.py new runs/pace-test --team "Your Club" --newest 10 --seeds 30
+.venv/bin/python scripts/study.py add runs/pace-test attribute:Pace attribute:Acceleration familiarity:20
+.venv/bin/python scripts/study.py run runs/pace-test          # resumable; about 1,100 matches per hour per worker
+.venv/bin/python scripts/study.py report runs/pace-test
+```
+
+`study.py --help` lists the condition types: attributes, familiarity, start state, mentality, team instructions,
+in-match management, tactic files.
+
+How to design and read one:
+
+- **Paired comparisons.** Every condition replays the same matches on the same seeds as the unchanged match, so
+  differences are measured match by match. Always compare against the natural replay, never against a separate run.
+- **Seeds.** 10 matches × 30 seeds (300 pairs) detects effects of about 0.1 points per game or 0.1 xGD. Halve the
+  detectable effect by quadrupling the seeds.
+- **Outcomes.** xGD (expected-goal difference) is the most sensitive; points per game is what matters but is
+  noisier. Look at xG for and against to explain an effect, and at goals minus xG for finishing-type effects.
+- **t values.** |t| ≥ 2 is about 95% confidence, |t| ≥ 3 solid. With many conditions a few |t| of 2-3 appear by
+  chance: rerun the interesting ones with more seeds (a new study with only those conditions and seeds 31+, or more
+  matches) before reporting them as findings.
+- **Saved matches from another game version** play on the installed engine but no longer replay exactly; that's fine
+  for comparisons, since every condition uses the same engine.
+- Matches the user managed replay the user's recorded substitutions; instant-result and holiday matches let the
+  assistant manage live. Prefer instant-result matches.
+
+Write findings up in plain language: what changed, by how much (per game and per season), how sure, and the
+mechanism (more chances, better chances, fewer chances conceded). `docs/studies/` has six worked examples.
+
+## Where things are
+
+| Path | What |
+|---|---|
+| `src/` | the app: server (`fm27_tactics_server.py`), UI (`tactics_ui/`), saved matches, English labels |
+| `port/mac_host/` | the engine host (C++), built by `scripts/build_native_mac.py` |
+| `port/map/` | address mapping and data readers (IL2CPP enums, effectiveness record) |
+| `port/validation/` | the original study scripts (Studies 1-6) and the resumable runner `overnight.py` |
+| `docs/RESEARCH.md` | host options and research switches (attribute and record writes, dumps) |
+| `docs/studies/` | study pages: design, results, caveats, how to reproduce |
+| `port/REPORT.md` | the technical notebook: how each engine function was found and checked |

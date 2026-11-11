@@ -1,0 +1,852 @@
+{
+ "_note": "Interface constants of the match input, this project's own metadata. Position masks and attribute layout are checked by the host (scenario read-back and --dump-input); the goalkeeper-up group's option ids are checked by the game's resolver when the catalogue is built. Set-piece options: ids and English names as shown in FM27's set-piece screens, and which tasks each set-piece role allows.",
+ "positions": [
+  {
+   "id": "GK",
+   "mask": 1,
+   "x": 50,
+   "y": 92
+  },
+  {
+   "id": "DR",
+   "mask": 4,
+   "x": 86,
+   "y": 76
+  },
+  {
+   "id": "DL",
+   "mask": 8,
+   "x": 14,
+   "y": 76
+  },
+  {
+   "id": "DC",
+   "mask": 16,
+   "x": 50,
+   "y": 78
+  },
+  {
+   "id": "DCR",
+   "mask": 2097168,
+   "x": 67,
+   "y": 78
+  },
+  {
+   "id": "DCL",
+   "mask": 1048592,
+   "x": 33,
+   "y": 78
+  },
+  {
+   "id": "WBR",
+   "mask": 32,
+   "x": 91,
+   "y": 62
+  },
+  {
+   "id": "WBL",
+   "mask": 64,
+   "x": 9,
+   "y": 62
+  },
+  {
+   "id": "DMC",
+   "mask": 128,
+   "x": 50,
+   "y": 61
+  },
+  {
+   "id": "DMR",
+   "mask": 2097280,
+   "x": 67,
+   "y": 61
+  },
+  {
+   "id": "DML",
+   "mask": 1048704,
+   "x": 33,
+   "y": 61
+  },
+  {
+   "id": "MR",
+   "mask": 256,
+   "x": 89,
+   "y": 45
+  },
+  {
+   "id": "ML",
+   "mask": 512,
+   "x": 11,
+   "y": 45
+  },
+  {
+   "id": "MC",
+   "mask": 1024,
+   "x": 50,
+   "y": 45
+  },
+  {
+   "id": "MCR",
+   "mask": 2098176,
+   "x": 67,
+   "y": 45
+  },
+  {
+   "id": "MCL",
+   "mask": 1049600,
+   "x": 33,
+   "y": 45
+  },
+  {
+   "id": "AMR",
+   "mask": 2048,
+   "x": 88,
+   "y": 28
+  },
+  {
+   "id": "AML",
+   "mask": 4096,
+   "x": 12,
+   "y": 28
+  },
+  {
+   "id": "AMC",
+   "mask": 8192,
+   "x": 50,
+   "y": 28
+  },
+  {
+   "id": "AMCR",
+   "mask": 2105344,
+   "x": 67,
+   "y": 28
+  },
+  {
+   "id": "AMCL",
+   "mask": 1056768,
+   "x": 33,
+   "y": 28
+  },
+  {
+   "id": "ST",
+   "mask": 16384,
+   "x": 50,
+   "y": 12
+  },
+  {
+   "id": "STR",
+   "mask": 2113536,
+   "x": 67,
+   "y": 12
+  },
+  {
+   "id": "STL",
+   "mask": 1064960,
+   "x": 33,
+   "y": 12
+  }
+ ],
+ "mentalities": [
+  {
+   "id": 1
+  },
+  {
+   "id": 2
+  },
+  {
+   "id": 3
+  },
+  {
+   "id": 4
+  },
+  {
+   "id": 5
+  },
+  {
+   "id": 6
+  },
+  {
+   "id": 7
+  }
+ ],
+ "attributes": [
+  {
+   "id": 0,
+   "name": "GK",
+   "position": true
+  },
+  {
+   "id": 1,
+   "name": "UnusedSweeper",
+   "position": true
+  },
+  {
+   "id": 2,
+   "name": "DL",
+   "position": true
+  },
+  {
+   "id": 3,
+   "name": "DC",
+   "position": true
+  },
+  {
+   "id": 4,
+   "name": "DR",
+   "position": true
+  },
+  {
+   "id": 5,
+   "name": "DM",
+   "position": true
+  },
+  {
+   "id": 6,
+   "name": "ML",
+   "position": true
+  },
+  {
+   "id": 7,
+   "name": "MC",
+   "position": true
+  },
+  {
+   "id": 8,
+   "name": "MR",
+   "position": true
+  },
+  {
+   "id": 9,
+   "name": "AML",
+   "position": true
+  },
+  {
+   "id": 10,
+   "name": "AMC",
+   "position": true
+  },
+  {
+   "id": 11,
+   "name": "AMR",
+   "position": true
+  },
+  {
+   "id": 12,
+   "name": "ST",
+   "position": true
+  },
+  {
+   "id": 13,
+   "name": "WBL",
+   "position": true
+  },
+  {
+   "id": 14,
+   "name": "WBR",
+   "position": true
+  },
+  {
+   "id": 15,
+   "name": "Crossing",
+   "position": false
+  },
+  {
+   "id": 16,
+   "name": "Dribbling",
+   "position": false
+  },
+  {
+   "id": 17,
+   "name": "Finishing",
+   "position": false
+  },
+  {
+   "id": 18,
+   "name": "Heading",
+   "position": false
+  },
+  {
+   "id": 19,
+   "name": "LongShots",
+   "position": false
+  },
+  {
+   "id": 20,
+   "name": "Marking",
+   "position": false
+  },
+  {
+   "id": 21,
+   "name": "OffTheBall",
+   "position": false
+  },
+  {
+   "id": 22,
+   "name": "Passing",
+   "position": false
+  },
+  {
+   "id": 23,
+   "name": "PenaltyTaking",
+   "position": false
+  },
+  {
+   "id": 24,
+   "name": "Tackling",
+   "position": false
+  },
+  {
+   "id": 25,
+   "name": "Vision",
+   "position": false
+  },
+  {
+   "id": 26,
+   "name": "Handling",
+   "position": false
+  },
+  {
+   "id": 27,
+   "name": "AerialReach",
+   "position": false
+  },
+  {
+   "id": 28,
+   "name": "CommandOfArea",
+   "position": false
+  },
+  {
+   "id": 29,
+   "name": "Communication",
+   "position": false
+  },
+  {
+   "id": 30,
+   "name": "Kicking",
+   "position": false
+  },
+  {
+   "id": 31,
+   "name": "Throwing",
+   "position": false
+  },
+  {
+   "id": 32,
+   "name": "Anticipation",
+   "position": false
+  },
+  {
+   "id": 33,
+   "name": "Decisions",
+   "position": false
+  },
+  {
+   "id": 34,
+   "name": "OneOnOnes",
+   "position": false
+  },
+  {
+   "id": 35,
+   "name": "Positioning",
+   "position": false
+  },
+  {
+   "id": 36,
+   "name": "Reflexes",
+   "position": false
+  },
+  {
+   "id": 37,
+   "name": "FirstTouch",
+   "position": false
+  },
+  {
+   "id": 38,
+   "name": "Technique",
+   "position": false
+  },
+  {
+   "id": 39,
+   "name": "LeftFoot",
+   "position": false
+  },
+  {
+   "id": 40,
+   "name": "RightFoot",
+   "position": false
+  },
+  {
+   "id": 41,
+   "name": "Flair",
+   "position": false
+  },
+  {
+   "id": 42,
+   "name": "Corners",
+   "position": false
+  },
+  {
+   "id": 43,
+   "name": "Teamwork",
+   "position": false
+  },
+  {
+   "id": 44,
+   "name": "WorkRate",
+   "position": false
+  },
+  {
+   "id": 45,
+   "name": "LongThrows",
+   "position": false
+  },
+  {
+   "id": 46,
+   "name": "Eccentricity",
+   "position": false
+  },
+  {
+   "id": 47,
+   "name": "RushingOut",
+   "position": false
+  },
+  {
+   "id": 48,
+   "name": "TendencyToPunch",
+   "position": false
+  },
+  {
+   "id": 49,
+   "name": "Acceleration",
+   "position": false
+  },
+  {
+   "id": 50,
+   "name": "FreeKickTaking",
+   "position": false
+  },
+  {
+   "id": 51,
+   "name": "Strength",
+   "position": false
+  },
+  {
+   "id": 52,
+   "name": "Stamina",
+   "position": false
+  },
+  {
+   "id": 53,
+   "name": "Pace",
+   "position": false
+  },
+  {
+   "id": 54,
+   "name": "JumpingReach",
+   "position": false
+  },
+  {
+   "id": 55,
+   "name": "Leadership",
+   "position": false
+  },
+  {
+   "id": 56,
+   "name": "Dirtiness",
+   "position": false
+  },
+  {
+   "id": 57,
+   "name": "Balance",
+   "position": false
+  },
+  {
+   "id": 58,
+   "name": "Bravery",
+   "position": false
+  },
+  {
+   "id": 59,
+   "name": "Consistency",
+   "position": false
+  },
+  {
+   "id": 60,
+   "name": "Aggression",
+   "position": false
+  },
+  {
+   "id": 61,
+   "name": "Agility",
+   "position": false
+  },
+  {
+   "id": 62,
+   "name": "ImportantMatches",
+   "position": false
+  },
+  {
+   "id": 63,
+   "name": "InjuryProneness",
+   "position": false
+  },
+  {
+   "id": 64,
+   "name": "Versatility",
+   "position": false
+  },
+  {
+   "id": 65,
+   "name": "NaturalFitness",
+   "position": false
+  },
+  {
+   "id": 66,
+   "name": "Determination",
+   "position": false
+  },
+  {
+   "id": 67,
+   "name": "Composure",
+   "position": false
+  },
+  {
+   "id": 68,
+   "name": "Concentration",
+   "position": false
+  }
+ ],
+ "team_conflicting_bits": [
+  [
+   25,
+   28
+  ],
+  [
+   25,
+   29
+  ],
+  [
+   25,
+   30
+  ],
+  [
+   26,
+   28
+  ],
+  [
+   26,
+   29
+  ],
+  [
+   27,
+   28
+  ],
+  [
+   27,
+   30
+  ]
+ ],
+ "phase_input_schema": 4,
+ "team_instruction_groups_not_in_static_data": [
+  {
+   "id": 32,
+   "name": "GoalkeeperUpForAttackingSetPieces",
+   "phase": 0,
+   "possession_phase": 0,
+   "options": [
+    {
+     "id": 1466265977,
+     "source_gif": "Goalkeeper Up - No"
+    },
+    {
+     "id": 1968654134,
+     "source_gif": "Goalkeeper Up - Yes"
+    }
+   ]
+  }
+ ],
+ "setpieces": {
+  "attack": [
+   {
+    "id": 0,
+    "english": "No Specific Instructions"
+   },
+   {
+    "id": 1,
+    "english": "Take the Set Piece"
+   },
+   {
+    "id": 2,
+    "english": "Stay Back"
+   },
+   {
+    "id": 3,
+    "english": "Stay Back If Needed"
+   },
+   {
+    "id": 4,
+    "english": "Go Forward"
+   },
+   {
+    "id": 5,
+    "english": "Attack Near Post"
+   },
+   {
+    "id": 6,
+    "english": "Attack Far Post"
+   },
+   {
+    "id": 7,
+    "english": "Attack Ball from Edge of Area"
+   },
+   {
+    "id": 8,
+    "english": "Lurk at Near Post"
+   },
+   {
+    "id": 9,
+    "english": "Lurk at Far Post"
+   },
+   {
+    "id": 10,
+    "english": "Lurk Outside Area (Centre)"
+   },
+   {
+    "id": 11,
+    "english": "Mark Keeper"
+   },
+   {
+    "id": 12,
+    "english": "Come Short"
+   },
+   {
+    "id": 13,
+    "english": "Stand With Taker"
+   },
+   {
+    "id": 14,
+    "english": "Lurk Outside Area (Near Side)"
+   },
+   {
+    "id": 15,
+    "english": "Lurk Outside Area (Far Side)"
+   }
+  ],
+  "defend": [
+   {
+    "id": 0,
+    "english": "Goalkeeper"
+   },
+   {
+    "id": 1,
+    "english": "Go Back"
+   },
+   {
+    "id": 2,
+    "english": "Stay Forward (Centre) "
+   },
+   {
+    "id": 3,
+    "english": "Mark Near Post"
+   },
+   {
+    "id": 4,
+    "english": "Mark Far Post"
+   },
+   {
+    "id": 5,
+    "english": "Form Wall"
+   },
+   {
+    "id": 6,
+    "english": "Player Mark"
+   },
+   {
+    "id": 7,
+    "english": "Zonally Mark Six Yard Box (Near Post)"
+   },
+   {
+    "id": 8,
+    "english": "Zonally Mark Six Yard Box (Near Centre)"
+   },
+   {
+    "id": 9,
+    "english": "Zonally Mark Six Yard Box (Centre)"
+   },
+   {
+    "id": 10,
+    "english": "Zonally Mark Six Yard Box (Far Centre)"
+   },
+   {
+    "id": 11,
+    "english": "Zonally Mark Six Yard Box (Far Post)"
+   },
+   {
+    "id": 12,
+    "english": "Edge of Area"
+   },
+   {
+    "id": 13,
+    "english": "Stay Forward (Near Side)"
+   },
+   {
+    "id": 14,
+    "english": "Stay Forward (Far Side)"
+   },
+   {
+    "id": 15,
+    "english": "Form Wall If Needed "
+   }
+  ],
+  "categories": [
+   {
+    "id": 0,
+    "english": "Aerial Defenders"
+   },
+   {
+    "id": 1,
+    "english": "Counter Attackers"
+   },
+   {
+    "id": 2,
+    "english": "Trackers"
+   },
+   {
+    "id": 3,
+    "english": "Blockers"
+   },
+   {
+    "id": 4,
+    "english": "Aerial Threats"
+   },
+   {
+    "id": 5,
+    "english": "Recovery Defenders"
+   },
+   {
+    "id": 6,
+    "english": "Creators"
+   },
+   {
+    "id": 7,
+    "english": "Box Threats"
+   }
+  ],
+  "swing": [
+   {
+    "id": 0,
+    "english": "Inswinger"
+   },
+   {
+    "id": 1,
+    "english": "Outswinger"
+   }
+  ],
+  "corner_target": [
+   {
+    "id": 0,
+    "english": "Near Post"
+   },
+   {
+    "id": 1,
+    "english": "Central"
+   },
+   {
+    "id": 2,
+    "english": "Far Post"
+   }
+  ],
+  "free_kick_risk": [
+   {
+    "id": 0,
+    "english": "Defend Transition"
+   },
+   {
+    "id": 1,
+    "english": "Balanced"
+   },
+   {
+    "id": 2,
+    "english": "Attack the Box"
+   }
+  ],
+  "defensive_line": [
+   {
+    "id": 0,
+    "english": "High Line"
+   },
+   {
+    "id": 1,
+    "english": "Balanced"
+   },
+   {
+    "id": 2,
+    "english": "Defend the Box"
+   }
+  ],
+  "allowed": {
+   "0": [
+    1,
+    3,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "1": [
+    2,
+    5,
+    12,
+    13,
+    14,
+    15
+   ],
+   "2": [
+    1,
+    3,
+    4,
+    6,
+    12
+   ],
+   "3": [
+    5,
+    15
+   ],
+   "4": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11
+   ],
+   "5": [
+    2,
+    3,
+    10,
+    14,
+    15
+   ],
+   "6": [
+    10,
+    12,
+    13,
+    14,
+    15
+   ],
+   "7": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11
+   ]
+  }
+ }
+}

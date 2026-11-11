@@ -1,0 +1,6 @@
+# The app needs only the Python 3.12 standard library.
+# Set-up only (scripts/build_catalog.py, reads the game's tactic data):
+#   UnityPy
+# Address-mapping tools (port/map/) only:
+#   capstone==5.0.9
+#   numpy
