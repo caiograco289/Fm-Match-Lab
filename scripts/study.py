@@ -355,7 +355,8 @@ def cmd_league(a):
     app's League page): each pair plays at home and away, on seeds 1..SEEDS (one "season" per seed)."""
     import exec_real, league
     out = Path(a.out).resolve(); out.mkdir(parents=True, exist_ok=True)
-    if a.match: path = str(Path(a.match).expanduser().resolve())
+    if a.match:
+        path = [str(Path(m).expanduser().resolve()) for m in a.match]; path = path[0] if len(path) == 1 else path
     else:
         found = sorted(exec_real.matches((a.team or '').replace(' ', '_')), key=lambda m: Path(m[1]).stat().st_mtime, reverse=True)
         if not found: raise SystemExit('Give --team (with saved matches) or --match')
@@ -408,7 +409,7 @@ def main():
     n.add_argument('--newest', type=int, help='only the N most recent matches'); n.add_argument('--seeds', type=int, default=30)
     n.add_argument('--opponent-tactic', help='play every replay against this tactic (see Tactic specs)')
     lg = sub.add_parser('league'); lg.add_argument('out'); lg.add_argument('--team', help='use this team\'s newest saved match')
-    lg.add_argument('--match', help='a saved match file instead'); lg.add_argument('--tactics', nargs='+', required=True)
+    lg.add_argument('--match', nargs='+', help='saved match file(s) as the template instead; several are used in turn, one per season'); lg.add_argument('--tactics', nargs='+', required=True)
     lg.add_argument('--seeds', type=int, default=20); lg.add_argument('--familiarity', type=int, default=80)
     lg.add_argument('--workers', type=int, default=6)
     lg.add_argument('--squad', help='SAVE.fm:Club - put this club\'s players from an FM27 save on both sides (needs fmsave)')

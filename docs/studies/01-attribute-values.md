@@ -126,6 +126,69 @@ Sorted by xGD per point. "27.0" columns are the same design on the 27.0 engine.
 | Agility | +0.015 (+1.6) | -0.012 (-1.5) | -0.007 | +0.005 | +0.008 | +0.002 | 300 |
 | Kicking | -0.001 (-0.1) | -0.023 (-3.2) | -0.018 | +0.005 | -0.011 | -0.022 | 300 |
 
+## Real squads against everyone at 12
+
+Many FM attribute tests level every player to the same value (often 12) so that only the tested attribute differs.
+[Study 2](02-real-vs-levelled.md) repeats this study three ways to see what that does (65,400 matches):
+
+| | **A** (this study): real squads, real matches | **B**: everyone 12, real matches | **C**: everyone 12, generic test match |
+|---|---|---|---|
+| **Fixtures** | 10 real fixtures from a real save (a newly promoted Premier League side's league, cup and European matches) | the same 10 real fixtures | one match between two unnamed teams, the same for every run (the sample match from the original tool) |
+| **Players' attributes** | real | every attribute of every player at 12 | every attribute of every player at 12 |
+| **Positions** | real position ratings | real position ratings kept | every player natural in every position |
+| **Bodies** | real | real | everyone 180 cm / 70 kg |
+| **Tactics** | the real ones (the tested side's saved tactic; each opponent's AI tactic) | the same real tactics | the sample's generic default tactics (4-3-3 against 4-2-3-1) |
+| **Match state and in-match management** | as they really were | as they really were | generic; the assistant manages both sides |
+| **The two sides** | different clubs, strengths and styles | different clubs and tactics, same attribute level | two near-identical teams |
+
+B is "the real games, with every player replaced by a 12-rated version of himself who keeps his position, body and
+role"; C is "a friendly between two identical teams of interchangeable 12-rated players". Why C differs is not yet
+settled: the generic default tactics, everyone being natural everywhere and the two mirrored teams are the main
+candidates ([Study 2](02-real-vs-levelled.md#why-c-gives-different-answers-not-settled-yet)).
+
+**How closely the attribute values agree** (correlation over all 54 attributes):
+
+| | xG difference | Points per game |
+|---|---|---|
+| A (real squads) against B (everyone 12, real matches) | **0.88** | 0.79 |
+| A against C (everyone 12, generic test match) | 0.77 | 0.58 |
+
+**The main attributes side by side** (xG difference for +5 in-game points across the whole squad; t in brackets):
+
+| Attribute | A: real squads | B: everyone 12, real matches | C: everyone 12, test match |
+|---|---|---|---|
+| Pace | +0.51 (11.1) | +0.69 (15.3) | +0.15 (7.4) |
+| Acceleration | +0.47 (10.8) | +0.44 (10.5) | +0.26 (13.2) |
+| Jumping Reach | +0.34 (8.2) | +0.28 (6.9) | +0.32 (14.4) |
+| Stamina | +0.30 (7.3) | +0.42 (9.4) | +0.05 (2.4) |
+| Anticipation | +0.24 (6.1) | +0.24 (5.9) | +0.05 (2.6) |
+| Dribbling | +0.24 (5.7) | +0.22 (5.0) | +0.09 (4.9) |
+| Concentration | +0.22 (4.9) | +0.22 (5.5) | +0.02 (1.0) |
+| Balance | +0.16 (4.0) | +0.19 (4.7) | +0.05 (2.6) |
+| Composure | +0.14 (3.0) | −0.03 (−0.8) | +0.01 (0.3) |
+| Work Rate | +0.10 (2.6) | +0.02 (0.5) | +0.01 (0.7) |
+| Strength | +0.03 (0.7) | +0.13 (3.0) | +0.03 (1.3) |
+| Agility | −0.06 (−1.5) | +0.09 (2.3) | +0.01 (0.7) |
+| Kicking (goalkeeper) | −0.12 (−3.2) | 0.00 (0.1) | 0.00 (0.1) |
+
+All 54 attributes, with points per game too, are in [Study 2](02-real-vs-levelled.md#results).
+
+What it shows:
+
+1. **Levelling the squads changes little, as long as the matches are real.** With every player at 12 in the real
+   matches (B), the same attributes lead and the sizes are similar: Pace, Acceleration, Stamina, Jumping Reach, then
+   Anticipation, Dribbling and Concentration.
+2. **The generic test match is what distorts the result.** On it (C), most effects shrink to about 40% and several
+   vanish: Stamina, Anticipation and Concentration look almost worthless there, though they clearly count in real
+   matches. Only Jumping Reach keeps its size. The common conclusion that "mental attributes barely matter" comes
+   from tests like C.
+3. **A few effects depend on the squad.** Composure, Work Rate and goalkeeper Kicking (negative) count only with real
+   players; Strength and Agility count only when everyone is equal, perhaps because they decide duels between
+   otherwise identical players.
+
+**For your own tests:** use real matches. Levelled squads are acceptable if the matches are real (B gives nearly
+the same answers as A); a single generic test match understates most attributes and misses some entirely.
+
 ## 27.0 against 27.0.1
 
 Same matches, seeds and design on both engines. The ranking is essentially unchanged (r = 0.98 for xGD effects).

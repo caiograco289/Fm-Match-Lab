@@ -184,6 +184,8 @@ class DesktopWarmRunner(BatchRunner):
                 env=os.environ.copy()
                 env.pop('FM27_SKIP_EVENT_DETAILS',None)
                 if chunk[0].get('engine_path'):env['FM27_ENGINE_PATH']=chunk[0]['engine_path']   # saved matches keep their own version word
+                env.pop('FM27_MAC_EXEC_FIELDS',None)
+                if chunk[0].get('exec_fields'):env['FM27_MAC_EXEC_FIELDS']=chunk[0]['exec_fields']   # held tactical familiarity (same for every task of a job)
                 if not chunk[0].get('event_details',True):
                     env['FM27_SKIP_EVENT_DETAILS']='1'
                     env.pop('FM27_DESKTOP_EVENTS_AUDIT',None)

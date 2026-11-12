@@ -76,15 +76,20 @@ complexity.
 
 ## A tactic league ([Study 7](studies/07-tactic-league.md))
 
-17 tactics (the 10 presets and 7 user tactics) play each other home and away, 640 matches each, with equal
-familiarity and each side picking its own XI.
+17 tactics (the 10 presets and 7 community tactics) play each other home and away over 20 seasons, 640 matches
+each, on neutral ground: the same synthetic squad for every team, template matches between other clubs, both sides
+starting alike and equal familiarity.
 
-- **User tactics take the top six places:** STORMBRINGER and HIGHWAY STAR P90 (1.71 and 1.70 points per game),
-  ARGUS 3-4-3 (1.63), then ZaZ's Ace of Hearts, Clubs and Spades (about 1.55).
-- **Best preset: Gegenpress (1.48),** then Fluid Counter-Attack (1.39). Five presets sit level around 1.25.
-- **Defensive presets are last:** Catenaccio 1.05, Park the Bus 0.89.
-- With its own XI and equal conditions, the back-three ARGUS ranks third, which supports the point that a fixed
-  4-2-4 lineup had handicapped it in Study 6.
+- **Every community tactic beats every preset.** STORMBRINGER (1.78 points per game) and ARGUS 3-4-3 (1.74) lead, then
+  ZaZ's Ace of Clubs (1.70); the weakest community tactic (Ace of Hearts, 1.44) is still ahead of the best preset.
+- **Best presets: Gegenpress (1.39) and Fluid Counter-Attack (1.38).** The defensive presets are last: Catenaccio 1.03,
+  Park the Bus 0.92.
+- **The setting hardly matters:** the two template matches give the same table (correlation 0.95), and so does the
+  first version on the team's own match with real squads (0.90).
+- **A second, 18-tactic league reproduces it** ([Study 7b](studies/07b-tactic-league-18.md)): every preset within about
+  0.06 points per game of its Study 7 value, and every community tactic again ahead of every preset.
+- **Matchups matter little.** A tactic's overall strength predicts almost all its head-to-head results: in Study 7b only
+  one of 306 pairings differs clearly from that prediction.
 
 ## Everything else ([Study 5](studies/05-everything-else.md))
 
@@ -121,33 +126,12 @@ differences mostly come from season-long effects a single match can't show. See 
 
 ## Tactical Tweaks ([Study 8](studies/08-tactical-tweaks.md))
 
-- **None helps over a whole match,** on the team's matches or against any of the 10 presets, and none is reliably
-  better against a particular preset.
-- **Lock It Down, Throw The Kitchen Sink, Go Long and Play With More Urgency cost clearly;** Goalkeeper Up For Set
-  Pieces concedes more.
-- Using them for part of a match, in the situation they are meant for, is not tested yet.
-
-## A tactic search (`scripts/optimise.py`)
-
-A search for better team instructions and mentality, scored by expected points (xPts, from both sides' xG) and xG
-difference, with the team's tactical areas held at the same level for every candidate. It screens hundreds of
-random valid combinations, models the effect of each option and of pairs of options, confirms the best predictions
-on fresh seeds and makes the final check on opponents the search never played. First run (17 saved matches: 11 for
-the search, 6 held out; about 21,600 matches):
-
-- **No clear gain on the held-out opponents.** The kept combination (six changes) scored +0.06 xPts per game (t 1.8),
-  +0.12 xG difference (t 1.7) and +0.04 points (t 0.6). Every measure points the same way, mostly through fewer
-  chances conceded (−0.11 xG against, t −2.7), but it is not established.
-- **Most single instructions matter little** for this team (within about ±0.03 xPts per game each). The clear
-  exceptions: dribbling less, and moving away from its usual Attacking mentality, both cost.
-- **Large model-picked combinations failed on fresh seeds:** two of 12 or more changes, predicted at +0.20 and +0.18
-  xPts, came out at −0.01 and −0.17 (t −4.1). The model is only reliable close to what was tested, so candidates are
-  now limited to 4 changes, and the best of several is kept only at t ≥ 2.5.
-- The changed instructions would also have to be learned in the game; the search does not count that cost, and
-  tactical complexity is not recomputed by the match engine, so complex instructions are not penalised.
-
-Next: the same search with the current squad against many more real opponents (`--save`: other clubs' matches the
-game played, and this season's fixtures from the save), with every saved match held out for the final check.
+- **Applied for a whole match, only Lock It Down has a clear effect on neutral ground** (every preset as the base,
+  synthetic squads): about −0.2 expected points per game, with fewer goals at both ends.
+- **Other tweaks depend on the tactic they modify.** Throw The Kitchen Sink, Go Long and Play With More Urgency cost
+  clearly with one team's high-press, high-tempo tactic, but average about zero over the ten presets.
+- **Goalkeeper Up For Set Pieces concedes more** in every version (+0.2 to +0.3 goals against per game).
+- Using tweaks for part of a match, in the situation they are meant for, is not tested yet.
 
 ## In progress and open questions
 

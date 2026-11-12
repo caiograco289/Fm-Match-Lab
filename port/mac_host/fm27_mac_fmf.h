@@ -66,7 +66,19 @@ static void fmf_probe(unsigned char* resources) {
         if (getenv("FM27_FMF_AUDIT")) LOG("{\"event\":\"native_fmf_children\",\"count\":%zu}", count);
         if (count <= 64) fmf_each(children, 64, [&](unsigned char* node) {
             uint64_t size = *(uint64_t*)(node + fmf_node_size);
-            if (getenv("FM27_FMF_AUDIT")) LOG("{\"event\":\"native_fmf_entry_size\",\"size\":%llu}", (unsigned long long)size);
+            if (getenv("FM27_FMF_AUDIT")) {   // research: every entry's title and first bytes (what a file carries besides the tactic)
+                auto t = *(unsigned**)(node + fmf_node_title); std::string name;
+                if (t && *t < 256) for (unsigned i = 0; i < *t; i++) { char c = ((char*)(t + 1))[i]; name += (c >= 32 && c < 127 && c != '"' && c != '\\') ? c : '?'; }
+                unsigned char head[16] = {}; void* raw = size >= 16 ? fmf_open_raw(node) : nullptr;
+                if (raw) fmf_read(raw, head, 16);
+                char hex[33] = {}; for (int i = 0; i < 16; i++) snprintf(hex + 2 * i, 3, "%02x", head[i]);
+                LOG("{\"event\":\"native_fmf_entry_size\",\"size\":%llu,\"title\":\"%s\",\"head\":\"%s\"}", (unsigned long long)size, name.c_str(), raw ? hex : "");
+                const char* image_out = getenv("FM27_FMF_IMAGE_OUT");   // research: write the "image" entry's bytes out
+                if (image_out && name == "image" && size > 16 && size < 64ull * 1024 * 1024) {
+                    void* r2 = fmf_open_raw(node); std::vector<unsigned char> all((size_t)size);
+                    if (r2) { fmf_read(r2, all.data(), all.size()); if (FILE* f = fopen(image_out, "wb")) { fwrite(all.data(), 1, all.size(), f); fclose(f); } }
+                }
+            }
             if (size < 8 || size > 1024 * 1024) return;
             auto title = *(unsigned**)(node + fmf_node_title);
             void* entry_file = node; void* stream = nullptr; void* extra = nullptr;

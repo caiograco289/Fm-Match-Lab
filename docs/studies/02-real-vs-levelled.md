@@ -22,6 +22,41 @@ of +5 points, paired by match and seed.
 - A against B isolates **squad realism** (stars and weak spots, real attribute profiles).
 - B against C isolates **match context** (real tactics, opponents and start states against the sample's).
 
+### What differs between A, B and C, in game terms
+
+B and C both set every player to 12 in every attribute, so the squads are equally average in both. Everything
+around the players differs: B keeps a real match from a real save, C is a generic friendly.
+
+| | **A**: real squads, real matches | **B**: everyone 12, real matches | **C**: everyone 12, generic test match |
+|---|---|---|---|
+| **Fixtures** | 10 real fixtures from a real save (a newly promoted Premier League side's league, cup and European matches): real stadiums, home advantage, competitions | the same 10 real fixtures | one match between two unnamed teams, the same for every run |
+| **Players' attributes** | the real players, with their real attributes | every attribute of every player at 12 | every attribute of every player at 12 |
+| **Positions** | real position ratings | real position ratings kept: a centre-back is still a centre-back, a winger can't play in goal | every player natural in every position: anyone can play anywhere equally well |
+| **Bodies** | real heights and weights | real heights and weights | everyone 180 cm / 70 kg |
+| **Tactics** | the real ones: the tested side's saved tactic, and each opponent's tactic as its AI manager picked it | the same real tactics | the sample's generic default tactics (a 4-3-3 against a 4-2-3-1) |
+| **Match state** | as it really was before kick-off: fitness, sharpness, morale, cohesion, tactical familiarity | as it really was | the sample's generic state |
+| **During the match** | as it really happened: the recorded substitutions, or the assistant or AI managing live | as it really happened | the assistant manages both sides |
+| **The two sides** | different clubs, strengths and styles | different clubs and tactics, at the same attribute level | two near-identical teams |
+| **Who gets the ±5** | the tested side's whole squad | the tested side's whole squad | the home side's whole squad |
+
+In short, **B** is "the real games, with every player replaced by a 12-rated version of himself who keeps his
+position, body and role"; **C** is "a friendly between two identical teams of interchangeable 12-rated players".
+
+### Why C gives different answers: not settled yet
+
+C differs from B in several ways at once, and this study does not separate them. The candidates:
+
+- **Generic default tactics.** Real tactics give players specific jobs (a pressing striker, an overlapping
+  full-back, a deep playmaker); the sample's defaults may not use the attributes that those jobs reward.
+- **Everyone natural everywhere.** When every player is equally good in every position, the edge an attribute gives
+  in a player's own position may count for less.
+- **Two mirrored teams.** With identical opponents there are no mismatches (a quick winger against a slow full-back)
+  for an attribute to exploit.
+- **Identical bodies, one fixed setting, the assistant on both sides, a generic match state.**
+
+A follow-up could change one of these at a time, starting from C: real tactics, then real position ratings, then a
+real opponent.
+
 ## Results
 
 **Overall agreement** of the 54 per-attribute effects (correlation):

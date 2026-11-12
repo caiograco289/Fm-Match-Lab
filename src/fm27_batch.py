@@ -11,10 +11,11 @@ from fm27_simulator import inspect_log
 import fm27_match_events
 
 def worker_limits():
-    # Reserve memory for the desktop/editor; allow roughly 2 GiB per native slot.
-    available=max(1,(desktop_platform.memory_available_gib()-1)//2)
-    maximum=max(1,min(4,max(1,(os.cpu_count()or 2)//2),available))
-    return {'maximum':maximum,'recommended':min(4,maximum)}
+    # Reserve 1 GiB for the desktop/editor; a macOS engine host uses about 60 MB (measured), so 0.25 GiB per worker is
+    # generous. One core is left free for the app and the rest of the Mac.
+    available=max(1,int((desktop_platform.memory_available_gib()-1)/0.25))
+    maximum=max(1,min(max(1,(os.cpu_count()or 2)-1),available))
+    return {'maximum':maximum,'recommended':max(1,min(6,maximum))}
 
 def own_child_processes():
     """Hosts are children of the service and exit with it (each polls its cancellation file)."""

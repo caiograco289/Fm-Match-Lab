@@ -63,6 +63,9 @@ def apply_squad(app, scenario, side, rows):
     """Overwrite one side's matchday squad with the given players (best first) and pick its XI by position."""
     import study6_tactics
     t = scenario['teams'][side]; size = t.get('roster_size', len(t['players']))
+    if len(rows) < size:   # fewer players than the match's squad slots: shrink the matchday squad, so no slot keeps
+        size = max(11, len(rows)); t['roster_size'] = size   # one of the match's own players
+        t['lineup'] = [i for i in t['lineup'] if i < size]
     attrs = {a['id']: norm(a['name']) for a in app.CATALOG['attributes'] if not a['position']}
     for j, row in enumerate(rows[:size]):
         p = t['players'][j]; a = p['attributes']

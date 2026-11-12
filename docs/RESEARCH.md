@@ -57,6 +57,8 @@ with them are not what the game would produce.
 | `FM27_MAC_STAFF_SET`, `FM27_MAC_STAFF_PROBE` | Write or inspect the match-side manager/staff block |
 | `FM27_MAC_PLAYER_DUMP`, `FM27_MAC_RAW_DUMP`, `FM27_MAC_LAYOUT_DUMP`, `FM27_MAC_STATS_PROBE`, `FM27_MAC_ROSTER_TRACE` | Layout calibration and checks |
 | `FM27_MAC_PKM_INCIDENTS`, `FM27_MAC_RESTART_PROBE`, `FM27_MAC_ROUTINE_PROBE`, `FM27_SETPIECE_FLAGS_AUDIT`, `FM27_FMF_AUDIT` | Incident, restart, set-piece and FMF parser probes |
+| `FM27_FMF_AUDIT=1` with `FM27_IMPORT_FMF=FILE` | Lists every entry of a tactic file (title, size, first bytes): the tactic, and the optional `image` entry some creators fill with a picture (2 MB files) |
+| `FM27_FMF_IMAGE_OUT=PATH` | With the audit: writes a tactic file's `image` entry to PATH (6-byte header and 4-byte length, then the picture) |
 | `FM27_COACH_PRESET_EXPORT=1` | Export the installed tactic presets (styles, templates, formations) from the game's data |
 | `FM27_IMPORT_FMF`, `FM27_IMPORT_TAC`, `FM27_EXPORT_TAC`, `FM27_EXPORT_SIDE`, `FM27_EXPORT_TITLE` | Tactic import/export through the game's parser and serializer (used by the app) |
 | `FM27_EPISODE_TYPE`, `FM27_EPISODE_SIDE`, `FM27_EPISODE_SECONDS` | Set-piece episode mode (used by the app) |

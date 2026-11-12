@@ -1,7 +1,12 @@
 # Study 8: FM27's in-match Tactical Tweaks
 
-**Status:** done (11 November). Part 1: the team's own matches, 5,700 matches. Part 2: each tweak against each of
-the 10 installed presets as the opponent's tactic, 11,400 matches.
+**Status:** done (11-12 November). Part 1: the team's own matches and tactic, 5,700 matches. Part 2: the team's
+tactic against each of the 10 presets, 11,400 matches. Part 3: on neutral ground, every preset as the base tactic,
+8,388 matches.
+
+**In short:** applied for a whole match, only Lock It Down has a clear effect on neutral ground (it costs about 0.2
+expected points per game). Every other tweak is close to zero on average; what a tweak does depends on the tactic it
+is applied to, which is why the team-tactic parts found more costly tweaks than part 3.
 
 ## What a tweak is
 
@@ -90,17 +95,66 @@ the Bus, R1 Route One, TT Tiki-Taka, VTT Vertical Tiki-Taka, WP Wing Play.)
    together (nearly every tweak looks bad against Tiki-Taka and Vertical Tiki-Taka) most likely come from the shared comparison:
    all tweaks are measured against the same 60 unchanged matches, so luck in those moves the whole column.
 
+## Part 3: on neutral ground
+
+Parts 1 and 2 applied every tweak to one team's tactic, a high-press, high-tempo 4-2-4 that is already at the extreme
+of many instructions. Part 3 removes that: no real team or tactic is involved.
+
+**Design:** each of the 10 presets is the base tactic in turn; each tweak is applied to it from kick-off, and the
+team plays a panel of four opponent presets (Gegenpress, Control Possession, Park the Bus, Route One) at home and
+away on 6 seeds. Each tweaked team is compared with the same preset without the tweak on the same seeds. Both sides
+have the same synthetic squad (Premier League middle eight), start alike and have familiarity held at 80; fixtures
+alternate between two template matches of other clubs. 16 tweak and preset combinations were skipped because the
+tweak changes nothing there (for example Stick To The Plan on every preset).
+
+Averaged over the 10 presets (about 430 paired matches per tweak; t in brackets):
+
+| Tweak | xPts | xG difference | Goals for | Goals against |
+|---|---|---|---|---|
+| Lock It Down | **−0.20 (−5.9)** | **−0.24 (−4.6)** | −0.30 | −0.23 |
+| Play Out The Back | +0.07 (1.6) | +0.10 (1.5) | +0.16 | 0.00 |
+| Go Narrower | +0.05 (1.4) | +0.10 (1.8) | +0.17 | −0.06 |
+| Throw The Kitchen Sink | +0.04 (0.9) | +0.03 (0.5) | +0.37 | +0.20 |
+| Goalkeeper Up For Set Pieces | −0.01 (−0.2) | 0.00 | +0.12 | **+0.22** |
+| Go Long | +0.01 (0.3) | +0.03 (0.4) | +0.12 | +0.03 |
+| Play With More Urgency | +0.01 (0.2) | +0.01 (0.1) | +0.07 | +0.01 |
+| Play With More Patience | −0.02 (−0.4) | −0.03 (−0.6) | +0.07 | −0.02 |
+| The other eleven | within ±0.03 | within ±0.06 | | |
+
+(Expected points, from both sides' xG, are a steadier measure than points; the points column of the full report is
+noisier and agrees within its noise.)
+
+### What part 3 adds
+
+1. **Only Lock It Down has a clear effect on neutral ground:** fewer goals at both ends and about −0.2 expected
+   points per game, whatever the base tactic.
+2. **The other tweaks that cost the team's tactic are neutral here.** Throw The Kitchen Sink, Go Long and Play With
+   More Urgency lost clearly with the team's high-tempo, high-press tactic (parts 1 and 2), but average about zero
+   over the ten presets. A tweak moves instructions one step up or down, so what it does depends on where the
+   tactic starts: pushing a tactic that is already at the extreme costs, pushing a middle-of-the-road one may not.
+3. **Goalkeeper Up For Set Pieces concedes more in all three parts** (+0.22 goals against here, +0.28 and +0.19
+   before); here it also scores more (+0.12), so the balance is about even.
+4. **By base tactic, single cells are rough** (48 paired matches, about ±0.2 xG difference). Whole columns tend to
+   move together because every tweak on a preset is compared with the same untweaked matches: the untweaked
+   Wing Play happened to do poorly (most tweaks look good on it, +0.30 on average, about 2.3 times its baseline's
+   uncertainty), Control Possession and Tiki-Taka the opposite. Treat preset-specific results as hints to test, not
+   findings. The full table by base tactic is in the study's report (`port/validation/study8_tweaks_league.py report`).
+
 ## Caveats
 
 - **From kick-off only.** In the game, tweaks are used for part of a match, in a given situation (leading,
   trailing, tired). Applying them at a set minute or score is not supported yet.
-- **One team's tactic.** The effect of a "step up or down" tweak depends on where the tactic's instructions start.
+- **Base tactic.** The effect of a "step up or down" tweak depends on where the tactic's instructions start (parts 1
+  and 2 used one team's tactic; part 3 the ten presets).
 - **Familiarity.** Whether applying a tweak costs tactical familiarity in the game is not known; the engine replay
   keeps the familiarity records as saved.
 
 ## Reproduce
 
 Part 2: one study per preset, `--opponent-tactic "preset:<style>"`, 5 matches, `--seeds 12`, `tweaks`.
+
+Part 3: `port/validation/study8_tweaks_league.py build OUT <template 1>.pkm <template 2>.pkm --seeds 6`, then `run`
+and `report` (two matches between other clubs as templates).
 
 ```sh
 .venv/bin/python scripts/study.py new runs/tweaks --team "<team>" --newest 10 --seeds 30

@@ -63,11 +63,22 @@ def transplant(A, team, source):
     src = sorted(source['players'][:source.get('roster_size', len(source['players']))],
                  key=lambda p: -(p['native_profile'].get('current_ability') or 0))
     size = team.get('roster_size', len(team['players']))
+    if len(src) < size:   # no slot keeps one of the template's own players
+        size = max(11, len(src)); team['roster_size'] = size; team['lineup'] = [i for i in team['lineup'] if i < size]
     for j, p in enumerate(src[:size]):
         q = team['players'][j]
         q['attributes'] = list(p['attributes']); q['name'] = p['name']
         q['native_profile'].update({k: v for k, v in p['native_profile'].items() if k not in EQUAL_START and k != 'team_cohesion'})
     study6_tactics.pick_xi(team)
+
+
+def same_squad_size(s):
+    """Both sides get the same number of matchday-squad slots (the smaller side's), before squads are applied."""
+    size = min(t.get('roster_size', len(t['players'])) for t in s['teams'])
+    for t in s['teams']:
+        if t.get('roster_size', len(t['players'])) > size:
+            t['roster_size'] = size; t['lineup'] = [i for i in t['lineup'] if i < size]
+    return s
 
 
 def equalise(s):
@@ -112,35 +123,53 @@ class Builder:
         return self.tactic(self.A.validate_scenario(s), side, team['tactic'])
 
 
-def build(A, cfg, out, say=print):
-    """Write jobs.json and meta.json for a league config; returns the number of matches."""
+class Stopped(Exception):
+    """The league was stopped while its fixtures were being built."""
+
+
+def build(A, cfg, out, say=print, stop=None, reuse=True):
+    """Write jobs.json and meta.json for a league config; returns the number of matches.
+    stop: optional callable checked before every fixture. reuse: build each team's side once per template and venue
+    and reuse it in all its fixtures (the same bytes as building every fixture from scratch; much faster)."""
     out = Path(out); out.mkdir(parents=True, exist_ok=True); (out / 'bins').mkdir(exist_ok=True)
     (out / 'config.json').write_text(json.dumps(cfg, indent=1, ensure_ascii=False), encoding='utf8')
     teams, seasons = cfg['teams'], int(cfg.get('seasons', 1))
     if not 2 <= len(teams) <= 20: raise ValueError('A league needs 2 to 20 teams')
-    base_path = str(Path(cfg['base_match']).expanduser().resolve())
-    base = A.validate_scenario(A.SAVED_MATCHES.open(base_path).default)
-    b = Builder(A, out); jobs, skipped = [], []
+    # one template match, or several used in turn (season k: template (k-1) mod n), so no single match shapes the league
+    templates = [str(Path(p).expanduser().resolve()) for p in (cfg['base_match'] if isinstance(cfg['base_match'], list) else [cfg['base_match']])]
+    bases = [same_squad_size(A.validate_scenario(A.SAVED_MATCHES.open(p).default)) for p in templates]
+    b = Builder(A, out); per_template, skipped = [[] for _ in templates], []
     complexity = ','.join(f'{x}:{o}=50' for x in (0, 1) for o in (0x19, 0x1a))
+    sides = {}   # (team, template, venue) -> that team's side, built once
+
+    def side_of(t, k, venue):
+        if (t, k, venue) not in sides: sides[(t, k, venue)] = b.side(copy.deepcopy(bases[k]), venue, teams[t])['teams'][venue]
+        return copy.deepcopy(sides[(t, k, venue)])
     for i, home in enumerate(teams):
         for j, away in enumerate(teams):
             if i == j or (not cfg.get('home_and_away', True) and j < i): continue
-            try:
-                s = b.side(b.side(copy.deepcopy(base), 0, home), 1, away)
-                if cfg.get('equal_start', True): equalise(s)
-                blob = A.encode_scenario(A.validate_scenario(s))
-            except Exception as e:
-                skipped.append(f'{home["name"]} v {away["name"]}: {str(e)[:160]}'); continue
-            f = out / 'bins' / f'{i}_{j}.bin'; f.write_bytes(blob)
-            fam = ','.join(f'{x}:{o}={int(t.get("familiarity", cfg.get("familiarity", 70)))}' for x, t in ((0, home), (1, away)) for o in AREAS)
-            jobs.append(['L', f'L|{i}|{j}', base_path, str(f), {'FM27_MAC_EXEC_FIELDS': fam + ',' + complexity}])
+            for k, (base, base_path) in enumerate(zip(bases, templates)):
+                if stop and stop(): raise Stopped()
+                try:
+                    if reuse:
+                        s = copy.deepcopy(base); s['teams'][0] = side_of(i, k, 0); s['teams'][1] = side_of(j, k, 1)
+                    else: s = b.side(b.side(copy.deepcopy(base), 0, home), 1, away)
+                    if cfg.get('equal_start', True): equalise(s)
+                    blob = A.encode_scenario(A.validate_scenario(s))
+                except Exception as e:
+                    skipped.append(f'{home["name"]} v {away["name"]}: {str(e)[:160]}'); continue
+                f = out / 'bins' / f'{i}_{j}_{k}.bin'; f.write_bytes(blob)
+                fam = ','.join(f'{x}:{o}={int(t.get("familiarity", cfg.get("familiarity", 70)))}' for x, t in ((0, home), (1, away)) for o in AREAS)
+                per_template[k].append(['L', f'L|{i}|{j}', base_path, str(f), {'FM27_MAC_EXEC_FIELDS': fam + ',' + complexity}])
         say(f'built {home["name"]}')
-    jobs = [j + [1, s] for s in range(1, seasons + 1) for j in jobs]   # season by season: seasons finish in order
-    info = (base.get('match_base') or {})
+    # season by season (seasons finish in order), each season in its template
+    jobs = [j + [1, s] for s in range(1, seasons + 1) for j in per_template[(s - 1) % len(templates)]]
+    infos = [(b_.get('match_base') or {}) for b_ in bases]; info = infos[0]; base_path = templates[0]
     meta = {'teams': [{'name': t['name'], 'tactic': tactic_label(t['tactic']), 'squad': squad_label(t['squad']),
                        'familiarity': int(t.get('familiarity', cfg.get('familiarity', 70)))} for t in teams],
-            'base_match': f"{info.get('home', '')} v {info.get('away', '')}".strip() or Path(base_path).name,
-            'base_match_file': Path(base_path).name, 'base_match_game_version': info.get('game_version'),
+            'base_match': '; '.join(f"{x.get('home', '')} v {x.get('away', '')}" for x in infos),
+            'base_match_file': '; '.join(Path(p).name for p in templates), 'base_match_game_version': info.get('game_version'),
+            'squad_slots': [b_['teams'][0].get('roster_size', len(b_['teams'][0]['players'])) for b_ in bases],
             'engine': (getattr(A, 'ENGINE_COMPATIBILITY', {}) or {}).get('profile'),
             'seasons': seasons, 'home_and_away': cfg.get('home_and_away', True), 'equal_start': cfg.get('equal_start', True),
             'reference_squads': reference_squads()['calibration'] if any(t['squad'].get('kind', 'reference') == 'reference' for t in teams) else None,

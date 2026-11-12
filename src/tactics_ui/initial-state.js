@@ -1,10 +1,11 @@
 'use strict';
-// Experimental start state: condition, match sharpness, fatigue, morale, team and club cohesion.
+// Experimental start state: condition, match sharpness, morale, team and club cohesion.
 // Off by default (the controlled start); applying values switches the scenario to initial_state "custom".
+// The profile field upstream called "fatigue" (fatigue_raw) is not offered: in saved matches its values are scattered
+// over 0-65535 within one XI, match preparation rewrites it, and set values that survive change nothing (port/REPORT.md).
 const initialStateFields = [
  {key:'condition', label:'Condition (%)', min:0, max:100, scale:100, value:100},
  {key:'sharpness', label:'Match sharpness (%)', min:0, max:100, scale:100, value:100},
- {key:'fatigue_raw', label:'Fatigue (raw 0–65535)', min:0, max:65535, scale:1, value:0},
  {key:'morale', label:'Morale (1–20)', min:1, max:20, scale:1, value:20},
  {key:'team_cohesion', label:'Team cohesion (0–100)', min:0, max:100, scale:1, value:80},
  {key:'club_cohesion', label:'Club cohesion (0–100)', min:0, max:100, scale:1, value:100},
@@ -17,7 +18,7 @@ playersView = function(){
  const values = initialStateValues[side];
  const range = (state.match_base?.cohesion_ranges || catalog.cohesion_ranges)?.[side];
  const inputs = initialStateFields.map(f=>`<label class="field"><span>${f.key==='team_cohesion'&&range?`Team cohesion (${range[0]}–${range[1]})`:f.label}</span><input data-initial-state="${f.key}" type="number" min="${f.min}" max="${f.max}" step="1" value="${values[f.key] ?? f.value}"></label>`).join('');
- const card = `<section class="team-bulk-controls" aria-label="Start state experiment"><div><h3>Start state (experimental) · current: ${state.initial_state === 'natural' ? 'Saved match’s original state (only changed values are written)' : custom ? 'Custom' : 'Controlled start'}</h3><p class="tiny muted">By default every match starts with full condition, full match sharpness, no fatigue, morale 20, team cohesion 80 (or the nearest the team can take) and club cohesion 100, so that tactics can be compared. Applying the values below switches this scenario to a custom start: the values are written into the native input and read back; players and fields you leave unset keep the controlled values. Custom-start experiments are labelled separately and never resumed together with controlled ones.</p></div><div class="team-bulk-actions">${inputs}<button id="initial-state-team" class="button">Apply to whole team</button><button id="initial-state-player" class="button ghost">Apply to current player only</button><button id="initial-state-reset" class="button ghost" ${custom ? '' : 'disabled'}>Restore controlled start (both teams)</button></div></section>`;
+ const card = `<section class="team-bulk-controls" aria-label="Start state experiment"><div><h3>Start state (experimental) · current: ${state.initial_state === 'natural' ? 'Saved match’s original state (only changed values are written)' : custom ? 'Custom' : 'Controlled start'}</h3><p class="tiny muted">By default every match starts with full condition, full match sharpness, morale 20, team cohesion 80 (or the nearest the team can take) and club cohesion 100, so that tactics can be compared. Applying the values below switches this scenario to a custom start: the values are written into the native input and read back; players and fields you leave unset keep the controlled values. Custom-start experiments are labelled separately and never resumed together with controlled ones.</p></div><div class="team-bulk-actions">${inputs}<button id="initial-state-team" class="button">Apply to whole team</button><button id="initial-state-player" class="button ghost">Apply to current player only</button><button id="initial-state-reset" class="button ghost" ${custom ? '' : 'disabled'}>Restore controlled start (both teams)</button></div></section>`;
  return initialStatePlayersPrevious().replace('<div class="player-summary">', card + '<div class="player-summary">');
 };
 

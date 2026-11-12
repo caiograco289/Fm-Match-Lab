@@ -2,35 +2,14 @@
 // Experiment naming, rename/delete, and the tactical-effectiveness experiment panel.
 const experimentLabel=document.createElement('label');experimentLabel.innerHTML='Experiment name<input id="experiment-name" maxlength="100" placeholder="Leave empty to name automatically">';
 $('#seed').closest('label').before(experimentLabel);
-const executionOptions=document.createElement('details');
-executionOptions.className='card experiment-panel';
-executionOptions.innerHTML=`
- <summary>Tactical effectiveness experiment</summary>
- <p class="tiny muted">When enabled, every match runs the newer engine branch on its own. The values are artificial experimental conditions.</p>
- <div class="experiment-controls">
-  <label><input id="execution-enabled" type="checkbox">Enable</label>
-  <label>Own team<input id="execution-own" type="number" min="0" max="100" step="1" value="70" disabled></label>
-  <label>Opponent<input id="execution-opponent" type="number" min="0" max="100" step="1" value="70" disabled></label>
- </div>`;
-$('#engine-settings').after(executionOptions);
-$('#execution-enabled').onchange=()=>{
- for(const id of ['execution-own','execution-opponent'])$('#'+id).disabled=!$('#execution-enabled').checked;
-};
+// (The old "tactical effectiveness experiment" panel, which held all 33 bytes of every player's effectiveness record,
+// is replaced by the held tactical familiarity on the Test a tactic page: home.js.)
 const experimentApiPrevious=api;
 api=async function(url,data){
  if(url==='/api/run'&&data){
   data={...data,name:$('#experiment-name').value.trim()||undefined};
   delete data.scenario.experimental_execution;
   if(data.reference)delete data.reference.experimental_execution;
-  if($('#execution-enabled').checked){
-   const values=['execution-own','execution-opponent'].map(id=>{
-    const input=$('#'+id);
-    if(input.value===''||!input.checkValidity())throw Error('Tactical effectiveness must be a whole number from 0 to 100');
-    return Number(input.value);
-   });
-   data.scenario={...data.scenario,experimental_execution:values};
-   if(data.reference)data.reference={...data.reference,experimental_execution:values};
-  }
   }
  return experimentApiPrevious(url,data);
 };

@@ -333,7 +333,18 @@ def validate_scenario(data):
         normalized['experimental_execution'] = [
             integer(value, 0, 100, 'experimental effectiveness') for value in values
         ]
+    if data.get('familiarity_hold') is not None:   # per side: None = as in the match, or the 8 tactical areas held at 0-100
+        hold = data['familiarity_hold']
+        if not isinstance(hold, list) or len(hold) != 2: raise ValueError('Set the tactical familiarity for each side')
+        normalized['familiarity_hold'] = [None if v is None else integer(v, 0, 100, 'tactical familiarity') for v in hold]
     return normalized
+
+FAMILIARITY_AREAS=[o+k for o in range(1,25,3) for k in (0,1,2)]   # the 24 tactical-area bytes of each player's effectiveness record
+def familiarity_fields(scenario):
+    """FM27_MAC_EXEC_FIELDS for a scenario's held familiarity: training and match exposure in all eight areas, per
+    side; tactical ability and complexity are left as stored (as in the studies and leagues)."""
+    hold=scenario.get('familiarity_hold') or [None,None]
+    return ','.join(f'{side}:{o}={v}' for side,v in enumerate(hold) if v is not None for o in FAMILIARITY_AREAS)
 
 def encode_scenario(data,absolute=False):
     data=validate_scenario(data);records=[];B=base_of(data);OOP_MAP=B.oop_map
@@ -546,6 +557,9 @@ def execute(job,scenarios,seeds):
         runner.jobs_per_session = 1
         job.update(runtime_mode='isolated_execution_experiment', jobs_per_native_session=1,
                    experimental_execution=execution_settings)
+    if len({familiarity_fields(s) for _,s in scenarios})>1:raise ValueError('The compared tactics must use the same tactical familiarity setting')
+    holds={label:s['familiarity_hold'] for label,s in scenarios if s.get('familiarity_hold') and any(v is not None for v in s['familiarity_hold'])}
+    if holds: job['familiarity_hold']=holds
     with LOCK:
         job['_runner']=runner;job['status']='running';job['started']=time.time()
         if job.get('_cancel'):runner.cancel()
@@ -553,7 +567,7 @@ def execute(job,scenarios,seeds):
         completed={(r['variant'],r['seed'])for r in job['runs']}
         match_base=base_of(scenarios[0][1])
         tasks=[{'key':f'{label}:{seed}','variant':label,'seed':seed,'scenario':next(s for v,s in scenarios if v==label),'fixture':match_base.pkm,'engine_path':match_base.engine_path,'position_names':{p['mask']:p['id']for p in POSITIONS.values()},'episode':job.get('episode_settings'),'config':job['_dir']/f'{label}.bin','path':job['_dir']/f'{index:04d}_{label}_seed_{seed}.jsonl'}for index,seed in enumerate(seeds)for label,_ in scenarios if(label,seed)not in completed]
-        for task in tasks:task['event_details']=job.get('event_details',True)
+        for task in tasks:task['event_details']=job.get('event_details',True);task['exec_fields']=familiarity_fields(task['scenario'])
         def result(run):
             with LOCK:
                 if run.get('failed'):job['failures'].append(run)
@@ -681,6 +695,7 @@ class Handler(BaseHTTPRequestHandler):
         known['/saved-matches.js']='saved-matches.js'
         known['/in-match.js']='in-match.js'
         known['/league.js']='league.js'
+        known['/home.js']='home.js'
         if path in known:
             name=known[path];kind={'html':'text/html','js':'text/javascript','css':'text/css'}[name.split('.')[-1]]
             return self.send((WEB/name).read_bytes(),kind=kind+'; charset=utf-8')
@@ -690,7 +705,7 @@ class Handler(BaseHTTPRequestHandler):
         if origin and origin!=f'http://{self.headers.get("Host")}':return self.send({'error':'Cross-site call refused'},403)
         try:
             length=int(self.headers.get('Content-Length',0))
-            if not 0<length<=(6000000 if urlparse(self.path).path in ('/api/import-fmf','/api/league/start')else 1500000):raise ValueError('Invalid request size')
+            if not 0<length<=(6000000 if urlparse(self.path).path in ('/api/import-fmf','/api/league/start','/api/league/upload')else 1500000):raise ValueError('Invalid request size')
             data=json.loads(self.rfile.read(length));path=urlparse(self.path).path
             if path.startswith('/api/league/'):   # the League page (src/league_web.py)
                 import league_web
@@ -825,6 +840,11 @@ def main():
         except (ValueError,OSError):continue
     server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler)
     print(f'FM27 tactics lab: http://127.0.0.1:{args.port}',flush=True)
+    def resume_leagues():   # a league interrupted by a restart of the app carries on (src/league_web.py)
+        try:
+            import league_web;league_web.resume_interrupted(sys.modules[__name__])
+        except Exception as e:print('league resume skipped:',e,flush=True)
+    threading.Timer(3,resume_leagues).start()
     try:server.serve_forever()
     except KeyboardInterrupt:pass
     finally:
