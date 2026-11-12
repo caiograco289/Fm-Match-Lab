@@ -150,7 +150,8 @@ def summarise(path):
     return r if 'score' in r and 'xg' in r else None
 
 
-def run(out, parallel):
+def run(out, parallel, stop=None):
+    """stop: optional callable; once it returns True no new chunk starts (running ones finish), resumable later."""
     jobs = json.load(open(out / 'jobs.json'))
     done = set()
     results = out / 'results.jsonl'
@@ -176,6 +177,7 @@ def run(out, parallel):
         e = dict(os.environ); e.pop('FM27_MAC_EXEC_FIELDS', None)
         if isinstance(env, dict): e.update(env)   # e.g. {'FM27_MAC_ATTR': ...}
         elif env: e['FM27_MAC_EXEC_FIELDS'] = env
+        if stop and stop(): return index, -2, len(items), [], None   # stopped before this chunk: nothing played
         d = work / str(index); d.mkdir(); rows, code, start, attempt = [], 0, 0, 0
         while start < len(items):   # a match the host rejects stops the host: skip it and go on with the rest
             part = items[start:]; w = d / str(attempt); w.mkdir(); attempt += 1
@@ -199,11 +201,12 @@ def run(out, parallel):
         for index, code, n, rows, d in pool.map(one, enumerate(chunks)):
             for r in rows: sink.write(json.dumps(r) + '\n')
             sink.flush(); total += len(rows)
+            if code == -2: continue
             if code or len(rows) != n: log.write(f'chunk {index} {chunks[index][1][0][:2]} exit {code}: {len(rows)}/{n}\n'); log.flush()
             shutil.rmtree(d, ignore_errors=True)
             if index % 20 == 0:
                 log.write(f'{time.strftime("%H:%M")} {total} matches, {total / max(1, time.time() - began) * 3600:.0f}/h\n'); log.flush()
-    log.write(f'{time.strftime("%H:%M")} finished: {total} matches\n'); log.close()
+    log.write(f'{time.strftime("%H:%M")} {"stopped" if stop and stop() else "finished"}: {total} matches\n'); log.close()
 
 
 def stats(diffs):

@@ -351,10 +351,10 @@ def cmd_report(a):
 
 
 def cmd_league(a):
-    """Round robin of tactics on one saved match: each pair plays twice (each tactic once on each side), on the same
-    seeds, so both squads and both ends of the fixture are shared out evenly."""
-    import overnight, exec_real
-    out = Path(a.out).resolve(); out.mkdir(parents=True, exist_ok=True); bins = out / 'bins'; bins.mkdir(exist_ok=True)
+    """Round robin of tactics on one saved match, through the shared league code (src/league.py, also behind the
+    app's League page): each pair plays at home and away, on seeds 1..SEEDS (one "season" per seed)."""
+    import exec_real, league
+    out = Path(a.out).resolve(); out.mkdir(parents=True, exist_ok=True)
     if a.match: path = str(Path(a.match).expanduser().resolve())
     else:
         found = sorted(exec_real.matches((a.team or '').replace(' ', '_')), key=lambda m: Path(m[1]).stat().st_mtime, reverse=True)
@@ -362,60 +362,43 @@ def cmd_league(a):
         path = str(Path(found[0][1]).resolve())
     sources = tactic_sources(a.tactics, out)
     if len(sources) < 2: raise SystemExit('A league needs at least two tactics')
-    A = app(); base = A.validate_scenario(A.SAVED_MATCHES.open(path).default)
-    if a.squad:   # the same club's players from a save on both sides, so only the tactics differ
-        import squad_from_save
-        save, _, club = a.squad.partition(':'); rows = squad_from_save.read_club(Path(save).expanduser(), club)
-        for side in (0, 1): base = squad_from_save.apply_squad(A, base, side, rows)
-        base = A.validate_scenario(base)
-    # both sides: the eight tactical areas at the chosen level, complexity equal (Study 3: the record's mode is the same)
-    held = ','.join(f'{side}:{o}={a.familiarity}' for side in (0, 1) for o in AREAS) + ',' + ','.join(f'{side}:{o}=50' for side in (0, 1) for o in (0x19, 0x1a))
-    jobs, skipped = [], []
-    for i, home in enumerate(sources):
-        for j, away in enumerate(sources):
-            if i == j: continue
-            try:
-                sc = apply_tactic(apply_tactic(copy.deepcopy(base), 0, home, out), 1, away, out)
-                blob = A.encode_scenario(A.validate_scenario(sc))
-            except Exception as e:
-                skipped.append(f'{home[0]} v {away[0]}: {str(e)[:120]}'); continue
-            f = bins / f'{len(jobs)}.bin'; f.write_bytes(blob)
-            jobs.append(['L', f'L|{home[0]}|{away[0]}', path, str(f), {'FM27_MAC_EXEC_FIELDS': held}, a.seeds])
-    (out / 'jobs.json').write_text(json.dumps(jobs))
-    (out / 'meta.json').write_text(json.dumps({'sides': {'L': 0}, 'match': Path(path).name, 'squad': a.squad.partition(':')[2] if a.squad else None, 'tactics': [x[0] for x in sources],
-                                               'familiarity': a.familiarity, 'skipped': skipped}))
-    for line in skipped: print('skipped', line)
-    total = sum(j[5] for j in jobs)
-    print(f'{len(sources)} tactics, {len(jobs)} pairings, {total} matches (about {max(1, round(total / (1100 * a.workers) * 60))} min)', flush=True)
-    overnight.run(out, a.workers)
+    if a.reference: squad = {'kind': 'reference', 'tier': a.reference}
+    elif a.squad:
+        save, _, club = a.squad.partition(':'); squad = {'kind': 'save', 'save': str(Path(save).expanduser()), 'club': club}
+    else: squad = {'kind': 'natural'}   # each side keeps the saved match's own players (Study 7)
+    teams = [{'name': name, 'tactic': {'kind': 'preset', 'style': src} if kind == 'preset' else {'kind': 'fmf', 'path': src},
+              'squad': squad, 'familiarity': a.familiarity} for name, kind, src in sources]
+    cfg = {'teams': teams, 'base_match': path, 'seasons': a.seeds, 'familiarity': a.familiarity, 'equal_start': a.equal_start,
+           'home_and_away': True}
+    total = league.build(app(), cfg, out, say=lambda s: None)
+    print(f'{len(teams)} tactics, {total} matches (about {max(1, round(total / (1100 * a.workers) * 60))} min)', flush=True)
+    league.run(out, a.workers)
     league_report(out)
 
 
 def league_report(out):
-    meta = json.loads((out / 'meta.json').read_text()); names = meta['tactics']
-    table = {n: dict(P=0, W=0, D=0, L=0, GF=0, GA=0, xGF=0.0, xGA=0.0) for n in names}; h2h = {}
-    for line in open(out / 'results.jsonl'):
-        r = json.loads(line); _, home, away = r['cond'].split('|')
-        for side, me, them in ((0, home, away), (1, away, home)):
-            t = table[me]; g, c = r['score'][side], r['score'][1 - side]
-            t['P'] += 1; t['GF'] += g; t['GA'] += c; t['xGF'] += r['xg'][side]; t['xGA'] += r['xg'][1 - side]
-            t['W' if g > c else 'D' if g == c else 'L'] += 1
-            h = h2h.setdefault((me, them), [0, 0]); h[0] += 3 if g > c else 1 if g == c else 0; h[1] += 1
-    rows = sorted(names, key=lambda n: -(3 * table[n]['W'] + table[n]['D']) / max(1, table[n]['P']))
-    lines = [f'# Tactic league on {meta["match"]}' + (f', {meta["squad"]} squad on both sides' if meta.get('squad') else ''), '', f'Every tactic plays every other at home and away; both sides\' '
-             f'tactical areas held at {meta["familiarity"]}; each side picks its XI by position.', '',
-             '| # | Tactic | P | W | D | L | Goals for | Goals against | xG for | xG against | Points per game |', '|---|---|---|---|---|---|---|---|---|---|---|']
-    for k, n in enumerate(rows, 1):
-        t = table[n]; p = max(1, t['P'])
-        lines.append(f"| {k} | {n} | {t['P']} | {t['W']} | {t['D']} | {t['L']} | {t['GF'] / p:.2f} | {t['GA'] / p:.2f} | "
-                     f"{t['xGF'] / p:.2f} | {t['xGA'] / p:.2f} | {(3 * t['W'] + t['D']) / p:.2f} |")
-    lines += ['', '## Head to head: points per game of the row tactic against the column tactic', '',
-              '| | ' + ' | '.join(str(k) for k in range(1, len(rows) + 1)) + ' |', '|---|' + '---|' * len(rows)]
-    for k, n in enumerate(rows, 1):
-        cells = [('·' if m == n else f"{h2h[(n, m)][0] / h2h[(n, m)][1]:.1f}" if (n, m) in h2h else '') for m in rows]
-        lines.append(f'| {k} {n} | ' + ' | '.join(cells) + ' |')
-    if meta.get('skipped'): lines += ['', 'Skipped pairings: ' + '; '.join(meta['skipped'])]
-    (out / 'report.md').write_text('\n'.join(lines) + '\n', encoding='utf8'); print('\n'.join(lines))
+    import league
+    res = league.table(out); m = res['meta']; rows = res['table']
+    lines = [f'# Tactic league on {m["base_match"]}', '', f'Every tactic plays every other at home and away, {m["seasons"]} season(s) '
+             f'(one seed each); each side picks its XI by position and is managed by the assistant; '
+             f'{"both sides start alike (condition, sharpness, morale, cohesion); " if m.get("equal_start") else ""}engine {m.get("engine")}.', '',
+             '| # | Tactic | Squad | Familiarity | W | D | L | Goals for | Goals against | xG for | xG against | xPts | Points | ± (seasons) | Points per game |',
+             '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|']
+    for r in rows:
+        if not r.get('seasons'): continue
+        spread = '' if r['Pts_sd'] is None else f"{r['Pts_sd']:.1f}"
+        lines.append(f"| {r['rank']} | {r['team']} | {r['squad']} | {r['familiarity']} | {r['W']:.1f} | {r['D']:.1f} | {r['L']:.1f} | "
+                     f"{r['GF']:.1f} | {r['GA']:.1f} | {r['xGF']:.2f} | {r['xGA']:.2f} | {r['xPts']:.1f} | {r['Pts']:.1f} | "
+                     f"{spread} | **{r['PPG']:.2f}** |")
+    order = res['order']
+    lines += ['', '## Head to head: points per match of the row tactic against the column tactic', '',
+              '| | ' + ' | '.join(str(k) for k in range(1, len(order) + 1)) + ' |', '|---|' + '---|' * len(order)]
+    for k, a in enumerate(order, 1):
+        cells = ['·' if a == b else ('' if res['head_to_head'][a][b] is None else f"{res['head_to_head'][a][b]:.1f}") for b in order]
+        lines.append(f'| {k} {a} | ' + ' | '.join(cells) + ' |')
+    if m.get('skipped'): lines += ['', 'Skipped fixtures: ' + '; '.join(m['skipped'])]
+    (Path(out) / 'report.md').write_text('\n'.join(lines) + '\n', encoding='utf8'); print('\n'.join(lines))
+    (Path(out) / 'table.csv').write_text(league.to_csv(res), encoding='utf8')
 
 
 def main():
@@ -429,6 +412,8 @@ def main():
     lg.add_argument('--seeds', type=int, default=20); lg.add_argument('--familiarity', type=int, default=80)
     lg.add_argument('--workers', type=int, default=6)
     lg.add_argument('--squad', help='SAVE.fm:Club - put this club\'s players from an FM27 save on both sides (needs fmsave)')
+    lg.add_argument('--reference', help='a synthetic reference squad on both sides: pl-top, pl-middle or pl-bottom (src/reference_squads.json)')
+    lg.add_argument('--equal-start', action='store_true', help='both sides start alike (condition, sharpness, morale, cohesion), as the League page does')
     d = sub.add_parser('add'); d.add_argument('out'); d.add_argument('specs', nargs='+')
     r = sub.add_parser('run'); r.add_argument('out'); r.add_argument('--workers', type=int, default=6)
     t = sub.add_parser('report'); t.add_argument('out')

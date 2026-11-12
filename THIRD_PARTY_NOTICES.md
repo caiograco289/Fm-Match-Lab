@@ -14,6 +14,13 @@ call the engine of a copy the user owns, which is loaded unchanged from the user
 Anything derived from game files on the user's machine is written only to the git-ignored `private/`, `build/` and
 `data/` folders.
 
+One exception: `src/reference_squads.json` holds **synthetic reference squads**: invented players with invented
+names, generated at random by `scripts/reference_squads.py` from statistical profiles (averages, spreads and
+correlations of attributes by position and tier) of the FM27 player database, calibrated on version 27.0.1+2503222
+(database 27.0.0, Premier League clubs at the start of the 2026/27 season). They are not real players: every
+generated player was checked to be farther from every real player than real players usually are from each other.
+The profiles and the save they come from are not in the repository.
+
 The MIT grant does not relicense game-related inputs, derived data or trademarks.
 
 ## Python packages

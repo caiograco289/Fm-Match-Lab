@@ -643,6 +643,13 @@ class Handler(BaseHTTPRequestHandler):
             try:return self.send(SAVED_MATCHES.list())
             except (OSError,ValueError) as e:return self.send({'error':str(e)},400)
         if path=='/api/phase-defaults':return self.send(phase_inputs.pack(DEFAULT,CATALOG))
+        if path.startswith('/api/league/'):   # the League page (src/league_web.py)
+            import league_web
+            try:
+                got=league_web.get(sys.modules[__name__],path,parse_qs(urlparse(self.path).query))
+                if got is None:return self.send({'error':'Not found'},404)
+                value,kind=got;return self.send(value,kind=kind)if kind else self.send(value)
+            except (KeyError,TypeError,ValueError,OSError) as e:return self.send({'error':str(e)},400)
         if path=='/api/status':return self.send({'engine':'original_native','engine_compatibility':ENGINE_COMPATIBILITY,'server_pid':os.getpid(),'fixture_me_version':'26.8.0.0','independent':True,'team_groups':len(GROUPS),'team_options':sum(len(g['options'])for g in GROUPS.values()),'player_groups':17,'roles':79,'batch':{'max_matches_per_variant':10000,**BATCH_LIMITS,'isolation':'bounded_reused_native_sessions','jobs_per_native_session':64,'postprocess_workers':2,'whole_match_automatic_retries':0}})
         if path=='/api/jobs':
             with LOCK:return self.send([{k:v for k,v in j.items()if not k.startswith('_')and(k!='runs'or parse_qs(urlparse(self.path).query).get('brief')!=['1'])}for j in sorted(JOBS.values(),key=lambda j:j.get('created',0))])
@@ -673,6 +680,7 @@ class Handler(BaseHTTPRequestHandler):
         known['/initial-state.js']='initial-state.js'
         known['/saved-matches.js']='saved-matches.js'
         known['/in-match.js']='in-match.js'
+        known['/league.js']='league.js'
         if path in known:
             name=known[path];kind={'html':'text/html','js':'text/javascript','css':'text/css'}[name.split('.')[-1]]
             return self.send((WEB/name).read_bytes(),kind=kind+'; charset=utf-8')
@@ -682,8 +690,12 @@ class Handler(BaseHTTPRequestHandler):
         if origin and origin!=f'http://{self.headers.get("Host")}':return self.send({'error':'Cross-site call refused'},403)
         try:
             length=int(self.headers.get('Content-Length',0))
-            if not 0<length<=(6000000 if urlparse(self.path).path=='/api/import-fmf'else 1500000):raise ValueError('Invalid request size')
+            if not 0<length<=(6000000 if urlparse(self.path).path in ('/api/import-fmf','/api/league/start')else 1500000):raise ValueError('Invalid request size')
             data=json.loads(self.rfile.read(length));path=urlparse(self.path).path
+            if path.startswith('/api/league/'):   # the League page (src/league_web.py)
+                import league_web
+                got=league_web.post(sys.modules[__name__],path,data)
+                return self.send(got,202 if path in('/api/league/start','/api/league/resume')else 200)if got is not None else self.send({'error':'Not found'},404)
             if path=='/api/saved-matches/open':
                 base=SAVED_MATCHES.open(data.get('path'))
                 return self.send({'key':base.key,'defaults':base.default})
