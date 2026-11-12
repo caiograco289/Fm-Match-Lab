@@ -18,6 +18,8 @@
 #define FM27_MAC_GAME_VERSION "27.0.0+2493426"
 #elif FM27_MAC_BUILD == 2494769
 #include "fm27_mac_x86_64_2494769.h"
+#elif FM27_MAC_BUILD == 2503222
+#include "fm27_mac_x86_64_2503222.h"
 #else
 #error "unknown FM27_MAC_BUILD"
 #endif

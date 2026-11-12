@@ -83,14 +83,55 @@ records, and the engine does not rebuild them when the tactic changes. So:
   in the game; here every tactic carries STORMBRINGER's. ([Study 3](03-tactical-familiarity.md) found no clear effect
   of complexity held during the match, so this probably matters little.)
 
+## Rerun: each tactic picks its own XI (Study 6b)
+
+The first run gave every tactic the team's saved XI in its 4-2-4 slots, which puts players out of position in
+other shapes: in a 3-4-3, players rated 1 (completely unfamiliar) at left wing-back and in central midfield. The
+rerun lets each tactic pick its starters from the matchday squad, slot by slot, by the rating for that position
+(ties broken by current ability), as the app's "Pick by position" does. Own familiarity, 10 matches × seeds 1-20.
+
+| Tactic | Saved XI: Δ xGD | Own XI: Δ xGD (t) | Saved XI: ppg | Own XI: ppg |
+|---|---|---|---|---|
+| Team's tactic with its own picked XI | | −0.03 (−0.3) | 1.80 | 1.75 |
+| ZaZ - Ace of Diamonds 0.1 ST | −0.23 | −0.10 (−1.0) | 1.64 | 1.75 |
+| GYR - BEAST 4231 FM27 | −0.22 | −0.11 (−1.1) | 1.60 | 1.64 |
+| HIGHWAY STAR 27 4231 P101 EC CC | −0.42 | −0.20 (−1.7) | 1.61 | 1.61 |
+| ARGUS 27 3430 P97 FA CC | −0.28 | −0.20 (−2.0) | 1.56 | 1.66 |
+| ZaZ - Ace of Spades 0.1 ST | −0.06 | −0.22 (−2.3) | 1.68 | 1.55 |
+| HIGHWAY STAR 27 BBM 4231 P90 FA | −0.14 | −0.24 (−2.3) | 1.78 | 1.61 |
+| ZaZ - Ace of Clubs 0.1 ST | −0.19 | −0.31 (−2.9) | 1.64 | 1.42 |
+| Underdog fm27 | −0.20 | −0.36 (−3.5) | 1.64 | 1.46 |
+| FM preset Control Possession | −0.37 | −0.41 (−4.0) | 1.62 | 1.68 |
+| ZaZ - Ace of Hearts 0.1 | −0.21 | −0.42 (−4.0) | 1.62 | 1.48 |
+| FM preset Gegenpress | −0.23 | −0.43 (−4.3) | 1.58 | 1.64 |
+| ARGUS 27 AWB 3430 P100 FA | −0.39 | −0.44 (−4.5) | 1.61 | 1.42 |
+| Beta 4-1-4-1 believe it | −0.33 | −0.47 (−4.5) | 1.49 | 1.51 |
+| FM preset Fluid Counter-Attack | −0.48 | −0.55 (−5.9) | 1.36 | 1.66 |
+| FM preset Vertical Tiki-Taka | −0.68 | −0.79 (−9.0) | 1.22 | 1.34 |
+| FM preset Wing Play | −0.71 | −0.82 (−8.3) | 1.30 | 1.38 |
+| FM preset Direct Counter-Attack | −0.67 | −0.83 (−8.8) | 1.35 | 1.44 |
+| FM preset Tiki-Taka | −0.83 | −0.88 (−8.7) | 1.21 | 1.10 |
+| 424 ROUTE1 TORQUAY P93 | −0.85 | −0.91 (−9.3) | 1.49 | 1.36 |
+| FM preset Route One | −0.93 | −0.98 (−10.2) | 1.36 | 1.20 |
+| FM preset Catenaccio | −1.09 | −1.15 (−11.5) | 1.20 | 0.97 |
+| FM preset Park the Bus | −1.41 | −1.41 (−14.7) | 0.86 | 0.88 |
+
+(Δ against the team's tactic with its saved XI; the team's own tactic is STORMBRINGER.)
+
+**What changed:** very little. The two runs agree closely (r = 0.96 for the xG differences, rank correlation 0.84).
+The team's own tactic stays first, the defensive presets stay last, and with 200 pairs per tactic most moves are
+within noise (about ±0.25 xGD). The back-three ARGUS P97 gained a little (−0.28 → −0.20); ARGUS AWB did not. A
+few tactics close to the team's own shape lost a little: the pick rule chooses by position rating first, which can
+be cruder than the XI the game itself picked. So the fixed lineup was a fair concern, but it does not explain the
+ranking: the tactics really do differ on these matches.
+
 ## Caveats
 
 - **"own" is not what the squad would have with a new tactic.** It is the current tactic's familiarity applied to
   every tactic (see the check above). A tactic the team switched to would start lower, so the "low" column is closer to
   the first weeks with a new tactic.
-- **Lineups are fixed.** Every tactic uses the saved XI in their saved slots. A tactic with a different shape (3-4-3,
-  4-1-4-1) would normally be played with a different selection, so tactics far from the team's shape are at a
-  disadvantage here.
+- **Lineups.** The main run uses the saved XI in its saved slots, which handicaps other shapes. The rerun above,
+  where each tactic picks its own XI by position, gives nearly the same ranking.
 - **Only 13 of the 25 files.** The 12 rejected ones (mostly made for FM24/FM26) would need re-exporting from FM27.
 
 ## Reproduce

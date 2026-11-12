@@ -22,9 +22,8 @@ KEY = re.compile(r'^saved:[0-9a-f]{16}$')
 
 
 def source_folder():
-    custom = os.environ.get('FM27_SAVED_MATCHES')
-    if custom: return Path(custom)
-    return Path.home() / 'Library/Application Support/Sports Interactive/Football Manager 27/matches/automatic'
+    import match_backup   # every match FM27 saved, kept after the game deletes it (see match_backup.py)
+    return match_backup.source_folder()
 
 
 def management(word):

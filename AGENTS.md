@@ -10,9 +10,9 @@ replay and test matches. Read this before running anything. `CLAUDE.md` points h
 - **Never modify the FM27 install.** No patched binaries, no replaced or added files. The tools read the game's files
   and call its engine functions in their own process; that's all.
 - **Never disable SIP**, and never ask the user to.
-- **FM27 must be closed while anything runs the engine** (set-up, the app's batches, studies). Check with
-  `pgrep -f "fm.app/Contents/MacOS/Football Manager 27"`. If the user opens the game mid-run, stop the run; the study
-  runner resumes where it stopped.
+- **Set-up needs FM27 closed** (`scripts/setup.py` checks). Batches and studies may run while the game is open: the
+  engine runs in its own process and results are identical either way (checked on 220 matches). The game just runs
+  slower while 6 workers are busy.
 - **Nothing derived from game files is committed**: no match files (`.pkm`), tactic files (`.fmf`), engine bytes,
   game data, screenshots of the user's save or study results. They belong in the git-ignored `private/`, `build/`,
   `data/` or `runs/` folders. `tests/test_boundary.py` enforces this; run the tests before every commit.
@@ -49,6 +49,12 @@ conditions), the runner's `jobs.json`/`results.jsonl`, and `report.md`.
 `study.py --help` lists the condition types: attributes, familiarity, start state, mentality, team instructions,
 in-match management, tactic files.
 
+`scripts/optimise.py` searches team instructions and mentality for one tactic across the team's saved matches: a
+screen of random valid combinations, a ridge model with main effects and pairwise interactions, confirmation of the
+predicted best on fresh seeds, and a final check on held-out matches (other opponents). Scored by xPts and xGD. Report
+the held-out check, not the screen or the model (both are inflated by selection). Tactical complexity is not
+recomputed by the match engine, so complex instructions do not pay their in-game cost in this search yet.
+
 How to design and read one:
 
 - **Paired comparisons.** Every condition replays the same matches on the same seeds as the unchanged match, so
@@ -72,7 +78,8 @@ mechanism (more chances, better chances, fewer chances conceded). `docs/studies/
 
 | Path | What |
 |---|---|
-| `src/` | the app: server (`fm27_tactics_server.py`), UI (`tactics_ui/`), saved matches, English labels |
+| `src/` | the app: server (`fm27_tactics_server.py`), UI (`tactics_ui/`), saved matches and their backup (`match_backup.py`), English labels |
+| `scripts/` | set-up, `study.py`, `optimise.py`, `squad_from_save.py` and `import_other_matches.py` (need fmsave), `backup_matches.py` |
 | `port/mac_host/` | the engine host (C++), built by `scripts/build_native_mac.py` |
 | `port/map/` | address mapping and data readers (IL2CPP enums, effectiveness record) |
 | `port/validation/` | the original study scripts (Studies 1-6) and the resumable runner `overnight.py` |

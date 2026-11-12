@@ -11,7 +11,9 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 HOST = 'private/engine/fm27_native/fm27_mac_host'
-SAVED = Path(os.environ.get('FM27_SAVED_MATCHES') or Path.home() / 'Library/Application Support/Sports Interactive/Football Manager 27/matches/automatic')   # override: e.g. a backup of matches the game has deleted
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'src'))
+import match_backup
+SAVED = match_backup.source_folder()   # the backup of every match FM27 saved (FM27_SAVED_MATCHES overrides)
 CONDITIONS = {'natural': None,
               'all33_30': {o: 30 for o in range(33)}, 'all33_90': {o: 90 for o in range(33)},
               'overall_30': {0x1e: 30}, 'overall_90': {0x1e: 90},

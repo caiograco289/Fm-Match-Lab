@@ -72,6 +72,12 @@ def _initialize_files(root, native, game, files, dll):
         validation = next((r for r in rows if r.get('event')=='native_engine_compatibility'),None)
         if validation and not (validation.get('compatible') or validation.get('trial_allowed')):
             close_leases()
+            if validation.get('method')=='lc_uuid_in_file':   # FM27 was updated since the host was built
+                built=str(validation.get('profile','')).removeprefix('fm27-').removesuffix('-macos-x86_64')
+                return {**status,'reason':'game_build_changed','diagnostics':rows,
+                        'message':f'FM27 has been updated since the set-up (the engine host was built for {built}). Close FM27 and run '
+                                  '.venv/bin/python scripts/setup.py again. If it reports an unsupported build, this version of the '
+                                  'tool does not know the new FM27 build yet: update the repository (docs/MACOS.md lists the supported builds).'}
             return {**status,'reason':validation.get('reason'),'diagnostics':rows,
                     'message':'Key interface or layout mismatch: '+str(validation.get('reason'))+', at '+hex(validation.get('rva',0))}
         actual = sha(dll)

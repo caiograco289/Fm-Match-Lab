@@ -147,6 +147,91 @@ Difference from the unchanged match, per game, for the team (t in brackets):
 
 Study 4 (running) measures whether the top attributes are worth more at high familiarity than at low.
 
+## Step 2: follow-ups
+
+### How familiarity changes over a season (from the saved matches)
+
+Each saved match stores every player's effectiveness record as it stood at kick-off. Reading the team's records
+from the ten matches saved in the current game version, in the order they were played (the save files carry no
+in-game date; the last two were 13 and 16 October), gives a view of how the two parts move:
+
+| Match (in order) | Training part, eight areas | Match exposure, eight areas |
+|---|---|---|
+| 1st of the 27.0.1 run (Brighton away) | 49 53 50 51 45 44 45 50 | 62 67 70 57 64 62 77 55 |
+| 2nd | 49 53 51 47 43 50 50 55 | 64 69 72 58 65 64 79 57 |
+| 3rd | 49 53 50 45 41 48 48 53 | 66 71 74 59 67 66 80 58 |
+| 4th | 42 46 43 41 35 41 41 46 | 63 67 74 59 65 63 80 59 |
+| 5th | 41 40 42 42 37 41 41 41 | 65 72 72 58 66 65 79 58 |
+| 6th (Chelsea, 13 Oct) | 43 43 44 39 34 46 45 50 | 66 73 74 60 68 67 80 59 |
+| 7th (Man City, 16 Oct) | 43 43 43 36 33 45 45 47 | 68 75 76 62 70 69 82 61 |
+
+(Areas in order: in-possession shape, passing style, build-up, chance creation, out-of-possession shape, line of
+engagement, pressing intensity, pressing trap. Team averages, rounded.)
+
+- **Match exposure climbs steadily**, about 2 per match in every area, towards the cap of 100.
+- **The training part fades.** Over these seven matches it fell in every area, by 4 to 15 points. The club's
+  training schedule over that period isn't recorded, so this shows that the training part drops between sessions
+  rather than how fast for a given schedule.
+
+Another FM27 engine tester reports the same mechanics from the game's training data: each Tactical Understanding
+session adds a record that fades with age (half after about three weeks), and matches add to familiarity too. The
+saved-match records agree with both.
+
+### Level sweep and one area at a time (done, 11 November; 8,400 matches)
+
+Same design as step 1 (10 matches × seeds 1-30, 300 pairs per condition). Each condition holds every team player's
+whole area (training, exposure and the third byte) at one level: all eight areas in steps of 10, or one area at 0 or
+100 with the other seven left as they are. For reference, the squad's own areas average about 40-60.
+
+**All eight areas** (difference from the unchanged match per game, t in brackets):
+
+| Level | Points | xG difference | Goals for | Goals against |
+|---|---|---|---|---|
+| 0 | **−0.33 (−3.3)** | **−0.47 (−5.5)** | −0.31 | +0.28 |
+| 10 | **−0.32 (−3.2)** | **−0.44 (−5.3)** | −0.29 | +0.14 |
+| 20 | −0.20 (−2.1) | −0.13 (−1.6) | −0.19 | +0.08 |
+| 30 | −0.04 | +0.08 (0.9) | +0.03 | −0.03 |
+| 40 | +0.07 | +0.13 (1.5) | +0.03 | −0.08 |
+| 50 | +0.19 (2.0) | **+0.28 (3.2)** | +0.14 | −0.11 |
+| 60 | +0.09 | **+0.33 (3.7)** | +0.14 | −0.13 |
+| 70 | +0.17 (1.7) | **+0.27 (3.0)** | +0.04 | −0.25 |
+| 80 | **+0.32 (3.3)** | **+0.41 (4.8)** | +0.30 | −0.24 |
+| 90 | +0.18 (1.9) | **+0.34 (3.9)** | +0.12 | −0.26 |
+| 100 | +0.18 (1.9) | **+0.34 (3.9)** | +0.12 | −0.26 |
+
+- **The curve is an S with a ceiling.** Below 20 the team loses about a third of a point per game; 30-40 is roughly
+  where the squad already is; from 50 up it gains about 0.2-0.3 points and 0.3-0.4 xG difference, and goes no
+  higher. xG difference, the steadier measure, is flat from 50 to 100.
+- **90 and 100 give identical matches**, score for score: the engine caps each area's combined value, and 90 already
+  reaches the cap. 80 looks best in points, but its xG difference is within noise of 50-100; read the plateau as one
+  level.
+- **From the bottom to the plateau is worth about half a point per game** (0 → 50-100: +0.5 points, +0.75 xG
+  difference), matching step 1.
+
+**One area at a time** (xG difference; points in the report are all |t| ≤ 2.2):
+
+| Area | At 0 | At 100 |
+|---|---|---|
+| In-possession shape | +0.07 | +0.04 |
+| Passing style | −0.13 | +0.18 (2.1) |
+| Build-up | −0.09 | +0.11 |
+| Chance creation | −0.12 | +0.19 (2.2) |
+| Out-of-possession shape | −0.09 | +0.17 (2.0) |
+| Line of engagement | +0.18 (2.2) | −0.08 |
+| Pressing intensity | **−0.32 (−3.7)** | +0.04 |
+| Pressing trap | −0.04 | +0.11 |
+
+- **No single area does much on its own.** Raising one area to 100 never gives a clear gain (best t 2.2 among 16
+  tests, about what chance produces). This agrees with the other engine tester's finding that raising one area
+  alone does almost nothing.
+- **The effect is spread across the areas.** The eight drops to 0 add up to about −0.55 xG difference, close to the
+  −0.47 for all areas at once, so the areas act roughly additively, each contributing a little.
+- **Pressing intensity is the one area that clearly hurts when untrained** (−0.32 xG difference, mostly fewer
+  chances created), probably because this team presses a lot. Which area matters most will depend on the tactic.
+
+In practice: train the tactic as a whole until it is well understood (the plateau starts around the middle of the
+scale); singling out one area to train buys little.
+
 ## Reproduce
 
 ```sh

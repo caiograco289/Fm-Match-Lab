@@ -20,5 +20,9 @@ The MIT grant does not relicense game-related inputs, derived data or trademarks
 
 The app itself uses only the Python standard library.
 
-- capstone and numpy are used only by the address-mapping tools in `port/map/` (BSD-3-Clause each).
+- capstone is used only by the address-mapping tools in `port/map/`; numpy by those tools and by the tactic search
+  (`scripts/optimise.py`) (BSD-3-Clause each).
+- fmsave (MIT, https://github.com/rhiever/fmsave) is optional and not bundled. It reads squads and fixtures from your
+  saves for `scripts/squad_from_save.py`, `study.py league --squad`, `optimise.py --save`, and to name the clubs in
+  `scripts/import_other_matches.py`; everything else runs without it.
 - UnityPy (MIT) is used only by the set-up (`scripts/build_catalog.py`) to read the game's tactic data.

@@ -36,7 +36,7 @@ saved matches under each condition on the same seeds and reports paired differen
 ```sh
 .venv/bin/python scripts/study.py new runs/my-study --team "Your Club" --newest 10
 .venv/bin/python scripts/study.py add runs/my-study attributes familiarity:20 instructions
-.venv/bin/python scripts/study.py run runs/my-study        # resumable; FM27 closed
+.venv/bin/python scripts/study.py run runs/my-study        # resumable
 .venv/bin/python scripts/study.py report runs/my-study
 ```
 
@@ -46,18 +46,44 @@ saved matches under each condition on the same seeds and reports paired differen
 
 Screenshots show the sample match, where the app uses generic player names.
 
-**What we found:** [docs/FINDINGS.md](docs/FINDINGS.md) summarises six studies of the engine (about 190,000
-matches); the full studies are in [docs/studies/](docs/studies/README.md). Using an AI agent? Point it at
+Leagues and squads from your saves:
+
+```sh
+# every tactic against every other, home and away, with the table and head-to-head results
+.venv/bin/python scripts/study.py league runs/league --team "Your Club" --tactics presets "tactics:~/Downloads/fm27-tactics"
+# the same with one club's players from your save on both sides (pip install fmsave)
+.venv/bin/python scripts/study.py league runs/league2 --team "Your Club" --tactics presets --squad "career.fm:Chelsea"
+# FM27's in-match Tactical Tweaks, applied from kick-off, against a chosen opposition tactic
+.venv/bin/python scripts/study.py new runs/tweaks --team "Your Club" --opponent-tactic "preset:Gegenpress"
+.venv/bin/python scripts/study.py add runs/tweaks tweaks
+# search for better team instructions and mentality across your saved matches (some held out for the final check)
+.venv/bin/python scripts/optimise.py runs/opt --team "Your Club"
+# the same with your current squad against many real opponents (other clubs' matches and this season's fixtures),
+# all your saved matches held out for the final check (needs fmsave)
+.venv/bin/python scripts/import_other_matches.py
+.venv/bin/python scripts/optimise.py runs/opt2 --team "Your Club" --save "<your save>.fm"
+```
+
+**Your matches are kept.** FM27 keeps only your last 10 saved matches; the app and the scripts copy each new one to
+a backup (`~/fm27-port-work/saved_matches`) when they start, and also keep the inputs of other clubs' matches that
+FM27 leaves in its `Temporary` folder (`scripts/import_other_matches.py` makes them playable).
+
+**What we found:** [docs/FINDINGS.md](docs/FINDINGS.md) summarises eight studies of the engine (about 220,000
+matches) and the first tactic search; the full studies are in [docs/studies/](docs/studies/README.md). Using an AI agent? Point it at
 [AGENTS.md](AGENTS.md): the rules, the set-up and how to design and read a study.
 
 ## Requirements
 
 - macOS on Apple Silicon (via Rosetta 2) or Intel.
-- FM27 installed through Steam, at a supported version: **27.0.0** or **27.0.1**. Other builds are refused until
-  they have been mapped (see "Game updates" in the guide).
+- FM27 installed through Steam, at a supported build: **27.0.0** (2493426), **27.0.1** (2494769) or the **27.0.1
+  hotfix of 12 November** (2503222, installed automatically by Steam). Other builds are refused until they have been
+  mapped: the set-up stops with "Unsupported FM27 build", and the app runs nothing (see "Updating after an FM27
+  patch" in the [guide](docs/MACOS.md)).
+- After Steam updates FM27 to a supported build, or after you update this repository, run `scripts/setup.py` again
+  (FM27 closed); until then the app says FM27 has been updated since the set-up and runs nothing.
 - Steam running and logged in. The tool does not bypass or emulate Steam, DRM or any online service.
 - Python 3.12 and the Xcode command line tools (`clang++`, `codesign`).
-- FM27 itself closed while simulations run.
+- FM27 closed during set-up. Simulations can run while you play; both just run slower.
 
 ## Set-up
 

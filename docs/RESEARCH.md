@@ -2,8 +2,8 @@
 
 The app drives the engine host (`private/engine/fm27_native/fm27_mac_host`, built by `scripts/build_native_mac.py`). You can
 also run the host directly, for example to replay a saved match or dump what the engine computed. Every option here
-reads or writes only the host's own process memory and its output file. Nothing touches the game install, and the
-game must be closed while you run any of them.
+reads or writes only the host's own process memory and its output file. Nothing touches the game install. They can
+run while the game is open.
 
 The host prints one JSON object per line to `--output`. Research output can contain data derived from your game
 files, so keep it in git-ignored folders (`port/mac_host/runs/`, `private/`, `build/`).
@@ -31,7 +31,8 @@ files, so keep it in git-ignored folders (`port/mac_host/runs/`, `private/`, `bu
 | `FM27_GAME_ROOT` | FM27 install (Steam folder, `fm.app` or `game_plugin.bundle/Contents/Resources`); found automatically if unset |
 | `FM27_ENGINE_ROOT` | `private/engine` (set by `scripts/run.py`) |
 | `FM27_DESKTOP_DATA` | App state folder (default `data/`) |
-| `FM27_SAVED_MATCHES` | Folder to list saved matches from instead of FM27's own (for example a backup of 27.0 matches) |
+| `FM27_SAVED_MATCHES` | Folder to list saved matches from instead of the backup (no backup is made then) |
+| `FM27_MATCH_BACKUP` | Backup folder for every match FM27 saves (default `~/fm27-port-work/saved_matches`); see `src/match_backup.py` |
 | `FM27_ENGINE_PATH=fixture` | Keep the bundled sample's FM26.8 engine word instead of the FM27 one (comparison only) |
 | `FM27_SKIP_EVENT_DETAILS` | Fast mode: no goal/card/player detail |
 | `FM27_STUDY_HOST` | Study scripts: use this frozen host binary, so a long run stays on one build |

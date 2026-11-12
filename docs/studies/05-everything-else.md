@@ -1,7 +1,7 @@
 # Study 5: everything else you can change
 
-**Status:** screen done (11 November, 35,400 matches). The confirmation reruns of the largest effects have not been
-run yet.
+**Status:** done (11 November). Screen: 35,400 matches. Confirmation of the uncertain effects and the goalkeeper
+check: 18,300 more.
 
 ## Design
 
@@ -149,34 +149,62 @@ Each row changes one instruction from the team's setting to the option named. So
 | PressingTrap: Show inside | -0.18 (-1.9) | -0.20 (-2.3) | -0.04 | +0.16 |
 | PressingTrap: Show outside | -0.14 (-1.4) | -0.28 (-3.3) | -0.12 | +0.16 |
 
+## Confirmation (seeds 31-120)
+
+The screen's uncertain effects (|t| between 2 and 4), plus team cohesion, condition and sharpness, were rerun on 90
+new seeds per match: 900 more pairs each, independent of the screen.
+
+| Change | Screen (300 pairs): ppg / xGD | Confirmation (900 pairs): ppg (t) | xGD (t) | Verdict |
+|---|---|---|---|---|
+| TI Pressing trap: Show outside | −0.14 / −0.28 | −0.23 (−4.0) | **−0.40 (−8.5)** | confirmed, larger |
+| TI Pressing trap: Show inside | −0.18 / −0.20 | −0.19 (−3.5) | **−0.30 (−6.3)** | confirmed |
+| Team cohesion, highest vs lowest | +0.32 / +0.35 | +0.21 (+3.8) | **+0.32 (+6.7)** | confirmed |
+| Mentality one step more attacking | −0.01 / −0.26 | −0.12 (−2.1) | **−0.22 (−4.5)** | confirmed |
+| Condition 100% | +0.18 / +0.24 | +0.13 (+2.3) | **+0.19 (+4.0)** | confirmed |
+| TI Dribbling: Standard | −0.13 / −0.18 | −0.11 (−1.9) | −0.15 (−3.0) | likely |
+| Sharpness 100% | +0.16 / +0.25 | +0.10 (+1.8) | +0.11 (+2.2) | likely, smaller |
+| Age −5 | −0.13 / −0.14 | +0.03 (+0.7) | −0.08 (−2.2) | unclear |
+| Pressure handling 18 | +0.22 / +0.26 | +0.06 (+1.0) | +0.06 (+1.2) | not confirmed |
+| Temperament 5 | −0.22 / −0.02 | −0.05 (−1.0) | −0.04 (−0.7) | not confirmed |
+| Professionalism 18 | +0.07 / +0.19 | −0.03 (−0.5) | +0.00 (+0.1) | not confirmed |
+| TI Tempo: Higher | +0.09 / +0.19 | +0.01 (+0.2) | −0.00 (−0.0) | not confirmed |
+| TI Progress through: Left | +0.11 / +0.20 | −0.01 (−0.2) | −0.02 (−0.4) | not confirmed |
+| TI When possession is won: Standard | +0.19 / +0.20 | −0.01 (−0.1) | −0.02 (−0.5) | not confirmed |
+| TI When possession is won: Regroup | +0.26 / +0.12 | +0.03 (+0.6) | +0.01 (+0.3) | not confirmed |
+| TI Underlaps: Standard | +0.21 / +0.19 | −0.04 (−0.7) | −0.05 (−1.0) | not confirmed |
+| TI Goalkeeper distribution speed: Balanced | +0.15 / +0.18 | +0.06 (+1.1) | +0.02 (+0.4) | not confirmed |
+| TI Passing directness: Standard | +0.21 / +0.03 | −0.03 (−0.5) | −0.05 (−1.1) | not confirmed |
+
+**The lesson:** in a screen of 125 changes, results with |t| of 2-3 are often chance. Of the 15 such results rerun
+here, 2 were confirmed (Show inside, condition 100%), 2 are likely (Dribbling standard, sharpness 100%), 1 is
+unclear and 10 vanished. The three with |t| above 3 in the screen all held up.
+
+**Goalkeeper check.** "All positions natural" cost 1.10 points per game in the screen. Making every starter natural
+in the 14 outfield positions but leaving the goalkeeper rating as stored has **no effect at all** (+0.01 points
+per game, 0.00 xGD, 300 pairs). The whole loss came from making outfield players natural goalkeepers: the engine
+or the assistant uses that rating, with bad results. Being natural in more outfield positions neither helps nor
+hurts in a single match.
+
 ## What it means
 
-**Large and certain (|t| ≥ 5):**
+**Large and certain:**
 
 1. **Match sharpness and condition matter enormously.**
    - Sharpness: dropping the squad to 50% costs a full point per game (−1.03, t −10.6); 75% costs 0.37.
-   - Condition: playing at 80% costs 0.80 points; 90% costs 0.28.
-   - Topping both up to 100% gains about 0.16–0.18 over the squad's normal values.
+   - Condition: playing at 80% costs 0.80 points; 90% costs 0.28. Full condition gains about 0.13 over the
+     squad's normal values (confirmed); full sharpness about 0.10 (likely).
    - In practice: rotation and fitness management are worth more than any tactical tweak.
 2. **Playing players out of position hurts a lot.** Capping the starters' position ratings at 15 costs 0.26 points
    per game. At 10 it costs 0.85.
 3. **"In-match AI" costs 0.56 points per game against the assistant (t −5.8).** This mode hands in-match decisions
-   to the game's AI manager logic for the team's side. The assistant's substitutions and changes are clearly better for
-   this squad.
-
-**Clear (|t| 3–5):**
-
-4. **Team cohesion:** the match's highest against its lowest possible value is worth +0.32 points per game (t 3.2),
-   +0.35 xGD (t 4.2).
-5. **Mentality one step more attacking costs 0.26 xGD (t −3.1)** but no points. One or two steps more defensive
-   changes nothing clear.
-6. **Pressing Trap "Show outside"** costs 0.28 xGD (t −3.3).
-
-**Probably real but unconfirmed (|t| 2–3):**
-
-7. **Pressure handling (personality) 18:** +0.22 ppg and +0.26 xGD.
-8. **A few team instructions** may help by about 0.2 xGD: Tempo higher, Supporting Runs standard, Attacking
-   Transition standard, a set Progress Through side. Each needs the confirmation rerun.
+   to the game's AI manager logic for the team's side. Whether our "AI" setting matches what the game does for AI
+   clubs is not yet checked, so treat this as provisional.
+4. **The pressing trap: keep it on standard.** Showing the opponent inside or outside costs 0.19-0.23 points and
+   0.30-0.40 xG difference per game for this team (confirmed on 1,200 pairs).
+5. **Team cohesion:** the match's highest against its lowest possible value is worth about +0.2 to +0.3 points per
+   game (confirmed).
+6. **Mentality one step more attacking costs about 0.12 points and 0.22 xGD per game** (confirmed). One or two
+   steps more defensive changes nothing clear.
 
 **Not read by the match, or no effect:**
 
@@ -184,21 +212,17 @@ Each row changes one instruction from the team's setting to the option named. So
 - **In-match "assistant":** exactly zero, as expected: the saved matches already use the assistant.
 - **Opposition instructions "none":** exactly zero. Either the saved matches carry no opposition instructions for
   the team, or the assistant sets its own during the match. Not checked.
-- **Current ability ±20, reputation ×0.5/×1.5, height ±10 cm, club cohesion, ambition, loyalty, sportsmanship,
-  adaptability:** no clear effect. The engine plays on attributes, not on the CA number.
+- **Current ability ±20, reputation ×0.5/×1.5, height ±10 cm, club cohesion and every personality field**
+  (including Pressure, Temperament and Professionalism after the confirmation): no clear effect in a single match.
+  The engine plays on attributes, not on the CA number.
 - **Morale:** small (5 → −0.17 ppg, t −1.7).
-- **Most team-instruction options:** under 0.2 xGD and not clear. The team's settings are not obviously improvable
-  one instruction at a time.
-
-**Unexplained: "positions all natural" (−1.10 ppg, t −12).** Making every starter natural in all 15 positions hurts
-more than capping them at 10. The likely cause is that this also makes every outfield player a natural goalkeeper,
-and the engine or the assistant uses that rating (for example when choosing who to move or substitute). This is not
-checked. Until it is, ignore this row; it is not evidence that versatility hurts.
+- **Most team-instruction options:** no clear effect one at a time; the few that looked promising in the screen did
+  not hold up.
 
 ## Next
 
-- Confirm the 10–15 largest unconfirmed effects with 3× the seeds (about 2 hours).
-- Check "positions all natural" with goalkeeper ratings left unchanged.
+- Check that the "In-match AI" setting matches what the game does for AI-managed clubs.
+- Check the zero effect of turning opposition instructions off.
 
 ## Reproduce
 
@@ -207,4 +231,8 @@ FM27_SAVED_MATCHES=<27.0 saved matches> .venv/bin/python port/validation/study5_
   port/mac_host/runs/study5 port/mac_host/runs/attr_real_2701
 FM27_STUDY_HOST=<frozen host> .venv/bin/python port/validation/overnight.py run port/mac_host/runs/study5 6
 .venv/bin/python port/validation/study5_everything.py analyse port/mac_host/runs/study5
+# confirmation and goalkeeper check
+.venv/bin/python port/validation/study5_confirm.py build port/mac_host/runs/study5c port/mac_host/runs/study5
+FM27_STUDY_HOST=<frozen host> .venv/bin/python port/validation/overnight.py run port/mac_host/runs/study5c 6
+.venv/bin/python port/validation/study5_confirm.py analyse port/mac_host/runs/study5c port/mac_host/runs/study5
 ```

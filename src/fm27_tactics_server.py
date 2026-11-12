@@ -344,6 +344,12 @@ def encode_scenario(data,absolute=False):
         # Manual-input flag (manager+0x30d0 bit 0): the fixture path always sets it. A saved match keeps its own
         # value: setting it changes an unedited saved match completely (Hull 1-0 13 shots -> 3-0 29 shots).
         if not B.natural:records.append((10,side,0,0,1))
+        elif (lambda f:f!=IN_MATCH_WORDS['assistant']and any(t.get(k)!=base.get(k)for k in (('phases','instructions','mentality','lineup')if desktop_saved_matches.management(f)=='ai'else('lineup',))))(B.snapshot['teams'][side].get('manager_input_flags')):
+            # During preparation the game picks the tactic of an AI-managed saved side (0x24000) again, and the starting
+            # XI of a side under the assistant variant 0x2430a (its tactic edits are kept). To play the edit, the side is
+            # under manual control through preparation, then handed to the assistant or the AI (kind 62).
+            if t['in_match']=='saved':raise ValueError(f"In this saved match, the game picks {t['name']}'s tactic or starting XI again at kick-off. Set its in-match management to Assistant or AI to play your changes.")
+            records.append((10,side,0,0,1))
         if 'roster_size'in t:records.append((17,side,0,0,t['roster_size']))
         if t['in_match']in IN_MATCH_WORDS:records.append((62,side,0,0,IN_MATCH_WORDS[t['in_match']]))
         records.extend(setpieces.encode(t['setpieces'],side,B.setpieces[side]))

@@ -29,3 +29,6 @@ engine_compat_profile.json
 /port/mac_host/*.dSYM
 /port/mac_host/runs/
 /runs/
+
+# macOS folder metadata (can reveal folder names)
+.DS_Store

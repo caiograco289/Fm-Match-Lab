@@ -12,7 +12,7 @@ areas (training and match-exposure bytes) at LOW for every player of the team. T
   FM27_STUDY_HOST=... python port/validation/overnight.py run OUT 6
   python port/validation/study6_tactics.py analyse OUT
 """
-import base64, copy, glob, json, math, sys
+import base64, copy, glob, json, math, os, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -21,6 +21,26 @@ SEEDS = 20
 LOW = 20
 AREAS = [o + k for o in range(1, 25, 3) for k in (0, 1, 2)]
 TEAM_KEYS = ('phases', 'instructions', 'mentality', 'native_extra_team_bits', 'native_source_plan', 'tactic_name')
+
+
+# Rating attribute per tactic position (as the app's "Pick by position", src/tactics_ui/app.js POS_ATTR)
+POS_ATTR = {'GK': 0, 'DL': 2, 'DR': 4, 'DCR': 3, 'DC': 3, 'DCL': 3, 'WBL': 13, 'WBR': 14, 'DMC': 5, 'DMR': 5, 'DML': 5,
+            'ML': 6, 'MCL': 7, 'MC': 7, 'MCR': 7, 'MR': 8, 'AML': 9, 'AMC': 10, 'AMCR': 10, 'AMCL': 10, 'AMR': 11,
+            'ST': 12, 'STR': 12, 'STL': 12}
+PICK_XI = os.environ.get('FM27_STUDY6_PICK_XI') == '1'   # each tactic picks its own starters (own familiarity only)
+
+
+def pick_xi(team):
+    """The app's "Pick by position": slots in order (goalkeeper first), each taking the unused matchday-squad
+    player with the highest rating for the slot's in-possession position; ties go to higher current ability."""
+    roster = team.get('roster_size', len(team['players'])); used = set()
+    slots = sorted(range(len(team['phases'][0])), key=lambda i: i != 0)
+    for i in slots:
+        attr = POS_ATTR[team['phases'][0][i]['position']]
+        best = max((j for j in range(roster) if j not in used),
+                   key=lambda j: (team['players'][j]['attributes'][attr], team['players'][j]['native_profile'].get('current_ability', 0), -j))
+        team['lineup'][i] = best; used.add(best)
+    team['in_match'] = 'assistant'   # some saved matches let the game re-pick the XI during preparation otherwise
 
 
 def low_fields(side):
@@ -60,18 +80,21 @@ def build(out, study1, presets, fmf_dir):
         match = j[1].split('|')[0]; side = meta['sides'][match]
         base = app.validate_scenario(app.SAVED_MATCHES.open(j[2]).default)
         if plans is None: plans = tactics(app, presets, fmf_dir, base, side)
-        for name, fields in [('saved tactic', None)] + list(plans.items()):
+        variants = [('saved tactic', None, False)] + [(n, f, PICK_XI) for n, f in plans.items()]
+        if PICK_XI: variants.insert(1, ('saved tactic, picked XI', None, True))
+        for name, fields, pick in variants:
             s = copy.deepcopy(base)
             try:
                 if fields: s['teams'][side].update(copy.deepcopy(fields))
+                if pick: pick_xi(s['teams'][side])
                 s = app.validate_scenario(s); blob = app.encode_scenario(s)
             except Exception as e:
                 skipped.setdefault(name, []).append(f'{match}: {str(e)[:100]}'); continue
             f = bins / f'{len(jobs)}.bin'; f.write_bytes(blob)
             jobs.append(['T', f'{match}|{name}|own', j[2], str(f), {}, SEEDS])
-            jobs.append(['T', f'{match}|{name}|low', j[2], str(f), {'FM27_MAC_EXEC_FIELDS': low_fields(side)}, SEEDS])
+            if not PICK_XI: jobs.append(['T', f'{match}|{name}|low', j[2], str(f), {'FM27_MAC_EXEC_FIELDS': low_fields(side)}, SEEDS])
     (out / 'jobs.json').write_text(json.dumps(jobs))
-    (out / 'meta.json').write_text(json.dumps(meta | {'skipped': skipped, 'tactics': sorted(plans), 'low': LOW, 'seeds': SEEDS}))
+    (out / 'meta.json').write_text(json.dumps(meta | {'skipped': skipped, 'tactics': sorted(plans), 'low': LOW, 'seeds': SEEDS, 'pick_xi': PICK_XI}))
     print(len(jobs), 'jobs,', sum(j[5] for j in jobs), 'matches,', len(plans), 'tactics; skipped:', {k: len(v) for k, v in skipped.items()})
 
 

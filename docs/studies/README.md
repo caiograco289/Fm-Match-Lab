@@ -1,6 +1,6 @@
 # Engine studies: plan and index
 
-Six questions about how FM27's match engine responds to what you control. Each study gets its own page here when it
+Questions about how FM27's match engine responds to what you control. Each study gets its own page here when it
 finishes. Pages for studies still running say so.
 
 | # | Question | Status | Page |
@@ -9,8 +9,10 @@ finishes. Pages for studies still running say so.
 | 2 | Are attribute values in real matches the same as in "everyone 12" tests? | **done**: levelling squads changes little; the test match shrinks most effects | [02-real-vs-levelled.md](02-real-vs-levelled.md) |
 | 3 | What does tactical familiarity do? | **done**: familiarity = trained and played area values; training counts double | [03-tactical-familiarity.md](03-tactical-familiarity.md) |
 | 4 | Do attributes matter more at high familiarity than at low? | **done**: no; attributes and familiarity add up | [04-attributes-x-familiarity.md](04-attributes-x-familiarity.md) |
-| 5 | Of everything else we can change, what matters and by how much? | **screen done**: sharpness, condition, positions, cohesion lead; confirmations to run | [05-everything-else.md](05-everything-else.md) |
+| 5 | Of everything else we can change, what matters and by how much? | **done**: sharpness, condition, positions and cohesion lead; pressing trap and mentality confirmed | [05-everything-else.md](05-everything-else.md) |
 | 6 | Do tactics differ, and does the best tactic depend on familiarity? | **done**: the team's own tactic (STORMBRINGER) is best; defensive presets far worse | [06-tactics-x-familiarity.md](06-tactics-x-familiarity.md) |
+| 7 | How do tactics do against each other? | **done**: user tactics take the top six places; Gegenpress the best preset; Park the Bus last | [07-tactic-league.md](07-tactic-league.md) |
+| 8 | What do FM27's in-match Tactical Tweaks do, and does it depend on the opponent's tactic? | done | 08-tactical-tweaks.md |
 
 ## Common design
 
@@ -31,7 +33,7 @@ Unless a page says otherwise, every study uses the same set-up.
 - **Many comparisons:** a study with 100 conditions will show a few |t| ≈ 2 results by chance. The pages call out
   only effects that are large, consistent in direction (both +5 and −5) or confirmed with more seeds.
 - **Limits:** all bases are one club, mostly Premier League matches, so results describe a lower-table side
-  against stronger teams. FM27 must be closed while studies run.
+  against stronger teams.
 
 Throughput is about 5,400 matches per hour on this machine (6 workers). Running costs are noted per study.
 

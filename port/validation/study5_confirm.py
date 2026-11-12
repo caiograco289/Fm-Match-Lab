@@ -53,6 +53,7 @@ def own(r, s):
 
 
 def stats(v):
+    if not v: return float('nan'), float('nan')
     n = len(v); m = sum(v) / n; sd = math.sqrt(sum((x - m) ** 2 for x in v) / (n - 1)) if n > 1 else 0
     return m, (m / (sd / math.sqrt(n)) if sd else 0.0)
 
@@ -89,6 +90,7 @@ def analyse(out, study5):
     for name, parts in result.items():
         print(name)
         for part, v in parts.items():
+            if not v['n']: continue
             print(f"   {part:24} n={v['n']:4}  ppg {v['pts'][0]:+.3f} ({v['pts'][1]:+.1f})  xGD {v['xGD'][0]:+.3f} ({v['xGD'][1]:+.1f})")
     json.dump(result, open(out / 'effects.json', 'w'), indent=1)
 

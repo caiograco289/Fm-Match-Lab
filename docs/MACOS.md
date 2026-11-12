@@ -13,11 +13,24 @@ install and drives the original match engine headlessly. Technical details, evid
   |---|---|---|
   | 27.0.0+2493426 | `0981AB31-AC3B-3D93-944F-47FE4B59CD9E` | 0x1b000000 |
   | 27.0.1+2494769 | `94CDDC80-8474-327A-85E0-E4FF95DC6893` | 0x1b000100 |
+  | 27.0.1+2503222 (12 November hotfix) | `DD0EE157-4C9C-31A7-81DD-0D1122E62FC7` | 0x1b000100 |
+
+  The hotfix moved two data constants and nothing the match engine uses; 36 of 36 matches played on the previous
+  build replay identically on it. On a build not in this table, `scripts/setup.py` stops with "Unsupported FM27
+  build" and the app runs nothing. If FM27 updates after the set-up, the app says so and asks you to run the set-up
+  again.
 - Steam running and logged in.
 - Python 3.12 and the Xcode command line tools (`clang++`, `codesign`).
 - At least one match saved by FM27 (instant result is fine): the set-up uses your newest as the sample match.
   Everything the set-up derives from your game files goes to the git-ignored `private/` folder.
-- Don't run batches while FM27 itself is open.
+- Set-up needs FM27 closed. Batches can run while the game is open (results are identical); both run slower.
+- FM27 keeps only your last 10 saved matches. The app, `study.py` and `optimise.py` copy each new one into a backup
+  (`~/fm27-port-work/saved_matches`) when they start and read from there, so nothing is lost as long as one of them
+  runs before 10 newer matches are saved; `scripts/backup_matches.py` does the same by hand.
+- FM27 also leaves the inputs of some matches between other clubs in its `Temporary` folder (`*.apm`); the backup
+  keeps them too. `scripts/import_other_matches.py` turns them into matches the app and the scripts open
+  (`Other_clubs` in the backup). Played on their own seed they reproduce the scores in the save (25 of 28 checked), so
+  the game ran them on the same engine with the same input. `scripts/optimise.py --save` uses them as opponents.
 
 ## Build and run
 

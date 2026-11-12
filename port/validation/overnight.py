@@ -158,38 +158,48 @@ def run(out, parallel):
         for line in open(results):
             r = json.loads(line); done.add((r['exp'], r['cond'], r['seed']))
     out = out.resolve(); work = out / 'work'; shutil.rmtree(work, ignore_errors=True); work.mkdir()
-    chunks = []
-    for exp, cond, fixture, b, env, n in jobs:
-        todo = [s for s in range(1 if exp != 'CT' else 31, (1 if exp != 'CT' else 31) + n) if (exp, cond, s) not in done]
-        for i in range(0, len(todo), 30): chunks.append((exp, cond, fixture, b, env, todo[i:i + 30]))
-    print(f'{len(chunks)} chunks, {sum(len(c[5]) for c in chunks)} matches to run', flush=True)
+    # every match to play, packed into chunks of up to 30 that share the same environment (one host start each);
+    # a worker plays any mix of saved matches and scenarios, with the same results as one job at a time
+    tasks = {}
+    for job in jobs:   # [exp, cond, fixture, bin, env, seeds(, first seed)]
+        exp, cond, fixture, b, env, n = job[:6]
+        first = job[6] if len(job) > 6 else 1 if exp != 'CT' else 31
+        for s in range(first, first + n):
+            if (exp, cond, s) not in done: tasks.setdefault(json.dumps(env, sort_keys=True), []).append((exp, cond, fixture, b, s))
+    chunks = [(env, group[i:i + 30]) for env, group in tasks.items() for i in range(0, len(group), 30)]
+    print(f'{len(chunks)} chunks, {sum(len(c[1]) for c in chunks)} matches to run', flush=True)
     log = open(out / 'run.log', 'a')
 
     def one(index_chunk):
-        index, (exp, cond, fixture, b, env, seeds) = index_chunk
-        d = work / str(index); d.mkdir()
-        lines = ['FM27DW1']
-        b = str(Path(b).resolve()) if b else ''; fixture = str(Path(fixture).resolve())
-        for s in seeds: lines += [fixture, b, str(d / f'{s}.jsonl'), str(s), '-']
-        (d / 'manifest').write_text('\n'.join(lines) + '\n')
+        index, (env, items) = index_chunk
+        env = json.loads(env)
         e = dict(os.environ); e.pop('FM27_MAC_EXEC_FIELDS', None)
         if isinstance(env, dict): e.update(env)   # e.g. {'FM27_MAC_ATTR': ...}
         elif env: e['FM27_MAC_EXEC_FIELDS'] = env
-        code = subprocess.run([str(HOST), '--worker-manifest', str(d / 'manifest'), '--output', str(d / 'startup.jsonl'),
-                               '--cancel-event', str(d / 'cancel')], env=e, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode
-        rows = []
-        for s in seeds:
-            p = d / f'{s}.jsonl'
-            r = summarise(p) if p.exists() else None
-            if r: rows.append(dict(exp=exp, cond=cond, seed=s, **r))
-        return index, code, len(seeds), rows, d
+        d = work / str(index); d.mkdir(); rows, code, start, attempt = [], 0, 0, 0
+        while start < len(items):   # a match the host rejects stops the host: skip it and go on with the rest
+            part = items[start:]; w = d / str(attempt); w.mkdir(); attempt += 1
+            lines = ['FM27DW1']
+            for k, (exp, cond, fixture, b, s) in enumerate(part):
+                lines += [str(Path(fixture).resolve()), str(Path(b).resolve()) if b else '', str(w / f'{k}.jsonl'), str(s), '-']
+            (w / 'manifest').write_text('\n'.join(lines) + '\n')
+            c = subprocess.run([str(HOST), '--worker-manifest', str(w / 'manifest'), '--output', str(w / 'startup.jsonl'),
+                                '--cancel-event', str(w / 'cancel')], env=e, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode
+            got = 0
+            for k, (exp, cond, fixture, b, s) in enumerate(part):
+                r = summarise(w / f'{k}.jsonl') if (w / f'{k}.jsonl').exists() else None
+                if not r: break
+                rows.append(dict(exp=exp, cond=cond, seed=s, **r)); got += 1
+            if got == len(part): break
+            code = code or c or -1; start += got + 1   # skip the match that failed
+        return index, code, len(items), rows, d
 
     began = time.time(); total = 0
     with ThreadPoolExecutor(parallel) as pool, open(results, 'a') as sink:
         for index, code, n, rows, d in pool.map(one, enumerate(chunks)):
             for r in rows: sink.write(json.dumps(r) + '\n')
             sink.flush(); total += len(rows)
-            if code or len(rows) != n: log.write(f'chunk {index} {chunks[index][:2]} exit {code}: {len(rows)}/{n}\n'); log.flush()
+            if code or len(rows) != n: log.write(f'chunk {index} {chunks[index][1][0][:2]} exit {code}: {len(rows)}/{n}\n'); log.flush()
             shutil.rmtree(d, ignore_errors=True)
             if index % 20 == 0:
                 log.write(f'{time.strftime("%H:%M")} {total} matches, {total / max(1, time.time() - began) * 3600:.0f}/h\n'); log.flush()

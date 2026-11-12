@@ -18,7 +18,8 @@ import desktop_platform  # noqa: E402
 
 # x86_64 LC_UUID -> (FM27_MAC_BUILD, game version, engine version word written by the build's match constructor)
 BUILDS = {'0981AB31-AC3B-3D93-944F-47FE4B59CD9E': (2493426, '27.0.0+2493426', 0x1b000000),
-          '94CDDC80-8474-327A-85E0-E4FF95DC6893': (2494769, '27.0.1+2494769', 0x1b000100)}
+          '94CDDC80-8474-327A-85E0-E4FF95DC6893': (2494769, '27.0.1+2494769', 0x1b000100),
+          'DD0EE157-4C9C-31A7-81DD-0D1122E62FC7': (2503222, '27.0.1+2503222', 0x1b000100)}
 
 
 

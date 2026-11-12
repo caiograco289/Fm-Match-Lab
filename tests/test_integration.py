@@ -25,7 +25,7 @@ class SavedMatchReplay(unittest.TestCase):
 
     def test_replay_is_deterministic(self):
         import desktop_saved_matches as sm
-        files = sorted(glob.glob(str(sm.source_folder() / '*/*_VER_fm.pkm')), key=os.path.getmtime)
+        files = sorted((f for f in glob.glob(str(sm.source_folder() / '*/*_VER_fm.pkm')) if '/Other_clubs/' not in f), key=os.path.getmtime)   # your own matches
         if not files: self.skipTest('no saved matches')
         pkm = files[-1]; seed = int(sm.NAME.match(Path(pkm).name)['seed'])
         with tempfile.TemporaryDirectory() as d:
