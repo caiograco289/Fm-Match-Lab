@@ -34,6 +34,9 @@ install and drives the original match engine headlessly. Technical details, evid
 
 ## Build and run
 
+The one-line [easy install](../README.md#easy-install) (`scripts/install.sh`) runs these steps for you, with uv's
+Python 3.12, in `~/Fm-Match-Lab`. By hand:
+
 ```sh
 python3.12 -m venv .venv
 .venv/bin/pip install UnityPy                 # set-up only: reads the game's tactic data
@@ -100,7 +103,7 @@ new scenarios default to "assistant"; "fixed" (no substitutions, no changes) is 
 not been mapped yet, the app says the engine is unsupported and runs nothing; it never runs against the wrong
 addresses. Once a release of this repository supports the new build, update the repository and run
 `.venv/bin/python scripts/setup.py` again (FM27 closed): it rebuilds the host and regenerates the tactic catalogue
-and player-instruction policies from the updated game. Matches saved by the old version still open, but no longer
+and player-instruction policies from the updated game. With the easy install, running its line again does both. Matches saved by the old version still open, but no longer
 replay exactly on the new engine.
 
 **For maintainers.** Mapping a build uses a local work folder outside the repository for game-file copies,

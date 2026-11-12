@@ -14,7 +14,7 @@ finishes. Pages for studies still running say so.
 | 7 | How do tactics do against each other? | **done** (neutral ground: synthetic squads, other clubs' matches): every community tactic beats every preset; STORMBRINGER and ARGUS lead; Park the Bus last | [07-tactic-league.md](07-tactic-league.md) |
 | 7b | An 18-tactic league: does it reproduce, and do particular matchups matter? | **done**: Study 7 reproduces; newer ZaZ Aces stronger; overall strength predicts almost every head to head | [07b-tactic-league-18.md](07b-tactic-league-18.md) |
 | 8 | What do FM27's in-match Tactical Tweaks do, and does it depend on the opponent's tactic? | done | 08-tactical-tweaks.md |
-| 9 | Are attribute values tied to the tactic? Physical and passing attributes under five playing styles | running | 09-attributes-by-style.md |
+| 9 | Are attribute values tied to the tactic? Physical and passing attributes under five playing styles | done | 09-attributes-by-style.md |
 
 ## Common design
 

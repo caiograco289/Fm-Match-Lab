@@ -56,6 +56,18 @@ complexity.
 - **Tactic complexity showed no clear effect** when changed during the match. Probably the game applies it before
   kick-off; this is still open.
 
+## Attributes by playing style ([Study 9](studies/09-attributes-by-style.md))
+
+- **Physical attributes win under every style, possession styles included.** +5 in Pace, Acceleration, Stamina, Work
+  Rate and Aggression for the whole squad is worth +0.38 to +0.48 expected points per game (14 to 18 points a season)
+  under all five styles tested.
+- **Passing attributes help the direct styles, not the possession styles.** +5 in Passing, Technique, Vision,
+  Decisions, First Touch and Composure: +0.15 xPts per game with Direct Counter-Attack, +0.11 with Gegenpress, nothing
+  measurable with Tiki-Taka or Control Possession.
+- **Why:** possession styles already complete 90-92% of their passes, and better passers there keep the ball slightly
+  less (likely more ambitious passes). Direct Counter-Attack completes 82%, and better passing lifts completion,
+  possession and shots.
+
 ## Attributes and familiarity together ([Study 4](studies/04-attributes-x-familiarity.md))
 
 - **They add up; they don't interact.** Good players are worth the same with a familiar or an unfamiliar tactic.

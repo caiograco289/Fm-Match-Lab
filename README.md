@@ -7,6 +7,32 @@ the change makes.
 It loads the unchanged match engine from **your own Steam install** of FM27 and drives it headlessly. Nothing from the
 game is included in this repository.
 
+## Easy install
+
+Have FM27 installed through Steam, play at least one match in it (instant result is fine), quit FM27, then paste this
+line into Terminal (Applications > Utilities > Terminal) and press Return:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/caiograco289/Fm-Match-Lab/main/scripts/install.sh | bash
+```
+
+It:
+
+- checks that FM27 is installed and closed and that Steam is running (it opens Steam if needed);
+- installs Apple's command line developer tools if missing (click **Install** in the window that appears), and
+  Rosetta 2 on Apple Silicon Macs;
+- installs [uv](https://docs.astral.sh/uv/) and uses it to get Python 3.12;
+- downloads the app into `~/Fm-Match-Lab` and builds everything from source on your Mac with the set-up below;
+- puts **FM27 Match Lab** on your Desktop: double-click it to start the app in your browser, and close its window to
+  stop it.
+
+It takes 5 to 20 minutes the first time. You can [read the script](scripts/install.sh) before running it. If something
+goes wrong, it tells you what to copy and where to send it.
+
+**To update** (a new version of the app, or after Steam updates FM27): run the same line again.
+
+The manual steps are under [Set-up](#set-up) below.
+
 This project began as a macOS port of [FM Tactics Lab](https://github.com/lqf0624/fm-tactics-lab) by **lqf0624**
 (Windows, MIT licence). The browser UI, scenario model and much of the server come from that project. The macOS
 engine host, address mapping, saved-match replay, in-match management and the studies are new. Upstream is now a
@@ -100,6 +126,8 @@ matches) and the first tactic search; the full studies are in [docs/studies/](do
 - FM27 closed during set-up. Simulations can run while you play; both just run slower.
 
 ## Set-up
+
+The [easy install](#easy-install) does all of this for you. By hand:
 
 ```sh
 git clone https://github.com/caiograco289/Fm-Match-Lab.git && cd Fm-Match-Lab
