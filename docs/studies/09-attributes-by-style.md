@@ -77,6 +77,30 @@ Taken together, the two direct styles gain +0.22 xGD from passing and the two po
 0.19 (t about 3). The physical effect varies less between styles (+0.64 to +0.85); only Neutral is clearly below
 Gegenpress (−0.22, t −2.4).
 
+**The hypothesis in one number.** If passing attributes paid more in a possession system, the passing gain under
+Tiki-Taka minus the passing gain under Gegenpress would be clearly positive. It is −0.17 xGD per game (t −1.9): if
+anything the wrong sign, and certainly not the positive effect the hypothesis needs.
+
+## Stamina and intensity (Study 9b)
+
+A tester on FM Arena found that Stamina matters even more with intense tactics. Study 9b (12 November, 2,400
+matches) holds the shape fixed and changes only the intensity: the Gegenpress preset, which is already at the top
+of all three settings (pressing Much more often, tempo Much Higher, High press); the same shape with all three on
+Standard and Mid block; and all three at the bottom (Much less often, Much Lower, Low block). The whole squad gets
++5 Stamina; otherwise the design is the one above (400 pairs per intensity).
+
+| Intensity | Points per game, unchanged | Stamina +5: xPts | xG difference | xG for | xG against | Shots | Shots against |
+|---|---|---|---|---|---|---|---|
+| High (Gegenpress preset) | 1.48 | +0.13 (+3.5) | +0.24 (+3.8) | +0.12 | −0.11 | +0.5 | −0.2 |
+| Standard | 1.52 | +0.05 (+1.2) | +0.08 (+1.4) | +0.08 | −0.00 | +0.1 | −0.1 |
+| Low | 1.41 | +0.09 (+2.5) | +0.14 (+2.4) | +0.07 | −0.07 | +0.7 | −0.6 |
+
+- **Stamina pays at every intensity:** +0.09 xPts per game pooled over the three (t 4.2), about 3.5 points a season.
+- **It pays most at high intensity** (+0.13 xPts, about 5 points a season), but the differences between intensities
+  are not significant: high minus standard +0.09 xPts (t 1.6), high minus low +0.04 (t 0.7). The data lean the
+  tester's way without confirming it; it would take about four times as many matches to settle.
+- The unchanged Gegenpress matches reproduce Study 9's exactly (1.48 points per game, xG 1.50 for and 1.21 against).
+
 ## Why passing helps the direct styles and not the possession styles
 
 What +5 passing changes in each style's own play, per game (t in brackets):

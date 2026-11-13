@@ -15,6 +15,15 @@ finishes. Pages for studies still running say so.
 | 7b | An 18-tactic league: does it reproduce, and do particular matchups matter? | **done**: Study 7 reproduces; newer ZaZ Aces stronger; overall strength predicts almost every head to head | [07b-tactic-league-18.md](07b-tactic-league-18.md) |
 | 8 | What do FM27's in-match Tactical Tweaks do, and does it depend on the opponent's tactic? | done | 08-tactical-tweaks.md |
 | 9 | Are attribute values tied to the tactic? Physical and passing attributes under five playing styles | done | 09-attributes-by-style.md |
+| 10 | Are attributes worth more together? Four groups of four, alone and together | **done**: no; groups add up, carried by Jumping Reach, Anticipation, Dribbling and Balance | [10-attribute-combinations.md](10-attribute-combinations.md) |
+| 11 | Which hidden and personality attributes matter, and does Important Matches count in big matches? | **done**: Pressure (low) is the one clear effect; Consistency barely matters and is often not read; Dirtiness and Temperament drive cards | [11-hidden-attributes.md](11-hidden-attributes.md) |
+| 12 | Are there thresholds? 13 attributes from 1 to 20 | **done**: mostly straight lines; Work Rate has a floor, Jumping Reach pays above 9-12, Pace and Acceleration diminish above 12; Strength works through goals, not xG | [12-thresholds.md](12-thresholds.md) |
+| 13 | What is an attribute worth in each position, and is one player one-eleventh of the team? | **done**: no clear position-specific values; Jumping Reach pays everywhere; the first few jumpers are worth most | [13-value-by-position.md](13-value-by-position.md) |
+| 14 | Do attribute values and rankings hold for strong and weak sides, favourites and underdogs? | **done**: yes; same ranking at every strength (rank correlation 0.84), no attribute differs (p 0.81) | [14-team-strength.md](14-team-strength.md) |
+| 15 | How big is home advantage, does it depend on the ground, and does morale matter? | **done**: home 1.54 v away 1.18 points (+0.21 xG); differs by ground, not by level; morale no measurable effect | [15-home-advantage-morale.md](15-home-advantage-morale.md) |
+| 17 | Does an unfamiliar in- or out-of-possession position cost more? (and 17b: where the cost of playing out of position comes from) | **done**: neither measurably; other-position ratings and the goalkeeper's rating carry the cost | [17-positions-in-and-out-of-possession.md](17-positions-in-and-out-of-possession.md) |
+| 20 | Does Current Ability play a role in the match? | **done**: no; CA 40-200 with attributes fixed changes nothing measurable, alone or with Passing or Decisions | [20-current-ability.md](20-current-ability.md) |
+| 21 | What makes a goalkeeper good? Eighteen attributes alone, all together, and the position rating (21b) | **done**: no single attribute clear; all +5 together +4-5 points of save rate, +0.26 points per game; position rating 10 concedes +0.69 goals per game | [21-goalkeepers.md](21-goalkeepers.md) |
 
 ## Common design
 

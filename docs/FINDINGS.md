@@ -67,6 +67,85 @@ complexity.
 - **Why:** possession styles already complete 90-92% of their passes, and better passers there keep the ball slightly
   less (likely more ambitious passes). Direct Counter-Attack completes 82%, and better passing lifts completion,
   possession and shots.
+- **Stamina pays at every intensity** (+0.09 xPts per game, t 4.2), most with a high-intensity press (+0.13), but
+  the difference between intensities is not significant yet (Study 9b).
+
+## Attribute combinations ([Study 10](studies/10-attribute-combinations.md))
+
+- **Attributes add up; groups are not worth more than their parts.** Four groups of four (playmaking, ball carrying,
+  defending, aerial), +5 alone and together: no group shows a synergy (every |t| ≤ 1).
+- **Each group's value comes from one or two members:** Jumping Reach is the whole aerial group (+0.22 xPts per game
+  alone), Anticipation the whole defending group (+0.11), Dribbling, Balance and Concentration the ball-carrying group.
+  Passing, Vision, Technique and Decisions are worth nothing measurable, alone or together, under Gegenpress or
+  Tiki-Taka.
+
+## Hidden and personality attributes ([Study 11](studies/11-hidden-attributes.md))
+
+- **Not "Consistency only".** Pressure is the one clear effect: a squad with Pressure 1 loses 0.15 expected points
+  per game (t −5.0), about 6 points a season. Consistency, Important Matches, Versatility, Injury Proneness, Loyalty
+  and Adaptability show nothing established.
+- **Important Matches is not worth more on European nights** than in the league.
+- **Dirtiness and Temperament drive cards, not results:** Dirtiness 20 adds a card per game, Temperament 1 half a card.
+- **Consistency is read only in some fixtures** (in one league template only for the away side), which points to a
+  per-fixture gate in the match, possibly the occasion's importance.
+
+## Thresholds: attributes from 1 to 20 ([Study 12](studies/12-thresholds.md))
+
+- **Most attributes pay a straight line from 1 to 20, with no floor.** Pace and Acceleration are worth about 1.2
+  expected points per game from 1 to 20, more per point below 12 than above.
+- **Work Rate has a floor:** 1 costs half a point per game, 3-6 a little, 9-20 nothing.
+- **Jumping Reach pays at the top:** flat to 9, then the steepest gain of any attribute from 12 to 18.
+- **Strength works through goals, not chances:** from 1 to 20 it adds 0.5 goals per game above xG (t 7.3), so
+  xG-based tables undervalue it. On points it "hurts a lot below 6", as the FM Arena guide says.
+- **Passing and Decisions are close to nothing at every level,** even at 1.
+
+## Attribute value by position ([Study 13](studies/13-value-by-position.md))
+
+- **No attribute has a clearly position-specific value** (eight attributes × five position groups, p 0.12 overall).
+  Two players +5 is worth about 0.03-0.06 xPts per game whichever pair it is; full-backs and wide attackers gain a
+  little more, defensive midfielders least (not established).
+- **Jumping Reach pays in every position,** mostly through chances created.
+- **Not one-eleventh each:** Jumping Reach +5 for three players already gives two-thirds of the whole team's gain.
+
+## Team strength ([Study 14](studies/14-team-strength.md))
+
+- **Attribute rankings hold at every strength:** top v top, middle v middle, bottom v bottom, favourite and underdog
+  give the same order (Acceleration and Jumping Reach first everywhere; rank correlation 0.84). No attribute's value
+  depends on the strength of either side or on the gap (p 0.81 overall).
+- **A lead:** an underdog gains a little less from better players (+0.07 xPts per game for the average +5, against
+  +0.11-0.17), and only at the back. Not established.
+
+## Home advantage and morale ([Study 15](studies/15-home-advantage-morale.md))
+
+- **Home advantage is about real football's size:** with identical sides, the home team takes 1.54 points per game
+  and the away team 1.18 (+0.21 xG, +0.28 goals, +1.3 shots; same possession, same cards).
+- **It differs by ground** (from +0.57 xG to none), but not by the level of the club.
+- **Morale at kick-off makes no measurable difference** between 5 and 20.
+
+## Positions in and out of possession ([Study 17](studies/17-positions-in-and-out-of-possession.md))
+
+- **An unfamiliar in-possession or out-of-possession position costs nothing measurable** for the three or four
+  players whose positions differ between phases, and neither costs more than the other.
+- **The cost of playing out of position is mostly elsewhere** (Study 17b): own positions at 10 for all outfield
+  starters −0.10 xPts per game; every position rating at 10 −0.30 (t −7.0), with less possession.
+- **A goalkeeper's position rating is shot-stopping:** at 10 he makes 0.7 fewer saves and concedes 0.7 more goals
+  per game at the same xG (about 20 points a season). This refines Study 5's "positions at 10 cost 0.85 points".
+
+## Current Ability ([Study 20](studies/20-current-ability.md))
+
+- **The Current Ability field does nothing measurable in the match.** With every attribute fixed, a squad at CA 40
+  does as well as one at CA 200 (all |t| ≤ 1.5), and Passing or Decisions +5 is worth the same at CA 60 as at CA 180.
+- CA is read during the match (lowering it below the squad's own range changes how every match unfolds), but not in a
+  way that changes chances or results. Better players matter through their attributes, not their CA.
+
+## Goalkeepers ([Study 21](studies/21-goalkeepers.md))
+
+- **No single goalkeeper attribute +5 has a clear effect** (Positioning and Concentration lead, unconfirmed). One on
+  Ones, Handling, Tendency to Punch and Jumping Reach are rarely even read.
+- **Together they matter:** all goalkeeping attributes +5 raise the save rate from 75% to 80%, 0.18 fewer goals
+  against and +0.26 points per game, at the same xG.
+- **The position rating matters more:** a keeper at 10 in goal saves 60% instead of 75% (+0.69 goals against, −0.53
+  points per game). Expected-points tables miss keepers, because shot-stopping changes goals, not xG.
 
 ## Attributes and familiarity together ([Study 4](studies/04-attributes-x-familiarity.md))
 

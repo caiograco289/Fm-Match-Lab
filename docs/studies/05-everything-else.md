@@ -195,7 +195,9 @@ hurts in a single match.
      squad's normal values (confirmed); full sharpness about 0.10 (likely).
    - In practice: rotation and fitness management are worth more than any tactical tweak.
 2. **Playing players out of position hurts a lot.** Capping the starters' position ratings at 15 costs 0.26 points
-   per game. At 10 it costs 0.85.
+   per game. At 10 it costs 0.85. [Study 17](17-positions-in-and-out-of-possession.md) (17b) splits this: most of the cost
+   comes from the goalkeeper's rating and from the outfield players' ratings for positions they don't play, not
+   from their own positions.
 3. **"In-match AI" costs 0.56 points per game against the assistant (t −5.8).** This mode hands in-match decisions
    to the game's AI manager logic for the team's side. Whether our "AI" setting matches what the game does for AI
    clubs is not yet checked, so treat this as provisional.
