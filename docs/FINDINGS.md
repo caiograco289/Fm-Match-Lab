@@ -107,6 +107,18 @@ complexity.
 - **Jumping Reach pays in every position,** mostly through chances created.
 - **Not one-eleventh each:** Jumping Reach +5 for three players already gives two-thirds of the whole team's gain.
 
+## Attribute value by position, random configurations ([Study 13b](studies/13b-value-by-position-random.md))
+
+- **Positions do differ** once all attributes are measured together (50,000 matches, every attribute of every starter
+  ±5 at random): Jumping Reach is worth most for centre-backs (+0.32 xPts a season per level for one player) and
+  strikers (+0.19), little for defensive midfielders (+0.06); Pace, Acceleration, Stamina and Anticipation pay in
+  every position.
+- **Forwards' speed and jumping create chances; defenders' prevent them.** Finishing and Strength for forwards add
+  goals, not xG.
+- **Goalkeepers: Agility and Reflexes,** each about 0.8-0.9 fewer goals a season per level, at the same xG against.
+- **Agrees with Study 13 (within its noise) and with a 200,000-match test on FM Arena** (correlation 0.80 over 240
+  cells); that test's lone striker is worth about twice each of our two.
+
 ## Team strength ([Study 14](studies/14-team-strength.md))
 
 - **Attribute rankings hold at every strength:** top v top, middle v middle, bottom v bottom, favourite and underdog
@@ -115,12 +127,23 @@ complexity.
 - **A lead:** an underdog gains a little less from better players (+0.07 xPts per game for the average +5, against
   +0.11-0.17), and only at the back. Not established.
 
+## Attributes across leagues ([Study 14b](studies/14b-attributes-across-leagues.md))
+
+- **Attribute values hold from the Premier League to the National League** for a mid-table side: Pace, Acceleration
+  and Jumping Reach are the top three in all five leagues, and no attribute differs between leagues (p 0.86).
+- **A lead:** Pace may be worth a little more lower down (trend t 1.7). Not established.
+
 ## Home advantage and morale ([Study 15](studies/15-home-advantage-morale.md))
 
 - **Home advantage is about real football's size:** with identical sides, the home team takes 1.54 points per game
   and the away team 1.18 (+0.21 xG, +0.28 goals, +1.3 shots; same possession, same cards).
 - **It differs by ground** (from +0.57 xG to none), but not by the level of the club.
 - **Morale at kick-off makes no measurable difference** between 5 and 20.
+
+- **Big stadiums give twice the home advantage** ([Study 15b](studies/15b-home-advantage-by-ground.md), 86 grounds):
+  +0.39 xG at 40,000 or more, +0.15-0.18 below, with no trend from 4,000 to 40,000. Pitch size makes no difference.
+  The same stadium differs from match to match, so the match (crowd, weather, competition) matters too; crowd,
+  stadium and club can't be separated yet.
 
 ## Positions in and out of possession ([Study 17](studies/17-positions-in-and-out-of-possession.md))
 
@@ -181,6 +204,17 @@ starting alike and equal familiarity.
   0.06 points per game of its Study 7 value, and every community tactic again ahead of every preset.
 - **Matchups matter little.** A tactic's overall strength predicts almost all its head-to-head results: in Study 7b only
   one of 306 pairings differs clearly from that prediction.
+
+## A real season with each preset ([Study 19](studies/19-a-season-per-tactic.md))
+
+Arsenal (the strongest Premier League side), Hull City (the weakest) and Altrincham (mid-table, National League) each
+play their real league season, against real squads and AI-picked, AI-managed opponents, 20 times with each preset.
+
+- **The same presets lead for all three:** Gegenpress, Control Possession and Fluid Counter-Attack (rank correlation
+  between clubs 0.95-0.96 in expected points). Arsenal with Gegenpress: 78 points a season.
+- **Park the Bus is last for all three,** 17 to 31 points a season behind the best; it doesn't rescue the underdog.
+- **Tactics matter most lower down:** 31 points a season between best and worst preset for Altrincham, 26 for Arsenal,
+  17 for Hull City.
 
 ## Everything else ([Study 5](studies/05-everything-else.md))
 

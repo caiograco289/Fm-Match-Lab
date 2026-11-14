@@ -84,6 +84,8 @@ mechanism (more chances, better chances, fewer chances conceded). `docs/studies/
 | `src/` | the app: server (`fm27_tactics_server.py`), UI (`tactics_ui/`), saved matches and their backup (`match_backup.py`), English labels |
 | `scripts/` | set-up, `study.py`, `optimise.py`, `squad_from_save.py` and `import_other_matches.py` (need fmsave), `backup_matches.py` |
 | `src/league.py`, `src/league_web.py`, `src/tactics_ui/league.js` | leagues of tactics: the shared engine (also `study.py league`), the app's League page |
+| `scripts/season.py`, `src/club_season.py` | a club's real league season from a save, once per tactic, against real squads and AI-picked, AI-managed opponents (Study 19) |
+| `port/validation/random_study.py` | attribute values by position from random configurations (every attribute of every starter ±5 in every match) |
 | `src/reference_squads.json`, `scripts/reference_squads.py` | synthetic reference squads and their generator (calibration stays in `private/reference/`) |
 | `port/mac_host/` | the engine host (C++), built by `scripts/build_native_mac.py` |
 | `port/map/` | address mapping and data readers (IL2CPP enums, effectiveness record) |

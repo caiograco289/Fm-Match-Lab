@@ -1,6 +1,8 @@
 # Study 13: what is an attribute worth in each position?
 
-**Status:** done (13 November, 15,680 matches). Three questions:
+**Status:** done (13 November, 15,680 matches). **Superseded in part by [Study 13b](13b-value-by-position-random.md),**
+which measures every attribute in every position far more precisely: positions do differ, and the "first players
+worth more" finding below is mostly the position of those first players (a centre-back and a striker). Three questions:
 - **Weights by position.** These are widely used for recruitment, but they come from regressions on season data,
   not from controlled tests. Which positions benefit most from each attribute?
 - **Jumping Reach** (from FM Arena): is high Jumping Reach valuable only for defenders, or for midfielders and

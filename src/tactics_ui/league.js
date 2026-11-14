@@ -93,7 +93,7 @@ function lgSectionView(){
  if (LG.tab === 'squads') return card('2. Squads', 'Keep the same squad for every team so that only the tactics differ.', `
    <p><label class="tiny"><input type="checkbox" id="lg-per-squad" ${s.perTeamSquad ? 'checked' : ''}> choose a squad per team (in the Teams & tactics table)</label></p>
    ${s.perTeamSquad ? '' : `<p>${lgSquadPicker(s.squad, 'all')}</p>`}
-   <ul class="tiny muted"><li><b>Synthetic</b> (recommended): invented players calibrated on FM27's database (${esc(o.reference.calibration.game_build)}, ${esc(o.reference.calibration.source)}), one squad per Premier League tier.</li>
+   <ul class="tiny muted"><li><b>Synthetic</b> (recommended): invented players calibrated on FM27's database (${esc(o.reference.calibration.game_build)}, ${esc(o.reference.calibration.source)}), one squad per tier: three for the Premier League, and the middle of the Championship, League One, League Two and National League.</li>
    <li><b>Real</b>: the players of one side of one of your saved or imported matches, or a club from your FM27 save. Built on this Mac; never leaves it.</li>
    <li><b>Levelled</b>: every match attribute at one value. ${esc(o.levelled_note)}</li></ul>`);
  if (LG.tab === 'format') return card('3. Familiarity & format', 'Everything the same for every team, so that only the tactics differ.', `

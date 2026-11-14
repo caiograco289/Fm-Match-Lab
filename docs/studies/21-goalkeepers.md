@@ -1,6 +1,8 @@
 # Study 21: what makes a goalkeeper good?
 
-**Status:** done (13 November, 7,600 matches in Study 21, 2,400 in the follow-up 21b). Goalkeepers are rarely tested
+**Status:** done (13 November, 7,600 matches in Study 21, 2,400 in the follow-up 21b). **[Study 13b](13b-value-by-position-random.md)
+resolves the single attributes:** Agility and Reflexes each save about 0.8-0.9 goals a season per level (t −19 to
+−23); Positioning and Concentration, the leads below, are close to zero. Goalkeepers are rarely tested
 on FM Arena, and players argue about which of their attributes matter: Reflexes, One on Ones, Handling? Which
 attributes of the starting keeper change results, and how?
 

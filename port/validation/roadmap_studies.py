@@ -4,6 +4,8 @@ Each entry returns {'title', 'seeds', 'groups': [...]}; a group names the tested
 team-instruction overrides, squad tiers, opponents, templates and its conditions [(name, edit(A, s, side))]. Attribute
 values are stored as in-game value x 5 (1-100); position ratings and personality fields as in-game values (1-20).
 """
+from pathlib import Path
+
 from neutral_study import ids, starters, position_group, rating_index
 
 TOP10 = ['Pace', 'Acceleration', 'Jumping Reach', 'Stamina', 'Anticipation', 'Dribbling', 'Concentration', 'Balance',
@@ -147,6 +149,16 @@ def s14():
         {'name': n, 'style': 'Gegenpress', 'tier': a, 'opp_tier': b, 'conds': conds} for n, a, b in pairs]}
 
 
+
+def s14b():
+    conds = [(f'{a}+5', add([a])) for a in TOP10 + ['Strength']]
+    tiers = [('Premier League', 'pl-middle'), ('Championship', 'championship'), ('League One', 'league-one'),
+             ('League Two', 'league-two'), ('National League', 'national-league')]
+    return {'title': 'Study 14b: attribute values across leagues', 'seeds': 20, 'pilot_seeds': 2, 'groups': [
+        {'name': n, 'style': 'Gegenpress', 'tier': t, 'opp_tier': t, 'conds': conds} for n, t in tiers],
+        'notes': 'A mid-table side of each league (synthetic squad calibrated on that league\'s middle eight clubs) '
+                 'against the same squad; the whole tested squad +5 in one attribute.'}
+
 def s15():
     return {'title': 'Study 15: home advantage and morale', 'seeds': 40, 'pilot_seeds': 4, 'groups': [
         {'name': 'Home advantage', 'style': 'Gegenpress', 'panel': ['Gegenpress'], 'venues': (0,), 'templates': STADIUMS,
@@ -155,6 +167,20 @@ def s15():
         'notes': 'Home advantage: identical squads and tactics (Gegenpress mirror) on twelve stadiums from the Premier '
                  'League to non-league, 100 seeds each; the home side is side 0. Morale: the tested side only (the '
                  'equal start is morale 15).'}
+
+
+def s15b():
+    import match_backup
+    terms = Path(__file__).resolve().parents[2] / 'private/personal_terms.txt'   # the user's own club's matches are left out
+    personal = [w.strip().lower().replace(' ', '_') for w in terms.read_text().splitlines() if w.strip()] if terms.is_file() else []
+    grounds = sorted(p.name for p in (match_backup.backup_folder() / 'Other_clubs').glob('*.pkm')
+                     if not p.name.startswith('Unknown_') and not any(w in p.name.lower() for w in personal))   # Unknown: no team names
+    return {'title': 'Study 15b: home advantage on every ground', 'seeds': 70 * len(grounds), 'pilot_seeds': len(grounds), 'groups': [
+        {'name': 'Home advantage', 'style': 'Gegenpress', 'panel': ['Gegenpress'], 'venues': (0,), 'templates': grounds,
+         'seeds': 70 * len(grounds), 'conds': []}],
+        'notes': "Study 15's design (identical squads and tactics, the home side is side 0) on every imported match "
+                 'between other clubs with known names, 70 seeds each, to relate home advantage to the ground (capacity, pitch size) '
+                 'and the match.'}
 
 
 def natural_both(A, s, side):
@@ -245,4 +271,4 @@ def s21b():
                  'attributes: those plus the eight general ones of Study 21. Rating: his goalkeeper position rating (natural 20).'}
 
 
-STUDIES = {'09b': s09b, '10': s10, '11': s11, '12': s12, '13': s13, '14': s14, '15': s15, '17': s17, '17b': s17b, '20': s20, '21': s21, '21b': s21b}
+STUDIES = {'09b': s09b, '10': s10, '11': s11, '12': s12, '13': s13, '14': s14, '14b': s14b, '15': s15, '15b': s15b, '17': s17, '17b': s17b, '20': s20, '21': s21, '21b': s21b}

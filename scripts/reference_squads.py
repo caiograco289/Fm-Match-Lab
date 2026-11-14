@@ -6,12 +6,15 @@ real player than real players are to each other. Only the generated squads (src/
 script are in the repository; the save, the real players and the profiles stay in the git-ignored private/ folder.
 
   .venv/bin/python scripts/reference_squads.py profile SAVE.fm     # local: tiers and profiles -> private/reference/
+  .venv/bin/python scripts/reference_squads.py profile SAVE2.fm --lower-only   # add tiers 2-5 from another save
   .venv/bin/python scripts/reference_squads.py generate            # squads -> src/reference_squads.json (+ distance check)
   .venv/bin/python scripts/reference_squads.py check               # each squad's averages by position against its tier
 
 Calibration (profile, needs fmsave): a save made on day 1 of the Premier League season. The 20 Premier League clubs
 (found from the fixtures) are ranked by the average current ability of their best 18 players and split into tiers:
-top 6, middle 8, bottom 6. Lower English leagues are used too when the save has them loaded. Per tier and position
+top 6, middle 8, bottom 6. The Championship, League One, League Two and National League (the 24-club leagues below,
+ranked by strength) give one tier each, from their middle eight clubs, when the save has them loaded; --lower-only
+adds just those to an existing calibration (the current squads were calibrated this way on a second day-1 save). Per tier and position
 group (goalkeeper, centre-back, right and left full-back, defensive midfielder, central midfielder, attacking
 midfielder, right and left winger, striker): the mean and spread of every attribute (hidden ones included), position
 rating, foot, height, age, current ability and personality value, from each club's first-team players (best 25 by
@@ -21,7 +24,9 @@ so that, for example, a quick winger tends to have good acceleration too.
 Generation: each player is drawn from a multivariate normal with the tier's means and spreads and the group's
 correlations (shrunk towards independence), clipped to the range seen in real players and rounded; his main position
 rating is 20. Per position group, many candidate players are drawn and the set whose averages are closest to the
-tier's is kept, so each squad is representative of its tier and not of one lucky or unlucky draw.
+tier's is kept, so each squad is representative of its tier and not of one lucky or unlucky draw. Generating again
+keeps the squads already in src/reference_squads.json and draws only new tiers, each from its own random stream
+(--all regenerates every tier).
 """
 import argparse, collections, json, math, random, re, sys, warnings
 from pathlib import Path
@@ -35,7 +40,9 @@ GROUPS = {'GK': ('gk',), 'CB': ('dc',), 'RB': ('dr', 'wbr'), 'LB': ('dl', 'wbl')
           'AM': ('amc',), 'RW': ('amr', 'mr'), 'LW': ('aml', 'ml'), 'ST': ('stc',)}
 SHAPE = {'GK': 3, 'CB': 4, 'RB': 2, 'LB': 2, 'DM': 2, 'CM': 3, 'AM': 1, 'RW': 2, 'LW': 2, 'ST': 2}   # 23 players
 TIERS = {'pl-top': 'Premier League, top six', 'pl-middle': 'Premier League, middle eight', 'pl-bottom': 'Premier League, bottom six',
-         'championship': 'Championship', 'league-two': 'League Two'}
+         'championship': 'Championship, middle eight', 'league-one': 'League One, middle eight',
+         'league-two': 'League Two, middle eight', 'national-league': 'National League, middle eight'}
+LOWER = ('championship', 'league-one', 'league-two', 'national-league')   # English tiers 2-5, strongest first
 SEED = 27
 SHRINK = 0.3   # correlation shrinkage towards independence
 SETS = 400     # candidate sets per position group
@@ -64,26 +71,32 @@ def vector(row, keys):
 
 
 # ---- profile (local) ----
-def leagues(save):
-    """Tiers -> club names, from the save's fixtures (league = a competition with a full double round robin)."""
+def leagues(save, clubs_players):
+    """Tiers -> club names, from the save's fixtures for the current season (league = a full double round robin of 20
+    or 24 clubs), ranked by the average current ability of each club's best 18 players. The Premier League is the
+    20-club league with Arsenal; the 24-club leagues below it, strongest first, are tiers 2, 3, 4 and 5 (the regional
+    sixth tier comes after)."""
     import fmsave
     with fmsave.open(save) as s:
-        clubs = {c.name: c for c in s.clubs()}; fixtures = list(s.fixtures())
+        name = {t.team_id: c.name for c in s.clubs() for t in c.teams}
+        year = s.info.game_date.year
+        fixtures = [f for f in s.fixtures() if f.season_start_year == year]
     by = collections.defaultdict(set); games = collections.Counter()
     for f in fixtures:
-        by[f.competition_id] |= {f.home_club_name, f.away_club_name}; games[f.competition_id] += 1
-    english = []
+        by[f.competition_id] |= {name.get(f.home_team_id), name.get(f.away_team_id)}; games[f.competition_id] += 1
+    strength = lambda c: sum(r['current_ability'] or 0 for r in clubs_players.get(c, [])[:18]) / 18
+    found = []
     for cid, cs in by.items():
         n = len(cs)
-        if n >= 18 and games[cid] == n * (n - 1) and all(c in clubs and clubs[c].nation_id == clubs.get('Arsenal', clubs[next(iter(cs))]).nation_id for c in cs):
-            english.append((sum(clubs[c].reputation or 0 for c in cs) / n, sorted(cs)))
-    english.sort(reverse=True)
-    if not english or 'Arsenal' not in english[0][1]: raise SystemExit('No Premier League found in the save (a full 20-club double round robin)')
-    out = {'premier-league': english[0][1]}
-    rest = [cs for _, cs in english[1:] if len(cs) == 24]
-    if rest: out['championship'] = rest[0]
-    if len(rest) >= 3: out['league-two'] = rest[2]
-    return out
+        if None not in cs and n in (20, 24) and games[cid] == n * (n - 1):
+            found.append((sum(map(strength, cs)) / n, sorted(cs)))
+    found.sort(reverse=True)
+    pl = next((cs for _, cs in found if len(cs) == 20 and 'Arsenal' in cs), None)
+    if not pl: raise SystemExit('No Premier League found in the save (a full 20-club double round robin)')
+    out = {'premier-league': pl}
+    rest = [cs for _, cs in found if len(cs) == 24]
+    for tier, cs in zip(LOWER, rest): out[tier] = cs
+    return out, strength
 
 
 def cmd_profile(a):
@@ -92,12 +105,11 @@ def cmd_profile(a):
     warnings.simplefilter('ignore')
     save = Path(a.save).expanduser()
     with fmsave.open(save) as s: info = s.info
-    clubs = squad_from_save.read_clubs(save); found = leagues(save)
-    strength = {c: np.mean([r['current_ability'] or 0 for r in clubs.get(c, [])[:18]]) for c in found['premier-league']}
-    pl = sorted(found['premier-league'], key=lambda c: -strength[c])
-    tiers = {'pl-top': pl[:6], 'pl-middle': pl[6:14], 'pl-bottom': pl[14:]}
-    for t in ('championship', 'league-two'):
-        if t in found: tiers[t] = found[t]
+    clubs = squad_from_save.read_clubs(save); found, strength = leagues(save, clubs)
+    pl = sorted(found['premier-league'], key=strength, reverse=True)
+    tiers = {} if a.lower_only else {'pl-top': pl[:6], 'pl-middle': pl[6:14], 'pl-bottom': pl[14:]}
+    for t in LOWER:   # the middle eight of each league by strength (places 9-16 of 24)
+        if t in found: tiers[t] = sorted(found[t], key=strength, reverse=True)[8:16]
     sample_row = next(r for rows in clubs.values() for r in rows if r['personality'])
     keys = vector_keys(sample_row)
     usable = lambda r: r['personality'] and all(v is not None for v in vector(r, keys))
@@ -121,9 +133,21 @@ def cmd_profile(a):
         profiles[tier]['_clubs'] = len(names)
     real = {'keys': keys, 'raw': [vector(r, keys)[:52] for r in everyone], 'group': [group_of(r['positions']) for r in everyone]}
     PRIVATE.mkdir(parents=True, exist_ok=True)
-    (PRIVATE / 'profiles.json').write_text(json.dumps({'keys': keys, 'tiers': {t: profiles[t] for t in tiers}, 'correlations': corr,
-                                                      'game_build': info.build, 'database': info.db_version, 'game_date': str(info.game_date),
-                                                      'tier_sizes': {t: len(v) for t, v in tiers.items()}}))
+    new = {'keys': keys, 'tiers': {t: profiles[t] for t in tiers}, 'correlations': corr, 'game_build': info.build,
+           'database': info.db_version, 'game_date': str(info.game_date), 'tier_sizes': {t: len(v) for t, v in tiers.items()}}
+    if a.lower_only:
+        # add the lower tiers to the existing calibration; its Premier League tiers, correlations and build stay, and
+        # this save's real players join the distance check
+        old = json.loads((PRIVATE / 'profiles.json').read_text())
+        if old['keys'] != keys: raise SystemExit('The two saves give different player fields; profile them separately')
+        for t in tiers:
+            old['tiers'][t] = new['tiers'][t]; old['tier_sizes'][t] = new['tier_sizes'][t]
+        old.setdefault('lower_tiers', {}).update({t: {'game_build': info.build, 'database': info.db_version,
+                                                      'game_date': str(info.game_date)} for t in tiers})
+        new = old
+        prev = json.loads((PRIVATE / 'real_players.json').read_text())
+        real = {'keys': keys, 'raw': prev['raw'] + real['raw'], 'group': prev['group'] + real['group']}
+    (PRIVATE / 'profiles.json').write_text(json.dumps(new))
     (PRIVATE / 'real_players.json').write_text(json.dumps(real))
     print(f'{info.build} (database {info.db_version}), {info.game_date}: tiers ' +
           ', '.join(f'{t} {len(v)} clubs' for t, v in tiers.items()) + f'; {len(everyone)} players for correlations -> {PRIVATE}')
@@ -172,9 +196,17 @@ def cmd_generate(a):
                            'tier_sizes': prof['tier_sizes']},
            'generator': {'script': 'scripts/reference_squads.py', 'seed': a.seed, 'correlation_shrinkage': SHRINK},
            'distance_check': {}, 'tiers': {}}
+    kept = {}
+    if OUT.is_file() and not a.all:
+        kept = json.loads(OUT.read_text(encoding='utf8'))
+        out['distance_check'] = kept['distance_check']; out['tiers'] = kept['tiers']   # earlier tiers stay exactly as they are
     for tier, groups in prof['tiers'].items():
+        if tier in out['tiers']: continue
+        if kept:   # a tier added later: its own random stream, so adding tiers never changes the others
+            rng = np.random.default_rng([a.seed, sorted(TIERS).index(tier)]); names_rng = random.Random(f'{a.seed}-{tier}')
+            banned_names = {r['name'].lower() for t in out['tiers'].values() for r in t['players']}
         players, closest = [], math.inf
-        names = invented_names(names_rng, 23, banned)
+        names = invented_names(names_rng, 23, banned + (sorted(banned_names) if kept else []))
         for g, count in SHAPE.items():
             p = groups.get(g)
             if not p: raise SystemExit(f'{tier}: no {g} players in the calibration')
@@ -210,7 +242,13 @@ def cmd_generate(a):
         players.sort(key=lambda r: -r['current_ability'])
         out['tiers'][tier] = {'label': TIERS[tier], 'players': players}
         out['distance_check'][tier] = {'closest_to_any_real_player_relative_to_threshold': round(closest, 2)}
-    out['distance_check']['thresholds'] = {g: round(v, 2) for g, v in thresholds.items()}
+    if kept:
+        out['calibration']['source'] = ('Premier League clubs at the start of the season; lower English leagues (tiers 2-5, '
+                                        'middle eight each) from a second save at the start of the season')
+        out['calibration']['tier_sizes'] = prof['tier_sizes']
+        out['calibration']['lower_tiers'] = prof.get('lower_tiers', {})
+    out['distance_check'].setdefault('thresholds', {g: round(v, 2) for g, v in thresholds.items()})
+    if kept: out['distance_check']['thresholds_lower_tiers'] = {g: round(v, 2) for g, v in thresholds.items()}
     out['distance_check']['measure'] = ('Euclidean distance to the nearest real player in the database over all 52 attributes on the '
                                         '1-20 scale; it must exceed the position group\'s threshold, the 5th percentile of real players\' '
                                         'distance to their nearest other real player (ratio above 1 = farther than that)')
@@ -240,7 +278,9 @@ def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest='cmd', required=True)
     s = sub.add_parser('profile'); s.add_argument('save')
+    s.add_argument('--lower-only', action='store_true', help='add only the lower-league tiers to the existing calibration')
     s = sub.add_parser('generate'); s.add_argument('--seed', type=int, default=SEED)
+    s.add_argument('--all', action='store_true', help='regenerate every tier (changes the existing squads)')
     sub.add_parser('check')
     a = p.parse_args()
     {'profile': cmd_profile, 'generate': cmd_generate, 'check': cmd_check}[a.cmd](a)
