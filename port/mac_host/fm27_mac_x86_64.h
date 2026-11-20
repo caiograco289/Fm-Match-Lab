@@ -27,6 +27,15 @@
 #endif
 
 namespace fm27mac {
+// 27.1.0+2505117 inserted 0x598 bytes before a player's ability record and cells, and moved the later
+// lineup fields by 0x590 (an 8-byte field was removed after the zero gap); the manager's plan block
+// gained 8 bytes at 0x10a0, so every field from 0x10a0 on is +0x8.
+#if FM27_MAC_BUILD >= 2505117
+enum : uintptr_t { layout_player_shift = 0x598, layout_slot_shift = 0x590, layout_plan_shift = 0x8 };
+#else
+enum : uintptr_t { layout_player_shift = 0x0, layout_slot_shift = 0x0, layout_plan_shift = 0x0 };
+#endif
+
 static const uint8_t kUuid[16] = {FM27_MAC_UUID};
 constexpr uint32_t kFm27EngineVersion = FM27_MAC_ENGINE_VERSION;   // the word the build's own match constructor writes
 
@@ -120,13 +129,13 @@ enum : uintptr_t {
     p_age                  = 0x71,       // 0x79
     p_field19              = 0x68,       // 0x70
     p_attributes           = 0x478,      // 0x480   D(25/25, 28/28 players)
-    p_cell_ip              = 0xcd8,      // 0xce0   V(209/224)
-    p_cell_oop             = 0xdb0,      // 0xdb8   V(218/237)
-    p_slot                 = 0x1e27,
-    p_on_pitch             = 0x1e26,     // 1 while on the pitch (found by snapshot search, 27.0.1; runtime: 11 per side)
-    p_lineup_slot          = 0x1e51,     // lineup slot while on the pitch, 255 off
-    p_ca                   = 0xc90,      // Windows 0xc98 (u16; builder argument 10 in both decompiled callers)
-    p_exec_record          = 0xcb2,      // Windows 0xcba: 33-byte tactical-effectiveness record (builder 0x4dd5f80)
+    p_cell_ip              = 0xcd8 + layout_player_shift,   // 0xcd8   V(209/224)
+    p_cell_oop             = 0xdb0 + layout_player_shift,  // 0xdb0   V(218/237)
+    p_slot                 = 0x1e27 + layout_slot_shift,
+    p_on_pitch             = 0x1e26 + layout_slot_shift,     // 1 while on the pitch (found by snapshot search, 27.0.1; runtime: 11 per side)
+    p_lineup_slot          = 0x1e51 + layout_slot_shift,     // lineup slot while on the pitch, 255 off
+    p_ca                   = 0xc90 + layout_player_shift,      // Windows 0xc98 (u16; builder argument 10 in both decompiled callers)
+    p_exec_record          = 0xcb2 + layout_player_shift,      // Windows 0xcba: 33-byte tactical-effectiveness record (builder 0x4dd5f80)
     exec_record_size       = 33,
     exec_raw_ability       = 0x1c,       // record offsets, same on both (builder writes +0x1c..+0x20)
     exec_role_suitability  = 0x1d,
@@ -135,21 +144,21 @@ enum : uintptr_t {
     exec_next_match        = 0x20,     // 0x1e27  C(effective-OI caller pair)
     mg_routines            = 0x8e8,      // 0x8f0   C(2 caller pairs) D
     mg_selection           = 0x6e0,      // 0x6e8   selection object: lists, captain (+0x200), routines (+0x208)
-    mg_captain_slot        = 0x3521,     // 0x34e5  captain's XI slot after preparation (V 16/16; runtime-checked)
+    mg_captain_slot        = 0x3521 + layout_plan_shift,     // 0x34e5  captain's XI slot after preparation (V 16/16; runtime-checked)
     mg_captain_key         = 0x8e0,      // 0x8e8   D
-    mg_throw_flags         = 0x16d8,     // 0x16f0  D(block -0x18)
-    mg_oi                  = 0x16e0,     // 0x16f8  D C
-    mg_oi_pos_count        = 0x1730,     // 0x1748  D
-    mg_oi_pos_rows         = 0x1734,     // 0x174c  D
-    mg_cells_live          = 0x1808,     // 0x1818  D(cells at -0x10)
-    mg_creator_live        = 0x18e0,     // 0x18f8  D
-    mg_version             = 0x18f0,     // 0x1908  D(reads 0x1a080000)
-    mg_map_live            = 0x1fb4,     // 0x1fb4  D (plan+0x79c)
-    mg_creator_mid         = 0x20a0,     // 0x20a0  D
-    mg_cells_canon         = 0x2788,     // 0x2768  D(cells at +0x20)
-    mg_creator_input       = 0x2860,     // 0x2848  D
-    mg_map_canon           = 0x2f34,     // 0x2f04  P+D
-    mg_input_flags         = 0x30d0,     // 0x30a0  V(55/57) D(0x24000 vs 0x24001: bit 0 set by edit kind 10)
+    mg_throw_flags         = 0x16d8 + layout_plan_shift,     // 0x16f0  D(block -0x18)
+    mg_oi                  = 0x16e0 + layout_plan_shift,     // 0x16f8  D C
+    mg_oi_pos_count        = 0x1730 + layout_plan_shift,     // 0x1748  D
+    mg_oi_pos_rows         = 0x1734 + layout_plan_shift,     // 0x174c  D
+    mg_cells_live          = 0x1808 + layout_plan_shift,   // 0x1818  D(cells at -0x10)
+    mg_creator_live        = 0x18e0 + layout_plan_shift,     // 0x18f8  D
+    mg_version             = 0x18f0 + layout_plan_shift,     // 0x1908  D(reads 0x1a080000)
+    mg_map_live            = 0x1fb4 + layout_plan_shift,   // 0x1fb4  D (plan+0x79c)
+    mg_creator_mid         = 0x20a0 + layout_plan_shift,     // 0x20a0  D
+    mg_cells_canon         = 0x2788 + layout_plan_shift,   // 0x2768  D(cells at +0x20)
+    mg_creator_input       = 0x2860 + layout_plan_shift,     // 0x2848  D
+    mg_map_canon           = 0x2f34 + layout_plan_shift,     // 0x2f04  P+D
+    mg_input_flags         = 0x30d0 + layout_plan_shift,     // 0x30a0  V(55/57) D(0x24000 vs 0x24001: bit 0 set by edit kind 10)
     cell_ip_offset         = 0x118,      // same
     cell_oop_offset        = 0x438,      // same
     cell_stride            = 0x48,       // same

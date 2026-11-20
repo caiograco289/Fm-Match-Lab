@@ -338,6 +338,20 @@ static int native_match() {
     if (scenario_file.empty())   // input roster order for slot-addressed research writes
         for (unsigned side = 0; side < 2; side++) for (unsigned i = 0; i < 26; i++) original_roster[side][i] = roster_at(team_of(match, side), i);
     if (scenario_file.empty()) research_attributes_apply(match);
+    if (const char* raw = getenv("FM27_MAC_RAW_LAYOUT")) {   // research: raw match, team and manager objects for layout diffs
+        FILE* rf = fopen(raw, "wb");
+        if (rf) {
+            fwrite(match, 1, 0x200, rf);
+            for (unsigned s = 0; s < 2; s++) {
+                auto team = team_of(match, s);
+                auto manager = team ? manager_of(team) : nullptr;
+                fwrite(&team, 8, 1, rf); if (team) { std::vector<unsigned char> tb(0x800); if (safe_copy(team, tb.data(), tb.size())) fwrite(tb.data(), 1, tb.size(), rf); }
+                fwrite(&manager, 8, 1, rf); if (manager) { std::vector<unsigned char> mb(0x3800); if (safe_copy(manager, mb.data(), mb.size())) fwrite(mb.data(), 1, mb.size(), rf); }
+            }
+            fclose(rf);
+            LOG("{\"event\":\"raw_layout_dumped\",\"path\":\"%s\"}", raw);
+        }
+    }
     dump_match_input(match);
     if (inspect_fixture_only) { LOG("{\"event\":\"native_fixture_inspected\",\"simulation_ticks_executed\":0}"); finish(0); }
     export_tac(match);
