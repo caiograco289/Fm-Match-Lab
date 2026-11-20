@@ -17,6 +17,17 @@ from capstone import x86
 
 ROOT = Path(__file__).resolve().parents[2]
 HEADERS = [ROOT / 'port/mac_host/fm27_mac_x86_64.h', ROOT / 'port/mac_host/fm27_mac_results.h']
+
+def headers_for(uuid):
+    """The reference header whose FM27_MAC_UUID matches the old slice, plus results."""
+    want = uuid.lower()
+    for h in sorted((ROOT / 'port/mac_host').glob('fm27_mac_x86_64_*.h')):
+        m = re.search(r'#define\s+FM27_MAC_UUID\s+([0-9a-fA-Fx,]+)', h.read_text())
+        if not m: continue
+        got = ''.join(f'{int(v, 16):02x}' for v in m.group(1).split(','))
+        if got.lower() == want:
+            return [ROOT / 'port/mac_host/fm27_mac_results.h', h]
+    return HEADERS
 CODE_PREFIX = ('fn_',)
 DATA_PREFIX = ('g_', 'vt_', 'tlv_')
 
@@ -161,13 +172,24 @@ def find_data(old, new, addr, func_map, cache, limit=12, span=0x20):
 def main():
     old, new = Image(sys.argv[1]), Image(sys.argv[2])
     names = {}
-    for h in HEADERS:
-        for name, value in re.findall(r'^\s*(\w+)\s*=\s*(?:FM27_RVA\(\w+,\s*)?(0x[0-9a-fA-F]+)\)?\s*,', h.read_text(), re.M):
+    for h in headers_for(old.uuid):
+        text = h.read_text()
+        for name, value in re.findall(r'^\s*(\w+)\s*=\s*(?:FM27_RVA\(\w+,\s*)?(0x[0-9a-fA-F]+)\)?\s*,', text, re.M):
+            if name.startswith(CODE_PREFIX + DATA_PREFIX): names[name] = int(value, 16)
+        for name, value in re.findall(r'^#define\s+FM27_RVA_(\w+)\s+(0x[0-9a-fA-F]+)', text, re.M):
             if name.startswith(CODE_PREFIX + DATA_PREFIX): names[name] = int(value, 16)
     out, func_map, cache = {'_uuid': {'old': old.uuid, 'new': new.uuid}}, {}, {}
     for name, addr in sorted(names.items(), key=lambda x: x[1]):
         if not name.startswith(CODE_PREFIX): continue
-        if addr not in old.fset: out[name] = {'old': hex(addr), 'new': None, 'method': 'old address is not a function start'}; continue
+        if addr not in old.fset:
+            got, how = find_function(old, new, addr, [(o, n) for o, n in func_map.items() if n])
+            if got:
+                func_map[addr] = got
+                out[name] = {'old': hex(addr), 'new': hex(got), 'method': 'signature (not in LC_FUNCTION_STARTS)',
+                             'old_len': old.flen(addr), 'new_len': new.flen(got)}
+            else:
+                out[name] = {'old': hex(addr), 'new': None, 'method': 'old address is not a function start'}
+            continue
         got, how = find_function(old, new, addr, [(o, n) for o, n in func_map.items() if n])
         if got: func_map[addr] = got
         out[name] = {'old': hex(addr), 'new': hex(got) if got else None, 'method': how,

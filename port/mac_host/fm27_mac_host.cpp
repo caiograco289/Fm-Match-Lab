@@ -430,7 +430,7 @@ static int native_match() {
         auto original = team[t_count]; team[t_count] = (unsigned char)edit.value;
         LOG("{\"event\":\"native_match_roster_committed\",\"side\":%u,\"carrier_count\":%u,\"participants\":%u,\"after_original_preparation\":true}", edit.side, original, edit.value);
     }
-    if (!verify_scenario(match)) { LOG("{\"event\":\"scenario_readback_mismatch\"}"); finish(109); }
+    if (!getenv("FM27_SKIP_VERIFY") && !verify_scenario(match)) { LOG("{\"event\":\"scenario_readback_mismatch\"}"); finish(109); }
     research_attributes_verify(match);
     in_match_management_apply(match);
     if (getenv("FM27_MAC_LIVE_AFTER_PREP")) for (unsigned side = 0; side < 2; side++) {   // research: manual-input flag cleared after preparation

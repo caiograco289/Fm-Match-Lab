@@ -20,6 +20,8 @@
 #include "fm27_mac_x86_64_2494769.h"
 #elif FM27_MAC_BUILD == 2503222
 #include "fm27_mac_x86_64_2503222.h"
+#elif FM27_MAC_BUILD == 2505117
+#include "fm27_mac_x86_64_2505117.h"
 #else
 #error "unknown FM27_MAC_BUILD"
 #endif

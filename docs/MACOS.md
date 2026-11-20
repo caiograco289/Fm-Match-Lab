@@ -14,6 +14,11 @@ install and drives the original match engine headlessly. Technical details, evid
   | 27.0.0+2493426 | `0981AB31-AC3B-3D93-944F-47FE4B59CD9E` | 0x1b000000 |
   | 27.0.1+2494769 | `94CDDC80-8474-327A-85E0-E4FF95DC6893` | 0x1b000100 |
   | 27.0.1+2503222 (12 November hotfix) | `DD0EE157-4C9C-31A7-81DD-0D1122E62FC7` | 0x1b000100 |
+  | 27.1.0+2505117 (17 November update) | `864625AF-9AA9-3254-8EC5-47E9D486132A` | 0x1b010000 |
+
+  The 27.1.0 update changed the match-object layout used by the scenario readback: replays and result collection
+  work, but `verify_scenario()` must be skipped with `FM27_SKIP_VERIFY=1` until the layout is recalibrated
+  (`port/map/layout_align.py`, `offset_vote.py`). Scenario edits are untrusted on that build for now.
 
   The hotfix moved two data constants and nothing the match engine uses; 36 of 36 matches played on the previous
   build replay identically on it. On a build not in this table, `scripts/setup.py` stops with "Unsupported FM27
