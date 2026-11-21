@@ -143,6 +143,7 @@ enum : uintptr_t {
     exec_buy_in            = 0x1f,
     exec_next_match        = 0x20,     // 0x1e27  C(effective-OI caller pair)
     mg_routines            = 0x8e8,      // 0x8f0   C(2 caller pairs) D
+    mg_routine_sets        = 0x8e8 + 0xd00 + layout_plan_shift,   // the 10 routine vectors; past the shift point
     mg_selection           = 0x6e0,      // 0x6e8   selection object: lists, captain (+0x200), routines (+0x208)
     mg_captain_slot        = 0x3521 + layout_plan_shift,     // 0x34e5  captain's XI slot after preparation (V 16/16; runtime-checked)
     mg_captain_key         = 0x8e0,      // 0x8e8   D
@@ -188,7 +189,7 @@ enum : uintptr_t {
 
 // ---- FMF tactic import (port/mac_host/fm27_mac_fmf.h) ----
 enum : uintptr_t {
-    mg_plan                = 0x1800,     // Windows manager+0x1818: parser base. Mac parser fields: bits +0xe0 (=mg_creator_live),
+    mg_plan                = 0x1800 + layout_plan_shift,   // Windows manager+0x1818: parser base. Mac parser fields: bits +0xe0 (=mg_creator_live),
                                          //  version +0xf0 (=mg_version), cells +0x120 (=mg_cells_live+0x118), map +0x7b4 (=mg_map_live)
     plan_title             = 0x790,      // Windows plan+0x778 (first string read/written by the TAC parser/writer)
     fmf_folder_dirs        = 0x30,       // runtime dump: same as Windows

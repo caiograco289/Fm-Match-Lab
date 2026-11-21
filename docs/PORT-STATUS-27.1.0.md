@@ -134,7 +134,9 @@ unchanged. The 8-byte difference between the two player deltas is an 8-byte fiel
 the cell block; the manager gained 8 bytes at 0x10a0.
 
 The header now derives all of these from `layout_player_shift`, `layout_slot_shift` and `layout_plan_shift`, which
-are zero on 27.0.x builds, so one header serves every build.
+are zero on 27.0.x builds, so one header serves every build. The plan base itself (`mg_plan`, the TAC parser and
+writer's anchor) is `0x1800 + layout_plan_shift`; leaving it unshifted crashed the game's tactic parser and writer,
+so `.fmf` import and export failed on 27.1.0 until it was fixed.
 
 Validation on 27.1.0+2505117, none of it using `FM27_SKIP_VERIFY`:
 - saved match replays exactly: Shaanxi Union 2-4 Chelsea, tick 23081;
