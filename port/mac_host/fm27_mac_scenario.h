@@ -13,6 +13,7 @@ static std::string scenario_file;
 static ScenarioEdit current_scenario_edit = {};
 static const char* scenario_stage = "initial";
 static unsigned char* original_roster[2][26] = {};
+static unsigned char* edited_player[2][26] = {};   // the object a scenario edit wrote to, for the read-back
 static bool game_constraints[2] = {false, false};
 
 static unsigned char* team_of(unsigned char* match, unsigned side) { return *(unsigned char**)(match + m_teams + 8 * side); }
@@ -173,16 +174,20 @@ static bool apply_scenario(unsigned char* match) {
         case 1: {
             if (edit.a >= team[t_count] || edit.b >= 69 || edit.value > (edit.b < 15 ? 20u : 100u)) return false;
             if (edit.b >= 15 && !edit.value) return false;
-            roster_at(team, edit.a)[p_attributes + edit.b] = (unsigned char)edit.value; attributes++; break;
+            auto player_slot = roster_at(team, edit.a); edited_player[edit.side][edit.a] = player_slot;
+            player_slot[p_attributes + edit.b] = (unsigned char)edit.value; attributes++; break;
         }
         case 18: {
             auto cell = tactic_cell(manager, edit.a); if (!cell) return false;
             auto entry = instruction_entry(cell, true); if (!entry) return false;
             entry[1] = 0; *(uint32_t*)((unsigned char*)entry + 16) = 0; ((unsigned char*)entry)[20] = 255; break;
         }
-        case 15:
-            if (edit.a >= team[t_count] || !profile_value(roster_at(team, edit.a), edit.b, edit.value, true, team)) return false;
+        case 15: {
+            if (edit.a >= team[t_count]) return false;
+            auto player_slot = roster_at(team, edit.a); edited_player[edit.side][edit.a] = player_slot;
+            if (!profile_value(player_slot, edit.b, edit.value, true, team)) return false;
             break;
+        }
         case 2: {
             const FM27TeamOption* selected = nullptr;
             for (const auto& o : fm27_team_options) if (o.group == edit.a && o.value == edit.value) selected = &o;
@@ -380,9 +385,10 @@ static void log_phase_players(unsigned char* team, unsigned phase) {
 static bool verify_scenario(unsigned char* match) {
     for (const auto& edit : scenario_edits) {
         auto team = team_of(match, edit.side); auto manager = manager_of(team);
-        if (edit.kind == 1 && original_roster[edit.side][edit.a][p_attributes + edit.b] != edit.value) {
+        auto edited = edited_player[edit.side][edit.a];   // the object the edit wrote to
+        if (edit.kind == 1 && edited && edited[p_attributes + edit.b] != edit.value) {
             LOG("{\"event\":\"scenario_attribute_readback\",\"side\":%u,\"slot\":%u,\"attribute\":%u,\"written\":%u,\"after_preparation\":%u}",
-                edit.side, edit.a, edit.b, edit.value, original_roster[edit.side][edit.a][p_attributes + edit.b]);
+                edit.side, edit.a, edit.b, edit.value, edited ? edited[p_attributes + edit.b] : 0);
             return false;
         }
         if (edit.kind == 17 && team[t_count] != edit.value) return false;
@@ -391,7 +397,7 @@ static bool verify_scenario(unsigned char* match) {
             for (auto s : scenario_edits) if (s.kind == 6 && s.side == edit.side && s.a == edit.a && s.value) expected |= 1ULL << s.value;
             if (!entry || entry[1] != expected) return false;
         }
-        if (edit.kind == 15 && !profile_value(original_roster[edit.side][edit.a], edit.b, edit.value, false, team)) {
+        if (edit.kind == 15 && !profile_value(edited, edit.b, edit.value, false, team)) {
             LOG("{\"event\":\"profile_readback_mismatch\",\"side\":%u,\"player\":%u,\"field\":%u}", edit.side, edit.a, edit.b); return false;
         }
         if (edit.kind == 10 && ((*(uint32_t*)(manager + mg_input_flags) & 1) != edit.value)) return false;
