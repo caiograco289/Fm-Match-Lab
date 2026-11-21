@@ -81,7 +81,7 @@ static void dump_match_input(unsigned char* match) {
         }
         fputs("],\"taker_lists\":[],\"routine_objects\":[],\"routine_variants\":[", f);
         for (unsigned group = 0; group < 10; group++) {
-            auto vec = manager + mg_routines + 0xd00 + 24 * group;
+            auto vec = manager + mg_routine_sets + 24 * group;
             auto begin = *(unsigned char***)vec, end = *(unsigned char***)(vec + 8);
             if (end - begin > 8) finish(106);
             fprintf(f, "%s[", group ? "," : "");
