@@ -42,9 +42,10 @@ def normalize(value,side,roster_size,base=None):
    r={'name':str(row['name'])[:48],'frequency':integer(row['frequency'],0,2)}
    r['opaque_flags']=integer(row.get('opaque_flags',0),0,255)
    for k in ['strategy','swing']:
-    if base[k]==255:
-     if row[k]!=255:raise ValueError('This set-piece type does not use this delivery strategy')
-     r[k]=255
+    if row[k]==base[k]:
+     r[k]=integer(row[k],0,255)   # the game's own stored value (255 = this set piece does not use it)
+    elif base[k]==255:
+     raise ValueError('This set-piece type does not use this delivery strategy')
     elif k=='strategy' and (kind,row[k]) in ((5,3),(7,6),(8,3)):
      r[k]=row[k]
     else:r[k]=integer(row[k],0,1 if k=='swing'else 2)
