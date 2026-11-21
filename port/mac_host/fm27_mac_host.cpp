@@ -130,6 +130,7 @@ static void release_ref(void*& value) {
 #include "fm27_mac_episode.h"
 #include "fm27_mac_execution.h"
 #include "fm27_mac_dump.h"
+#include "fm27_mac_positions.h"
 
 static void check_cancel() {
     if (!cancel_file.empty() && access(cancel_file.c_str(), F_OK) == 0) {
@@ -532,6 +533,7 @@ static int native_match() {
         if (!event_details_disabled) log_setpiece_selection(match, tick);
         check_cancel();
         episode_step(match);
+        position_probe(match, tick);
         if (flags & 4) {
             if (auto probe = getenv("FM27_MAC_STATS_PROBE")) {   // layout calibration only (runs/, git-ignored)
                 FILE* f = fopen(probe, "w");
