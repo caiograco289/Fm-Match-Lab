@@ -1,7 +1,7 @@
 """Engine integration test (needs FM27 installed, Steam running and FM27 itself closed). Opt in:
   FM27_INTEGRATION=1 .venv/bin/python -m unittest tests.test_integration
-It replays the newest match FM27 saved on its own seed, twice, and checks that the host finishes the match, verifies
-its inputs and gives identical results. Compare the score with what the game showed (an exact replay matches it)."""
+It checks native goal/card totals against the final incident registry, and replays the newest saved match twice
+to check deterministic results. Compare the score with what the game showed (an exact replay matches it)."""
 import glob, json, os, re, subprocess, sys, tempfile, unittest
 from pathlib import Path
 
@@ -22,6 +22,29 @@ class SavedMatchReplay(unittest.TestCase):
         finish = next(r for r in rows if r.get('event') == 'natural_match_finished')
         stats = next(r for r in rows if r.get('event') == 'native_match_statistics')
         return finish, stats, rows
+
+    def test_goals_and_cards_match_native_totals(self):
+        import desktop_saved_matches as sm
+        import fm27_match_events
+        files = sorted((f for f in glob.glob(str(sm.source_folder() / '*/*_VER_fm.pkm')) if '/Other_clubs/' not in f), key=os.path.getmtime)
+        if not files: self.skipTest('no saved matches')
+        pkm = files[-1]; match = sm.NAME.match(Path(pkm).name)
+        self.assertIsNotNone(match)
+        assert match is not None
+        seed = int(match['seed'])
+        with tempfile.TemporaryDirectory() as d:
+            finish, _, rows = self.run_host(pkm, seed, Path(d) / 'events.jsonl')
+        self.assertTrue(finish['full_match_completed'])
+        identity = next(r for r in rows if r.get('event') == 'native_player_statistics_identity_verified')
+        self.assertTrue(identity['verified'])
+        players = next(r['players'] for r in rows if r.get('event') == 'native_player_match_totals')
+        scenario = {'teams': [{'players': [p for p in players if p['side'] == side]} for side in (0, 1)]}
+        events = fm27_match_events.collect(rows, scenario, {})
+        self.assertTrue(events.get('scorers_verified_against_native_totals'), events['integrity'])
+        self.assertTrue(events.get('cards_verified_against_native_totals'), events['integrity'])
+        self.assertTrue(events['integrity']['registry_verified'], events['integrity'])
+        self.assertEqual(events['integrity']['goal_differences'], [])
+        self.assertEqual(events['integrity']['card_differences'], [])
 
     def test_replay_is_deterministic(self):
         import desktop_saved_matches as sm

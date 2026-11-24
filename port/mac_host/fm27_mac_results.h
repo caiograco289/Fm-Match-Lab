@@ -2,8 +2,8 @@
 // and player totals from native_match_events.h, the Steam session cleanup and the per-match release.
 // Layout evidence (Mac x86_64): team statistics record behind team+0x6a0 (Windows 0x690) with unchanged internal
 // offsets (3-3 probe: xG 0.96/1.91, passes 562/503 and 622/564, shots 10/6 and 10/5); score context is -8 after
-// +0x18 (player totals +0x68/+0x70, registry +0x38); totals records keep +0x18 person key and +0x8b goals
-// (keys matched 20/20 per side; goals summed to the score).
+// +0x18 (player totals +0x68/+0x70, registry +0x38); totals records keep +0x18 person key.
+// Goal/card counters moved by four bytes on x86_64 build 2505117; older layouts are unchanged.
 #pragma once
 enum : uintptr_t {
     t_statistics       = 0x6a0,      // 0x690
@@ -11,6 +11,15 @@ enum : uintptr_t {
     ctx_registry       = 0x38,       // 0x40
     ctx_totals         = 0x68,       // 0x70
     totals_records     = 0x250,      // same
+#if FM27_MAC_BUILD == 2505117 && defined(__x86_64__)
+    totals_goals       = 0x8f,
+    totals_yellow      = 0xaa,
+    totals_red         = 0xab,
+#else
+    totals_goals       = 0x8b,
+    totals_yellow      = 0xa6,
+    totals_red         = 0xa7,
+#endif
     p_native_id        = 0x48,       // 0x50
     p_identity         = 0x20,       // 0x28 (person-key argument)
     vslot_person_key   = 63,         // Windows 0x1f0/8 = 62; Itanium: key = f(this, identity) returned in EAX
@@ -94,7 +103,7 @@ static void desktop_player_totals(unsigned char* match) {
             if (matches != 1) { identity_ok = false; continue; }
             checked++;
             fprintf(log_file, "%s{\"side\":%u,\"roster_index\":%u,\"native_id\":%u,\"goals\":%u,\"yellow_cards\":%u,\"red_cards\":%u,\"ip_position\":%u,\"oop_position\":%u}",
-                    comma ? "," : "", side, index, *(unsigned*)(actor + p_native_id), stats[0x8b], stats[0xa6], stats[0xa7], *(unsigned*)(actor + p_cell_ip),
+                    comma ? "," : "", side, index, *(unsigned*)(actor + p_native_id), stats[totals_goals], stats[totals_yellow], stats[totals_red], *(unsigned*)(actor + p_cell_ip),
                     *(unsigned*)(actor + p_cell_oop));
             comma = true;
         }
