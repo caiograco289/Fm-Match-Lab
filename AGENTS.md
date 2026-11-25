@@ -1,4 +1,4 @@
-# Guide for AI agents working with FM27 Match Lab
+# Guide for AI agents working with FM27 Match Engine Laboratory
 
 This repository runs Football Manager 27's own match engine from the user's Steam install, outside the game, to
 replay and test matches. Read this before running anything. `CLAUDE.md` is a symbolic link to this file, so every

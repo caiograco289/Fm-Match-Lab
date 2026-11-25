@@ -70,7 +70,7 @@ def main():
     source = git(ROOT, 'rev-parse', '--short', 'HEAD').strip()
     now = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S+0000')   # no local time zone in the public history
     utc = dict(os.environ, TZ='UTC', GIT_AUTHOR_DATE=now, GIT_COMMITTER_DATE=now)
-    git(dest, 'commit', '-q', '-m', a.message or ('FM27 Match Lab for macOS' if first else 'Update'), env=utc)
+    git(dest, 'commit', '-q', '-m', a.message or ('FM27 Match Engine Laboratory for macOS' if first else 'Update'), env=utc)
     env = dict(os.environ, FM27_PUBLISH_CHECK='1')
     r = subprocess.run([sys.executable, '-m', 'unittest', 'discover', 'tests'], cwd=dest, env=env, capture_output=True, text=True)
     print(r.stderr.strip().splitlines()[-1] if r.stderr.strip() else '')

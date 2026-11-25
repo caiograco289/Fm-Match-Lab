@@ -1,4 +1,4 @@
-# FM27 Match Lab for macOS
+# FM27 Match Engine Laboratory for macOS
 
 Run Football Manager 27's own match engine on your Mac, outside the game: replay matches you played, change
 attributes, lineups, tactics, instructions or set pieces, and simulate thousands of matches to see what difference
@@ -23,7 +23,7 @@ It:
   Rosetta 2 on Apple Silicon Macs;
 - installs [uv](https://docs.astral.sh/uv/) and uses it to get Python 3.12;
 - downloads the app into `~/Fm-Match-Lab` and builds everything from source on your Mac with the set-up below;
-- puts **FM27 Match Lab** on your Desktop: double-click it to start the app in your browser, and close its window to
+- puts **FM27 Match Engine Laboratory** on your Desktop: double-click it to start the app in your browser, and close its window to
   stop it.
 
 It takes 5 to 20 minutes the first time. You can [read the script](scripts/install.sh) before running it. If something

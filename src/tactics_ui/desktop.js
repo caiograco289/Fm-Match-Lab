@@ -64,7 +64,7 @@ function desktopBindDrag(){
  });
 }
 const desktopBindPrevious=bind;bind=function(){desktopBindPrevious();if(view!=='tactics')return;desktopBindDrag();$('#slot-position').onchange=e=>desktopMove(phase,slot,e.target.value);$$('.instruction-tile').forEach(tile=>{const select=tile.querySelector('select');tile.classList.toggle('tile-locked',!!select?.disabled);if(select?.disabled)tile.setAttribute('aria-label',tile.querySelector('.tile-title').textContent+', role locked');});};
-document.title='FM27 Match Lab';
+document.title='FM27 Match Engine Laboratory';
 fetch('/api/status').then(r=>r.json()).then(s=>{const m=/^fm27-([0-9.]+)/.exec(s.engine_compatibility?.profile||'');if(m)$('#desktop-version').textContent='FM27 '+m[1];}).catch(()=>{});
 function desktopIsKeeper(index,s=side){const t=state.teams[s],slotIndex=t.lineup.indexOf(index);if(slotIndex>=0)return t.phases[0][slotIndex].position==='GK';const a=t.players[index].attributes;return a[0]>=10&&a[0]>=Math.max(...a.slice(2,15));}
 function desktopAttributeVisible(id,keeper){if(id<15)return keeper?id===0:id!==0;if(GK.has(id))return keeper;if(keeper&&TECH.has(id)&&![22,37,38].includes(id))return false;if(keeper&&id===21)return false;return true;}
