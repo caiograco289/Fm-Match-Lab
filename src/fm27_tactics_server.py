@@ -304,7 +304,7 @@ def validate_scenario(data):
             for i,c in enumerate(cells):
                 if c['position']not in POSITIONS or c['role']not in ROLES or ROLES[c['role']]['phase']!=phase:raise ValueError('Unknown position or phase role')
                 ncell=n['phases'][phase][i];ncell['position']=c['position'];ncell['role']=c['role']
-                retained=desktop_source_plans.cell(source,phase,c)
+                retained=desktop_source_plans.cell(source or base,phase,c)
                 if data['rules']=='game'and not retained and c['role']not in role_options(cells,phase,c['position']):raise ValueError('The chosen role is not allowed at this position or in this formation')
                 original=base['phases'][phase][i]
                 duty=str(c.get('duty','0'if c['role']!=original['role']else original['duty']))

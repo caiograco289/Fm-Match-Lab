@@ -86,6 +86,41 @@ class Encoding(unittest.TestCase):
         s['teams'][0]['in_match'] = 'nonsense'
         with self.assertRaises(ValueError): self.app.validate_scenario(s)
 
+    def test_saved_match_retains_native_instructions(self):
+        from unittest.mock import patch
+        base = self.app.MatchBase('saved:0000000000000000', self.app.SNAPSHOT,
+                                  self.app.BUNDLED.pkm, True)
+        scenario = copy.deepcopy(base.default)
+        with patch.dict(self.app.SAVED_MATCHES.bases, {base.key: base}):
+            normalized = self.app.validate_scenario(scenario)
+        for side in (0, 1):
+            self.assertEqual(normalized['teams'][side]['phases'], scenario['teams'][side]['phases'])
+
+    def test_new_restricted_instruction_is_rejected(self):
+        scenario = copy.deepcopy(self.app.DEFAULT)
+        for side, team in enumerate(scenario['teams']):
+            for phase, cells in enumerate(team['phases']):
+                for index, cell in enumerate(cells):
+                    policy = self.app.cell_policy(side, phase, index, cell)
+                    for group in self.app.PIS.values():
+                        gid = str(group['id'])
+                        option = next((o['id'] for o in group['options']
+                                       if o['id'] and o['id'] != cell['instructions'][gid]
+                                       and (group['phase'] != phase or policy[o['id']] != '0')), None)
+                        if option is not None:
+                            cell['instructions'][gid] = option
+                            scenario['rules'] = 'game'
+                            with self.assertRaisesRegex(ValueError, 'restricted by the current role'):
+                                self.app.validate_scenario(scenario)
+                            return
+        self.fail('No restricted instruction available for the regression test')
+
+    def test_native_source_signature_still_checked(self):
+        scenario = copy.deepcopy(self.app.DEFAULT)
+        scenario['teams'][0]['native_source_plan'] = {'value': {}, 'signature': 'forged'}
+        with self.assertRaisesRegex(ValueError, 'source check failed'):
+            self.app.validate_scenario(scenario)
+
     def test_attribute_bounds(self):
         s = copy.deepcopy(self.app.DEFAULT); s['teams'][0]['players'][0]['attributes'][20] = 101
         with self.assertRaises(ValueError): self.app.validate_scenario(s)
