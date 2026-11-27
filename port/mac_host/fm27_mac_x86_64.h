@@ -29,6 +29,8 @@
 #include "fm27_mac_x86_64_2503222.h"
 #elif FM27_MAC_BUILD == 2505117
 #include "fm27_mac_x86_64_2505117.h"
+#elif FM27_MAC_BUILD == 2511875
+#include "fm27_mac_x86_64_2511875.h"
 #else
 #error "unknown FM27_MAC_BUILD"
 #endif
@@ -43,7 +45,8 @@ constexpr uint32_t kFm27EngineVersion = FM27_MAC_ENGINE_VERSION;   // the word t
 // the set-piece routine container itself is unchanged (runtime: all 10 type vectors valid at manager+0x8f0+0xd00)
 // (port/map/offset_carry.py votes, e.g. 0xcd8 -> 0x1270
 // 158/161, 0x1e26 -> 0x23b6 379/379, 0x3521 -> 0x3529 11/11; $FM27_WORK_DIR/mac/27.1.0-2505117/offset_carry.json).
-#if !defined(__aarch64__) && FM27_MAC_BUILD == 2505117
+// 27.1.1+2511875 keeps 27.1.0's layouts (votes 27.1.0 -> 27.1.1: every carried offset unchanged, e.g. 0xcd8 238/238).
+#if !defined(__aarch64__) && (FM27_MAC_BUILD == 2505117 || FM27_MAC_BUILD == 2511875)
 constexpr uintptr_t P_(uintptr_t o) { return o >= 0x1150 ? o + 0x590 : o >= 0xb80 ? o + 0x598 : o; }
 constexpr uintptr_t MG_(uintptr_t o) { return o >= 0x8d0 ? o + 8 : o; }
 #else

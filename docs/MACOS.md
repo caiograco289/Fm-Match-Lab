@@ -17,6 +17,7 @@ install and drives the original match engine headlessly. Technical details, evid
   | 27.0.1+2494769 | `94CDDC80-8474-327A-85E0-E4FF95DC6893` | 0x1b000100 |
   | 27.0.1+2503222 (12 November hotfix) | `DD0EE157-4C9C-31A7-81DD-0D1122E62FC7` | 0x1b000100 |
   | 27.1.0+2505117 (18 November update) | `864625AF-9AA9-3254-8EC5-47E9D486132A` | 0x1b010000 |
+  | 27.1.1+2511875 (24 November hotfix) | `D1D81C1A-44AD-3342-B6D4-B8DDF2EA6B61` | 0x1b010001 |
 
   27.1.0 moved most functions and grew two records the host reads (the player record and the manager record);
   `port/map/offset_carry.py` carried the field offsets, and the host applies them for that build (x86_64 for now).
